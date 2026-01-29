@@ -1,0 +1,12 @@
+.fitcheck-layout {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* Ensure navbar is on top */
+.navbar-wrapper {
+  position: relative;
+  z-index: 50;
+}
+

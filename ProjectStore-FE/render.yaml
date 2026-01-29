@@ -1,0 +1,5 @@
+# render.yaml
+staticSites:
+  - name: projectstore-fe
+    buildCommand: npm install && npm run build
+    publishPath: buildCommand
