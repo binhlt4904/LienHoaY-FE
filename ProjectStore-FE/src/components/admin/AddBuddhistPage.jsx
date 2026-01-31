@@ -5,7 +5,7 @@ import AdminSidebar from "./AdminSidebar";
 import AdminChatBox from "./AdminChatBox";
 import Navbar from "../Navbar";
 
-function AddSetPage() {
+function AddBuddhistPage() {
     const [user] = useState(() => {
         const cached = localStorage.getItem("user");
         return cached ? JSON.parse(cached) : null;
@@ -14,13 +14,13 @@ function AddSetPage() {
     const [errors, setErrors] = useState({});
     const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
-    document.title = "Set - Levents";
+    document.title = "Pháp Phục - Liên Hoa Y";
 
     const navigate = useNavigate();
     const [sidebarOpen, setSidebarOpen] = useState(false);
     const [formData, setFormData] = useState({
         name: "",
-        category: "set",
+        category: "buddhist",
         arrivedDate: "",
         price: "",
         thumbnailImage: null,
@@ -109,7 +109,7 @@ function AddSetPage() {
             });
 
             alert("Thêm sản phẩm thành công!");
-            navigate("/admin/product/set");
+            navigate("/admin/product/buddhist");
         } catch (error) {
             console.error("Lỗi khi thêm sản phẩm:", error);
             alert("Có lỗi xảy ra khi thêm sản phẩm.");
@@ -126,7 +126,7 @@ function AddSetPage() {
 
             <div className="flex-1 mt-28 p-6 overflow-y-auto">
                 <div className="max-w-3xl mx-auto bg-white p-8 rounded-2xl shadow-md">
-                    <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">Thêm sản phẩm Set</h2>
+                    <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">Thêm sản phẩm Pháp Phục</h2>
                     <form onSubmit={handleSubmit} className="space-y-6">
                         <div>
                             <label className="block text-gray-700 font-medium mb-1">Tên sản phẩm</label>
@@ -215,4 +215,4 @@ function AddSetPage() {
     );
 }
 
-export default AddSetPage;
+export default AddBuddhistPage;

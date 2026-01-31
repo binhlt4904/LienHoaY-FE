@@ -17,10 +17,10 @@ function ProductPage() {
     return cached ? JSON.parse(cached) : null;
   });
   const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
-  const [tops, setTops] = useState([]);
+  const [buddhists, setBuddhists] = useState([]);
   const [bottoms, setBottoms] = useState([]);
   const [accessories, setAccessories] = useState([]);
-  const [sets, setSets] = useState([]);
+  const [robes, setRobes] = useState([]);
   const [setShowUserDropdown] = useState(false);
   const dropdownContainerRef = useRef(null);
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -39,18 +39,18 @@ function ProductPage() {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const res1 = await axios.get(`${API_BASE_URL}/admin/products/getAllTops`);
+        const res1 = await axios.get(`${API_BASE_URL}/admin/products/getAllBuddhists`);
         const res2 = await axios.get(`${API_BASE_URL}/admin/products/getAllBottoms`);
         const res3 = await axios.get(`${API_BASE_URL}/admin/products/getAllAccessories`);
-        const res4 = await axios.get(`${API_BASE_URL}/admin/products/getAllSets`);
+        const res4 = await axios.get(`${API_BASE_URL}/admin/products/getAllRobes`);
 
 
 
-        setTops(res1.data); // Lưu vào state đã có price
-        console.log(tops);
+        setBuddhists(res1.data); // Lưu vào state đã có price
+        console.log(buddhists);
         setBottoms(res2.data);
         setAccessories(res3.data);
-        setSets(res4.data);
+        setRobes(res4.data);
 
       } catch (err) {
         console.error("Error fetching products:", err);
@@ -62,13 +62,13 @@ function ProductPage() {
 
   const categories = [
     {
-      name: "Top",
-      description: "Quản lý các sản phẩm áo",
+      name: "Pháp Phục",
+      description: "Quản lý các sản phẩm pháp phục",
       icon: <FaTshirt className="text-3xl text-gray-700" />,
       bg: "bg-white border border-gray-200",
       hover: "hover:bg-gray-100",
-      onClick: () => navigate("/admin/product/top"),
-      total: tops.length,
+      onClick: () => navigate("/admin/product/buddhist"),
+      total: buddhists.length,
     },
     {
       name: "Bottom",
@@ -80,13 +80,13 @@ function ProductPage() {
       total: bottoms.length,
     },
     {
-      name: "Set",
-      description: "Quản lý các sản phẩm set",
+      name: "Áo Tràng",
+      description: "Quản lý các sản phẩm áo tràng",
       icon: <GiArmoredPants className="text-3xl text-gray-700" />,
       bg: "bg-white border border-gray-200",
       hover: "hover:bg-gray-100",
-      onClick: () => navigate("/admin/product/set"),
-      total: sets.length,
+      onClick: () => navigate("/admin/product/robe"),
+      total: robes.length,
     },
     {
       name: "Accessory",

@@ -1,5 +1,5 @@
 import HomePage from './components/client/HomePage';
-import TopPage from './components/client/TopPage';
+import BuddhistPage from './components/client/BuddhistPage';
 import BottomPage from './components/client/BottomPage';
 import AccessoryPage from './components/client/AccessoryPage';
 import CheckoutPage from './components/client/CheckoutPage';
@@ -13,18 +13,20 @@ import NewArrivalPage from './components/client/NewArrivalPage';
 import ProductDetail from './components/client/ProductDetail';
 import ProfilePage from './components/client/ProfilePage';
 import FitCheckPage from './components/client/FitCheckPage';
-import SetPage from './components/client/SetPage';
+import RobePage from './components/client/RobePage';
+import ContactPage from './components/ContactPage';
+import AllProductsPage from './components/client/AllProductsPage';
 
 import AdminDashboard from './components/admin/AdminDashboard';
 import ProductPage from './components/admin/ProductPage';
-import TopPageAdmin from './components/admin/TopPage';
+import BuddhistPageAdmin from './components/admin/BuddhistPage';
 import BottomPageAdmin from './components/admin/BottomPage';
-import SetPageAdmin from './components/admin/SetPage';
+import RobePageAdmin from './components/admin/RobePage';
 import AccessoryPageAdmin from './components/admin/AccessoryPage';
 import ProductDetailAdmin from './components/admin/ProductDetail';
-import AddTopPage from './components/admin/AddTopPage';
+import AddBuddhistPage from './components/admin/AddBuddhistPage';
 import AddBottomPage from './components/admin/AddBottomPage';
-import AddSetPage from './components/admin/AddSetPage';
+import AddRobePage from './components/admin/AddRobePage';
 import AddAccessoryPage from './components/admin/AddAccessoryPage';
 import AdminOrderPage from './components/admin/AdminOrderPage';
 import OrderDetailPage from './components/admin/OrderDetailPage';
@@ -35,9 +37,10 @@ import RevenuePage from './components/admin/RevenuePage';
 
 export const userRoutes = [
   { path: "/", component: HomePage },
-  { path: "/product/top", component: TopPage },
+  { path: "/product/buddhist", component: BuddhistPage },
   { path: "/product/bottom", component: BottomPage },
-  { path: "/product/set", component: SetPage },
+  { path: "/product/robe", component: RobePage },
+  { path: "/product", component: AllProductsPage },
   { path: "/product/accessory", component: AccessoryPage },
   { path: "/product/top-seller", component: TopSellerPage },
   { path: "/product/new-arrival", component: NewArrivalPage },
@@ -50,19 +53,19 @@ export const userRoutes = [
   { path: "/about", component: AboutPage },
   { path: "/user/profile", component: ProfilePage },
   { path: "/fitcheck", component: FitCheckPage },
+  { path: "/contact", component: ContactPage },
 ];
 
 export const adminRoutes = [
   { path: "/admin", component: AdminDashboard },
   { path: "/admin/product", component: ProductPage },
-  { path: "/admin/product/top", component: TopPageAdmin },
-  { path: "/admin/product/bottom", component: BottomPageAdmin },
-  { path: "/admin/product/set", component: SetPageAdmin },
+  { path: "/admin/product/buddhist", component: BuddhistPageAdmin },
+  { path: "/admin/product/robe", component: RobePageAdmin },
   { path: "/admin/product/accessory", component: AccessoryPageAdmin },
   { path: "/admin/product/:id", component: ProductDetailAdmin },
-  { path: "/admin/product/top/add", component: AddTopPage },
+  { path: "/admin/product/buddhist/add", component: AddBuddhistPage },
   { path: "/admin/product/bottom/add", component: AddBottomPage },
-  { path: "/admin/product/set/add", component: AddSetPage },
+  { path: "/admin/product/robe/add", component: AddRobePage },
   { path: "/admin/product/accessory/add", component: AddAccessoryPage },
   { path: "/admin/order", component: AdminOrderPage },
   { path: "/admin/order/detail/:id", component: OrderDetailPage },

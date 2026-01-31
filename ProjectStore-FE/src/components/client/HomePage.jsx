@@ -33,17 +33,11 @@ function HomePage() {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const res1 = await axios.get(`${API_BASE_URL}/products/tops`);
-        const res2 = await axios.get(`${API_BASE_URL}/products/bottoms`);
         const res3 = await axios.get(`${API_BASE_URL}/products/accessories`);
         const res4 = await axios.get(`${API_BASE_URL}/products/new-arrivals`);
-        const res5 = await axios.get(`${API_BASE_URL}/products/sets`);
-
-        setTops(res1.data);
-        setBottoms(res2.data);
+        console.log(res4)
         setAccessories(res3.data);
         setNewArrivals(res4.data);
-        setSets(res5.data);
       } catch (err) {
         console.error("Error fetching products:", err);
       }
@@ -76,7 +70,8 @@ function HomePage() {
       if (product.category === 'top') navigate(`/product/top/${product.id}`);
       if (product.category === 'bottom') navigate(`/product/bottom/${product.id}`);
       if (product.category === 'accessory') navigate(`/product/accessory/${product.id}`);
-      if (product.category === 'set') navigate(`/product/set/${product.id}`);
+      if (product.category === 'robe') navigate(`/product/robe/${product.id}`);
+      if (product.category === 'buddhist') navigate(`/product/buddhist/${product.id}`);
     };
 
     return (
@@ -128,14 +123,48 @@ function HomePage() {
     </div>
   );
 
+  const categories = [
+    {
+      title: "Pháp Phục Nam",
+      image: "/images/mau1.png",
+      link: "/product/phap-phuc-nam",
+      discount: "15%",
+    },
+    {
+      title: "Pháp Phục Nữ",
+      image: "/images/mau2.png",
+      link: "/product/phap-phuc-nu",
+      discount: "10%",
+    },
+    {
+      title: "Áo Tràng Cao Cấp",
+      image: "/images/mau3.png",
+      link: "/product/ao-trang-cao-cap",
+      discount: "15%",
+    },
+    {
+      title: "Túi Đi Chùa",
+      image: "/images/mau4.png",
+      link: "/product/tui-di-chua",
+      discount: "5%",
+    },
+  ];
+
+
+
+
   return (
-    <div className="flex h-screen bg-[#fff7f3]">
+    <div className="flex h-screen bg-[#fff7f3] overflow-hidden">
       <Navbar user={user} onToggleSidebar={() => setSidebarOpen(!sidebarOpen)} />
-    
+
 
       <main
         ref={mainRef}
-        className="flex-1 mt-[102px] px-10 py-8 overflow-y-auto space-y-14"
+        className="flex-1 mt-[50px] px-10 py-8 overflow-y-auto space-y-14"
+        style={{
+          scrollbarWidth: "none", // Firefox
+          msOverflowStyle: "none", // IE
+        }}
       >
         {/* Banner */}
         <div className="relative">
@@ -147,114 +176,92 @@ function HomePage() {
           <div className="absolute inset-0 rounded-3xl bg-gradient-to-t from-black/20 via-transparent to-transparent"></div>
         </div>
 
-        {/* New Arrival */}
-        <section>
-          <SectionHeader title="NEW ARRIVAL" onViewAll={() => navigate("/product/new-arrival")} />
-          <Swiper
-            modules={[Navigation]}
-            navigation
-            spaceBetween={24}
-            slidesPerView={1}
-            breakpoints={{
-              640: { slidesPerView: 2 },
-              1024: { slidesPerView: 3 },
-            }}
-          >
-            {newArrivals.map((product, index) => (
-              <SwiperSlide key={index}>
-                <ProductDetail product={product} isNew />
-              </SwiperSlide>
-            ))}
-          </Swiper>
+        <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+          {categories.map((item, index) => (
+            <div
+              key={index}
+              onClick={() => navigate(item.link)}
+              className="relative h-[300px] rounded-[36px] bg-[#fdf1e7] shadow-lg hover:shadow-2xl 
+      transition-all duration-300 cursor-pointer overflow-hidden group"
+            >
+              <img
+                src={item.image}
+                alt={item.title}
+                className="absolute inset-0 w-full h-full object-cover opacity-95 group-hover:scale-110 transition-transform duration-300"
+              />
+
+              <div className="absolute inset-0 bg-gradient-to-t from-[#7a1414]/85 via-[#7a1414]/40 to-transparent" />
+
+              <div className="relative z-10 p-7 h-full flex flex-col justify-between text-[#fff5d6]">
+                <div>
+                  <h3 className="text-xl font-extrabold leading-snug">
+                    {item.title}
+                  </h3>
+                  
+                </div>
+
+                <button className="self-start bg-[#b22a2a] hover:bg-[#951f1f] text-white text-sm font-semibold px-6 py-2.5 rounded-full shadow-lg transition">
+                  MUA NGAY
+                </button>
+              </div>
+            </div>
+          ))}
         </section>
 
-        {/* Set */}
-        <section>
-          <SectionHeader title="SET" onViewAll={() => navigate("/product/set")} />
-          <Swiper
-            modules={[Navigation]}
-            navigation
-            loop
-            grabCursor
-            spaceBetween={24}
-            slidesPerView={1}
-            breakpoints={{
-              640: { slidesPerView: 2 },
-              1024: { slidesPerView: 3 },
-            }}
-          >
-            {sets.map((product, index) => (
-              <SwiperSlide key={index}>
-                <ProductDetail product={product} />
-              </SwiperSlide>
-            ))}
-          </Swiper>
+
+        {/* ================= NEW PRODUCTS SECTION ================= */}
+        <section className="grid grid-cols-1 lg:grid-cols-5 gap-12 items-start">
+          {/* Left text */}
+          <div className="lg:col-span-1 space-y-5">
+            <h2
+              className="text-3xl font-extrabold tracking-wide text-[#1f1f1f]"
+              style={{ fontFamily: "'Playfair Display', serif" }}
+            >
+              Sản Phẩm Mới!
+            </h2>
+            <p className="text-gray-600 leading-relaxed">
+              Khám phá bộ sưu tập pháp phục mới 2026 tại{" "}
+              <span className="font-semibold text-[#7a1414]">
+                Liên Hoa Y
+              </span>
+              .
+            </p>
+            <p className="text-gray-600 leading-relaxed">
+              Các mặt hàng của Shop luôn được cập nhật mới liên tục về màu sắc
+              và kiểu dáng.
+            </p>
+
+            <button
+              onClick={() => navigate("/product/new-arrival")}
+              className="mt-2 inline-flex items-center gap-2 text-[#7a1414] font-semibold hover:underline"
+            >
+              Xem tất cả →
+            </button>
+          </div>
+
+          {/* Right product grid */}
+          <div className="lg:col-span-4">
+            <Swiper
+              modules={[Navigation]}
+              navigation
+              spaceBetween={24}
+              slidesPerView={1}
+              breakpoints={{
+                640: { slidesPerView: 2 },
+                1024: { slidesPerView: 4 },
+              }}
+            >
+              {(newArrivals || []).map((product, index) => (
+                <SwiperSlide key={index}>
+                  <ProductDetail product={product} />
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          </div>
+
         </section>
 
-        {/* Top */}
-        <section>
-          <SectionHeader title="TOP" onViewAll={() => navigate("/product/top")} />
-          <Swiper
-            modules={[Navigation]}
-            navigation
-            loop
-            grabCursor
-            spaceBetween={24}
-            slidesPerView={1}
-            breakpoints={{
-              640: { slidesPerView: 2 },
-              1024: { slidesPerView: 3 },
-            }}
-          >
-            {tops.map((product, index) => (
-              <SwiperSlide key={index}>
-                <ProductDetail product={product} />
-              </SwiperSlide>
-            ))}
-          </Swiper>
-        </section>
 
-        {/* Bottom */}
-        <section>
-          <SectionHeader title="BOTTOM" onViewAll={() => navigate("/product/bottom")} />
-          <Swiper
-            modules={[Navigation]}
-            navigation
-            spaceBetween={24}
-            slidesPerView={1}
-            breakpoints={{
-              640: { slidesPerView: 2 },
-              1024: { slidesPerView: 3 },
-            }}
-          >
-            {bottoms.map((product, index) => (
-              <SwiperSlide key={index}>
-                <ProductDetail product={product} />
-              </SwiperSlide>
-            ))}
-          </Swiper>
-        </section>
-
-        {/* Accessory */}
-        <section>
-          <SectionHeader title="ACCESSORY" onViewAll={() => navigate("/product/accessory")} />
-          <Swiper
-            modules={[Navigation]}
-            navigation
-            spaceBetween={24}
-            slidesPerView={1}
-            breakpoints={{
-              640: { slidesPerView: 2 },
-              1024: { slidesPerView: 3 },
-            }}
-          >
-            {accessories.map((product, index) => (
-              <SwiperSlide key={index}>
-                <ProductDetail product={product} />
-              </SwiperSlide>
-            ))}
-          </Swiper>
-        </section>
 
         <ChatBox />
         <ScrollToTopButton targetRef={mainRef} />

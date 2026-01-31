@@ -167,20 +167,20 @@ function ProductDetail() {
   };
 
   const detectCategoryForFitCheck = (prod) => {
-      // 1. Check from explicit category if available in data
-      if (prod.category?.name) {
-          const cName = prod.category.name.toLowerCase();
-          if (cName.includes('áo') || cName.includes('top') || cName.includes('shirt') || cName.includes('hoodie')) return 'top';
-          if (cName.includes('quần') || cName.includes('váy') || cName.includes('bottom') || cName.includes('short') || cName.includes('jeans')) return 'bottom';
-          if (cName.includes('phụ kiện') || cName.includes('accessory') || cName.includes('túi') || cName.includes('nón')) return 'accessory';
-      }
+    // 1. Check from explicit category if available in data
+    if (prod.category?.name) {
+      const cName = prod.category.name.toLowerCase();
+      if (cName.includes('áo') || cName.includes('top') || cName.includes('shirt') || cName.includes('hoodie')) return 'top';
+      if (cName.includes('quần') || cName.includes('váy') || cName.includes('bottom') || cName.includes('short') || cName.includes('jeans')) return 'bottom';
+      if (cName.includes('phụ kiện') || cName.includes('accessory') || cName.includes('túi') || cName.includes('nón')) return 'accessory';
+    }
 
-      // 2. Fallback to product name
-      const name = (prod.name || '').toLowerCase();
-      if (name.includes('quần') || name.includes('váy') || name.includes('short') || name.includes('jeans') || name.includes('skirt') || name.includes('jogger')) return 'bottom';
-      if (name.includes('túi') || name.includes('nón') || name.includes('mũ') || name.includes('kính') || name.includes('đồng hồ') || name.includes('nhẫn') || name.includes('bag') || name.includes('hat') || name.includes('cap')) return 'accessory';
-      
-      return 'top'; // Default fallback
+    // 2. Fallback to product name
+    const name = (prod.name || '').toLowerCase();
+    if (name.includes('quần') || name.includes('váy') || name.includes('short') || name.includes('jeans') || name.includes('skirt') || name.includes('jogger')) return 'bottom';
+    if (name.includes('túi') || name.includes('nón') || name.includes('mũ') || name.includes('kính') || name.includes('đồng hồ') || name.includes('nhẫn') || name.includes('bag') || name.includes('hat') || name.includes('cap')) return 'accessory';
+
+    return 'top'; // Default fallback
   };
 
   if (!product) return <div>Đang tải...</div>;
@@ -191,8 +191,7 @@ function ProductDetail() {
   return (
     <div className="flex h-screen bg-[#fff7f3]">
       <Navbar user={user} onToggleSidebar={() => setSidebarOpen(!sidebarOpen)} />
-      <Sidebar user={user} isOpen={sidebarOpen} />
-       <main
+      <main
         ref={mainRef}
         className="flex-1 mt-[72px] p-8 overflow-y-auto space-y-8 "
       >
@@ -305,39 +304,39 @@ function ProductDetail() {
 
             <div className="flex gap-3 mt-6">
               <button
-  onClick={handleAddToCart}
-  className="flex-1 bg-gradient-to-r from-red-600 to-red-500 text-white 
+                onClick={handleAddToCart}
+                className="flex-1 bg-gradient-to-r from-red-600 to-red-500 text-white 
   font-semibold py-3 rounded-full shadow 
   hover:from-red-700 hover:to-red-600 hover:shadow-lg hover:scale-105 
   transition-all duration-300"
->
-  Thêm vào giỏ hàng
-</button>
+              >
+                Thêm vào giỏ hàng
+              </button>
 
-<button
-  onClick={() => {
-    const category = detectCategoryForFitCheck(product);
-    const productToTry = {
-      id: product.id,
-      name: product.name,
-      url: currentImage || product.thumbnailImage,
-      price: product.price,
-      category: category
-    };
-    localStorage.setItem('fitcheck_pending_product', JSON.stringify(productToTry));
-    window.location.href = '/fitcheck';
-  }}
-  className="flex-1 bg-gradient-to-r from-rose-500 to-pink-500 text-white 
+              <button
+                onClick={() => {
+                  const category = detectCategoryForFitCheck(product);
+                  const productToTry = {
+                    id: product.id,
+                    name: product.name,
+                    url: currentImage || product.thumbnailImage,
+                    price: product.price,
+                    category: category
+                  };
+                  localStorage.setItem('fitcheck_pending_product', JSON.stringify(productToTry));
+                  window.location.href = '/fitcheck';
+                }}
+                className="flex-1 bg-gradient-to-r from-rose-500 to-pink-500 text-white 
   font-semibold py-3 rounded-full shadow 
   hover:from-rose-600 hover:to-pink-600 hover:shadow-lg hover:scale-105 
   transition-all duration-300 flex items-center justify-center gap-2"
->
-  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-  </svg>
-  Thử Đồ
-</button>
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                </svg>
+                Thử Đồ
+              </button>
 
             </div>
           </div>

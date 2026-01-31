@@ -6,7 +6,7 @@ import Navbar from "../Navbar";
 import AdminChatBox from "./AdminChatBox";
 import axios from "axios";
 
-function TopPage() {
+function RobePage() {
     const navigate = useNavigate();
     const [user] = useState(() => {
         const cached = localStorage.getItem("user");
@@ -16,7 +16,7 @@ function TopPage() {
     const dropdownContainerRef = useRef(null);
     const [sidebarOpen, setSidebarOpen] = useState(false);
 
-    document.title = "TOP - Levents";
+    document.title = "Áo Tràng - Liên Hoa Y";
 
     const [products, setProducts] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
@@ -44,7 +44,7 @@ function TopPage() {
         const fetchProducts = async () => {
             try {
                 const response = await axios.get(
-                    `${API_BASE_URL}/admin/products/tops?page=${currentPage - 1}&size=${itemsPerPage}`
+                    `${API_BASE_URL}/admin/products/robes?page=${currentPage - 1}&size=${itemsPerPage}`
                 );
                 setProducts(response.data.content);
                 setTotalPages(response.data.totalPages);
@@ -76,9 +76,9 @@ function TopPage() {
 
             <div className="flex-1 p-8 mt-16 overflow-y-auto">
                 <div className="flex justify-between items-center mb-4">
-                    <h2 className="text-2xl font-bold">Danh sách sản phẩm Top</h2>
+                    <h2 className="text-2xl font-bold">Danh sách sản phẩm Áo Tràng</h2>
                     <button
-                        onClick={() => navigate("/admin/product/top/add")}
+                        onClick={() => navigate("/admin/product/robe/add")}
                         className="flex items-center gap-2 bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
                     >
                         <FaPlus />
@@ -181,4 +181,4 @@ function TopPage() {
     );
 }
 
-export default TopPage;
+export default RobePage;

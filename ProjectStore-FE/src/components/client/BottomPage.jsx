@@ -82,8 +82,7 @@ function BottomPage() {
   return (
     <div className="flex h-screen bg-[#fff7f3]">
       <Navbar user={user} onToggleSidebar={() => setSidebarOpen(!sidebarOpen)} />
-      <Sidebar user={user} isOpen={sidebarOpen} />
-
+      
       <main
         ref={mainRef}
         className="flex-1 mt-[72px] p-8 overflow-y-auto space-y-8 "

@@ -158,3 +158,5 @@ export const generatePoseVariation = async (tryOnImageUrl, poseInstruction) => {
   });
   return handleApiResponse(response);
 };
+
+

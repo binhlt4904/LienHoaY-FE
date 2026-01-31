@@ -213,9 +213,9 @@ const CheckoutPage = () => {
   };
 
   return (
-    <div className="flex bg-gray-100 h-screen">
+    <div className="flex bg-[#fff7f3] h-screen">
       <Navbar user={user} onToggleSidebar={() => setSidebarOpen(!sidebarOpen)} />
-      <Sidebar user={user} isOpen={sidebarOpen} />
+     
        <main
         ref={mainRef}
         className="flex-1 mt-[72px] p-8 overflow-y-auto space-y-8 "
@@ -287,10 +287,6 @@ const CheckoutPage = () => {
                   <label className="flex items-center gap-2">
                     <input type="radio" name="payment" value="cod" checked={paymentMethod === 'cod'} onChange={() => setPaymentMethod('cod')} />
                     Thanh toán khi nhận hàng
-                  </label>
-                  <label className="flex items-center gap-2">
-                    <input type="radio" name="payment" value="wallet" checked={paymentMethod === 'wallet'} onChange={() => setPaymentMethod('wallet')} />
-                    Thanh toán bằng ví LeventPay
                   </label>
                 </div>
               </div>

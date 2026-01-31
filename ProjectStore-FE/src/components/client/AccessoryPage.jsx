@@ -81,7 +81,7 @@ function AccessoryPage() {
   return (
     <div className="flex h-screen bg-[#fff7f3]">
       <Navbar user={user} onToggleSidebar={() => setSidebarOpen(!sidebarOpen)} />
-      <Sidebar user={user} isOpen={sidebarOpen} />
+      
 
        <main
         ref={mainRef}
