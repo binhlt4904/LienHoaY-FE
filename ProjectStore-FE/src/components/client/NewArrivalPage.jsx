@@ -26,7 +26,7 @@ function NewArrivalPage() {
   const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
   const mainRef = useRef(null);
 
-  document.title = "NEW ARRIVAL - Levents";
+  document.title = "NEW ARRIVAL - Liên Hoa Y";
 
   const pageSize = 6; // mỗi trang 6 sản phẩm
 
