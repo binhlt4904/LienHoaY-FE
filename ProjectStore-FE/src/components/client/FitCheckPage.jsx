@@ -581,7 +581,7 @@ export default function FitCheckPage() {
   );
 
   return (
-    <div className="flex h-screen mt-[100px] bg-[#fff7f3] overflow-hidden">
+    <div className="flex h-screen mt-[120px] bg-[#fff7f3] overflow-hidden">
       {/* Sidebar */}
       <Navbar onToggleSidebar={() => setSidebarOpen(!sidebarOpen)} />
 

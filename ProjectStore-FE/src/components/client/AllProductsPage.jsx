@@ -57,8 +57,9 @@ function AllProductsPage() {
     fetchProducts();
   }, [sortBy, currentPage, searchTerm, priceFilter, categoryTerm]);
 
-  const handleProductClick = (id) => {
-    navigate(`/product/${id}`);
+  const handleProductClick = (product) => {
+    if (product.category === 'buddhist') navigate(`/product/buddhist/${product.id}`);
+      if (product.category === 'robe') navigate(`/product/robe/${product.id}`);
   };
 
   return (
@@ -172,7 +173,7 @@ function AllProductsPage() {
           {products.map((product) => (
             <div
               key={product.id}
-              onClick={() => handleProductClick(product.id)}
+              onClick={() => handleProductClick(product)}
               className="group relative bg-white border border-red-100 rounded-2xl shadow-sm 
               hover:shadow-xl transition-all duration-300 hover:-translate-y-1 
               cursor-pointer overflow-hidden"
