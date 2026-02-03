@@ -1,162 +1,181 @@
-// Get API key from environment variable
-// Note: Create React App requires REACT_APP_ prefix and process.env
-import { GoogleGenAI } from "@google/genai";
+// Gemini Service - Backend Proxy Version
+// All Gemini API calls now go through the backend for security
+import axios from 'axios';
 
-const apiKey = process.env.REACT_APP_GEMINI_API_KEY || '';
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:8080/api';
 
-console.log("Gemini Service Initialized");
-console.log("API Key present:", !!apiKey);
-if (!apiKey) {
-  console.error("Gemini API Key is missing! Check .env.local and ensure variable is named REACT_APP_GEMINI_API_KEY");
-}
+console.log("Gemini Service Initialized (Backend Proxy Mode)");
+console.log("API Base URL:", API_BASE_URL);
 
-const ai = new GoogleGenAI({ apiKey });
-const model = 'gemini-3-pro-image-preview';
-
-const fileToPart = async (file) => {
-  const dataUrl = await new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => resolve(reader.result);
-    reader.onerror = error => reject(error);
-  });
-  const { mimeType, data } = dataUrlToParts(dataUrl);
-  return { inlineData: { mimeType, data } };
-};
-
-const dataUrlToParts = (dataUrl) => {
-  const arr = dataUrl.split(',');
-  if (arr.length < 2) throw new Error("Invalid data URL");
-  const mimeMatch = arr[0].match(/:(.*?);/);
-  if (!mimeMatch || !mimeMatch[1]) throw new Error("Could not parse MIME type from data URL");
-  return { mimeType: mimeMatch[1], data: arr[1] };
-};
-
-const dataUrlToPart = (dataUrl) => {
-  const { mimeType, data } = dataUrlToParts(dataUrl);
-  return { inlineData: { mimeType, data } };
-};
-
-const handleApiResponse = (response) => {
-  if (response.promptFeedback?.blockReason) {
-    const { blockReason, blockReasonMessage } = response.promptFeedback;
-    const errorMessage = `Request was blocked. Reason: ${blockReason}. ${blockReasonMessage || ''}`;
+/**
+ * Handle errors from backend
+ */
+const handleGeminiError = (error) => {
+  if (error.response) {
+    // Backend returned error response
+    const { status, data } = error.response;
+    const errorMessage = data.error || data.details || 'Unknown error occurred';
+    
+    console.error(`Gemini API Error (${status}):`, errorMessage);
     throw new Error(errorMessage);
+  } else if (error.request) {
+    // Request made but no response
+    console.error('Network Error: Cannot reach backend server');
+    throw new Error('Cannot reach backend server. Please check your connection.');
+  } else {
+    // Error setting up request
+    console.error('Request Error:', error.message);
+    throw new Error(error.message);
   }
-
-  // Find the first image part in any candidate
-  for (const candidate of response.candidates ?? []) {
-    const imagePart = candidate.content?.parts?.find(part => part.inlineData);
-    if (imagePart?.inlineData) {
-      const { mimeType, data } = imagePart.inlineData;
-      return `data:${mimeType};base64,${data}`;
-    }
-  }
-
-  const finishReason = response.candidates?.[0]?.finishReason;
-  if (finishReason && finishReason !== 'STOP') {
-    const errorMessage = `Image generation stopped unexpectedly. Reason: ${finishReason}. This often relates to safety settings.`;
-    throw new Error(errorMessage);
-  }
-  const textFeedback = response.text?.trim();
-  const errorMessage = `The AI model did not return an image. ` + (textFeedback ? `The model responded with text: "${textFeedback}"` : "This can happen due to safety filters or if the request is too complex. Please try a different image.");
-  throw new Error(errorMessage);
 };
 
+/**
+ * Generate model image from user image
+ * @param {File} userImage - User uploaded image file
+ * @returns {Promise<string>} Data URL of generated model image
+ */
 export const generateModelImage = async (userImage) => {
-  const userImagePart = await fileToPart(userImage);
-  const prompt = "You are an expert fashion photographer AI. Transform the person in this image into a full-body fashion model photo suitable for an e-commerce website. The background must be a clean, neutral studio backdrop (light gray, #f0f0f0). The person should have a neutral, professional model expression. Preserve the person's identity, unique features, and body type, but place them in a standard, relaxed standing model pose. The final image must be photorealistic. Return ONLY the final image.";
-  const response = await ai.models.generateContent({
-    model,
-    contents: { parts: [userImagePart, { text: prompt }] },
-    config: {
-      responseModalities: ["IMAGE"],
-    },
-  });
-  return handleApiResponse(response);
+  try {
+    const formData = new FormData();
+    formData.append('userImage', userImage);
+    
+    console.log('Calling backend: POST /api/gemini/generate-model');
+    
+    const response = await axios.post(
+      `${API_BASE_URL}/gemini/generate-model`,
+      formData,
+      {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        },
+        timeout: 60000 // 60 second timeout
+      }
+    );
+    
+    // Return image data URL (compatible with previous implementation)
+    return response.data.imageData;
+  } catch (error) {
+    handleGeminiError(error);
+  }
 };
 
+/**
+ * Generate virtual try-on image
+ * @param {string} modelImageUrl - Data URL of model image
+ * @param {File} garmentImage - Garment image file
+ * @returns {Promise<string>} Data URL of try-on result
+ */
 export const generateVirtualTryOnImage = async (modelImageUrl, garmentImage) => {
-  const modelImagePart = dataUrlToPart(modelImageUrl);
-  const garmentImagePart = await fileToPart(garmentImage);
-  const prompt = `You are an expert virtual try-on AI. You will be given a 'model image' and a 'garment image'. Your task is to create a new photorealistic image where the person from the 'model image' is wearing the clothing from the 'garment image'.
-
-**Crucial Rules:**
-1.  **Complete Garment Replacement:** You MUST completely REMOVE and REPLACE the clothing item worn by the person in the 'model image' with the new garment. No part of the original clothing (e.g., collars, sleeves, patterns) should be visible in the final image.
-2.  **Preserve the Model:** The person's face, hair, body shape, and pose from the 'model image' MUST remain unchanged.
-3.  **Preserve the Background:** The entire background from the 'model image' MUST be preserved perfectly.
-4.  **Apply the Garment:** Realistically fit the new garment onto the person. It should adapt to their pose with natural folds, shadows, and lighting consistent with the original scene.
-5.  **Output:** Return ONLY the final, edited image. Do not include any text.`;
-  const response = await ai.models.generateContent({
-    model,
-    contents: { parts: [modelImagePart, garmentImagePart, { text: prompt }] },
-    config: {
-      responseModalities: ["IMAGE"],
-    },
-  });
-  return handleApiResponse(response);
+  try {
+    const formData = new FormData();
+    formData.append('modelImageUrl', modelImageUrl);
+    formData.append('garmentImage', garmentImage);
+    
+    console.log('Calling backend: POST /api/gemini/virtual-try-on');
+    
+    const response = await axios.post(
+      `${API_BASE_URL}/gemini/virtual-try-on`,
+      formData,
+      {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        },
+        timeout: 60000
+      }
+    );
+    
+    return response.data.imageData;
+  } catch (error) {
+    handleGeminiError(error);
+  }
 };
 
-export const generateMixMatchImage = async (modelImageUrl, topImage, bottomImage, accessoryImage) => {
-  const modelImagePart = dataUrlToPart(modelImageUrl);
-  const parts = [modelImagePart];
-  let promptText = "You are an expert virtual try-on AI. You will be given a 'model image'";
-  
-  if (topImage) {
-      const topPart = await fileToPart(topImage);
-      parts.push(topPart);
-      promptText += " and a 'top garment image'";
+/**
+ * Generate mix-match image with multiple garments
+ * @param {string} modelImageUrl - Data URL of model image
+ * @param {File} topImage - Top garment image file
+ * @param {File} bottomImage - Bottom garment image file
+ * @param {Array<File>|File} accessories - Accessory image(s)
+ * @param {File} fullBodyImage - Full body garment image file
+ * @returns {Promise<string>} Data URL of mix-match result
+ */
+export const generateMixMatchImage = async (
+  modelImageUrl, 
+  topImage, 
+  bottomImage, 
+  accessories = [], 
+  fullBodyImage = null
+) => {
+  try {
+    const formData = new FormData();
+    formData.append('modelImageUrl', modelImageUrl);
+    
+    if (fullBodyImage) {
+      formData.append('fullBodyImage', fullBodyImage);
+    } else {
+      if (topImage) formData.append('topImage', topImage);
+      if (bottomImage) formData.append('bottomImage', bottomImage);
+    }
+    
+    // Handle accessories (single file or array)
+    if (accessories) {
+      if (Array.isArray(accessories)) {
+        // For now, backend only supports single accessory
+        // Send first accessory if array provided
+        if (accessories.length > 0) {
+          formData.append('accessories', accessories[0]);
+        }
+      } else {
+        formData.append('accessories', accessories);
+      }
+    }
+    
+    console.log('Calling backend: POST /api/gemini/mix-match');
+    
+    const response = await axios.post(
+      `${API_BASE_URL}/gemini/mix-match`,
+      formData,
+      {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        },
+        timeout: 60000
+      }
+    );
+    
+    return response.data.imageData;
+  } catch (error) {
+    handleGeminiError(error);
   }
-  
-  if (bottomImage) {
-      const bottomPart = await fileToPart(bottomImage);
-      parts.push(bottomPart);
-      promptText += " and a 'bottom garment image'";
-  }
-
-  if (accessoryImage) {
-      const accPart = await fileToPart(accessoryImage);
-      parts.push(accPart);
-      promptText += " and an 'accessory image'";
-  }
-
-  promptText += `. Your task is to create a new photorealistic image where the person from the 'model image' is wearing the provided items.
-
-**Crucial Rules:**
-1.  **Item Application:** Apply the provided items to the person.
-    ${topImage ? "- Replace the upper body clothing with the 'top garment image'." : ""}
-    ${bottomImage ? "- Replace the lower body clothing with the 'bottom garment image'." : ""}
-    ${accessoryImage ? "- Add or apply the 'accessory image' naturally (e.g., handbag in hand/shoulder, hat on head, jewelry where appropriate)." : ""}
-    ${(!topImage && bottomImage) ? "- Keep the person's existing upper body clothing UNCHANGED." : ""}
-    ${(topImage && !bottomImage) ? "- Keep the person's existing lower body clothing UNCHANGED." : ""}
-2.  **Preserve the Model:** The person's face, hair, body shape, and pose MUST remain unchanged (unless the accessory, like a hat, naturally covers part of the hair).
-3.  **Preserve the Background:** The background MUST be preserved perfectly.
-4.  **Realistic Fit:** The items should fit naturally, respecting gravity, layering, and lighting.
-5.  **Output:** Return ONLY the final, edited image.`;
-
-  parts.push({ text: promptText });
-
-  const response = await ai.models.generateContent({
-    model,
-    contents: { parts },
-    config: {
-      responseModalities: ["IMAGE"],
-    },
-  });
-  return handleApiResponse(response);
 };
 
+/**
+ * Generate pose variation from try-on image
+ * @param {string} tryOnImageUrl - Data URL of try-on image
+ * @param {string} poseInstruction - Instruction for new pose
+ * @returns {Promise<string>} Data URL of pose variation result
+ */
 export const generatePoseVariation = async (tryOnImageUrl, poseInstruction) => {
-  const tryOnImagePart = dataUrlToPart(tryOnImageUrl);
-  const prompt = `You are an expert fashion photographer AI. Take this image and regenerate it from a different perspective. The person, clothing, and background style must remain identical. The new perspective should be: "${poseInstruction}". Return ONLY the final image.`;
-  const response = await ai.models.generateContent({
-    model,
-    contents: { parts: [tryOnImagePart, { text: prompt }] },
-    config: {
-      responseModalities: ["IMAGE"],
-    },
-  });
-  return handleApiResponse(response);
+  try {
+    const formData = new FormData();
+    formData.append('tryOnImageUrl', tryOnImageUrl);
+    formData.append('poseInstruction', poseInstruction);
+    
+    console.log('Calling backend: POST /api/gemini/pose-variation');
+    
+    const response = await axios.post(
+      `${API_BASE_URL}/gemini/pose-variation`,
+      formData,
+      {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        },
+        timeout: 60000
+      }
+    );
+    
+    return response.data.imageData;
+  } catch (error) {
+    handleGeminiError(error);
+  }
 };
-
-
