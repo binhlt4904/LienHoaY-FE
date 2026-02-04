@@ -11,7 +11,7 @@ import {
   FaWallet,
   FaTshirt,
 } from "react-icons/fa";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useCart } from "./client/CartContext";
 import Swal from "sweetalert2";
 import SidebarToggleButton from "./SidebarToggleButton";
@@ -386,101 +386,69 @@ function Navbar({ onToggleSidebar }) {
         <ul className="flex items-center justify-center gap-10 h-[46px] text-sm font-semibold tracking-widest text-[#f7e8b0]">
 
           <li>
-            <Link to="/" className="hover:text-white transition">
+            <NavLink
+              to="/"
+              className={({ isActive }) =>
+                  isActive
+                    ? "text-white transition"
+                    : "text-[#f7e8b0] hover:text-white transition"
+                }
+            >
               Trang Chủ
-            </Link>
+            </NavLink>
           </li>
 
           <li>
-            <Link to="/product" className="hover:text-white transition">
+            <NavLink
+              to="/product"
+              className={({ isActive }) =>
+                  isActive
+                    ? "text-white transition"
+                    : "text-[#f7e8b0] hover:text-white transition"
+                }
+            >
               Tất Cả Sản Phẩm
-            </Link>
+            </NavLink>
           </li>
-
-          {/* ===== ÁO TRÀNG DROPDOWN ===== */}
-          <li className="relative group">
-            <Link
-              to="/product/robe"
-              className="hover:text-white transition flex items-center gap-1"
-            >
-              Áo Tràng
-              <span className="text-xs">▼</span>
-            </Link>
-
-            <ul
-              className="absolute left-1/2 -translate-x-1/2 top-full mt-2 
-        min-w-[200px] bg-[#5c0d0d] border border-[#cfa34a]/40 rounded-lg shadow-lg
-        opacity-0 invisible group-hover:opacity-100 group-hover:visible
-        transition-all duration-200 z-50"
-            >
-              <li>
-                <Link to="/product/top/ao-trang-nam" className="block px-4 py-2 hover:bg-[#7a1414] transition">
-                  Áo Tràng Nam
-                </Link>
-              </li>
-              <li>
-                <Link to="/product/top/ao-trang-nu" className="block px-4 py-2 hover:bg-[#7a1414] transition">
-                  Áo Tràng Nữ
-                </Link>
-              </li>
-              <li>
-                <Link to="/product/top/ao-trang-tre-em" className="block px-4 py-2 hover:bg-[#7a1414] transition">
-                  Áo Tràng Trẻ Em
-                </Link>
-              </li>
-              <li>
-                <Link to="/product/top/ao-trang-di-chua" className="block px-4 py-2 hover:bg-[#7a1414] transition">
-                  Áo Tràng Đi Chùa
-                </Link>
-              </li>
-            </ul>
-          </li>
-
-          {/* ===== PHÁP PHỤC DROPDOWN ===== */}
-          <li className="relative group">
-            <Link
-              to="/product/buddhist"
-              className="hover:text-white transition flex items-center gap-1"
-            >
-              Pháp Phục
-              <span className="text-xs">▼</span>
-            </Link>
-
-            <ul
-              className="absolute left-1/2 -translate-x-1/2 top-full mt-2 
-        min-w-[220px] bg-[#5c0d0d] border border-[#cfa34a]/40 rounded-lg shadow-lg
-        opacity-0 invisible group-hover:opacity-100 group-hover:visible
-        transition-all duration-200 z-50"
-            >
-              <li>
-                <Link to="/product/bottom/ao-lam-di" className="block px-4 py-2 hover:bg-[#7a1414] transition">
-                  Áo Lam Đi Chùa
-                </Link>
-              </li>
-              <li>
-                <Link to="/product/bottom/phap-phuc-tu-si" className="block px-4 py-2 hover:bg-[#7a1414] transition">
-                  Pháp Phục Tu Sĩ
-                </Link>
-              </li>
-              <li>
-                <Link to="/product/bottom/y-ca-sa" className="block px-4 py-2 hover:bg-[#7a1414] transition">
-                  Y Ca Sa
-                </Link>
-              </li>
-              <li>
-                <Link to="/product/bottom/ao-hau-le" className="block px-4 py-2 hover:bg-[#7a1414] transition">
-                  Áo Hậu Lễ
-                </Link>
-              </li>
-            </ul>
-          </li>
-
+          
           <li>
-            <Link to="/product/accessory" className="hover:text-white transition">
-              Vật Phẩm Phật Giáo
-            </Link>
+            <NavLink
+              to="/product?category=ao-dai"
+              className={({ isActive }) =>
+                  isActive
+                    ? "text-white transition"
+                    : "text-[#f7e8b0] hover:text-white transition"
+                }
+            >
+             Áo dài
+            </NavLink>
           </li>
-
+          
+          <li>
+            <NavLink
+              to="/product?category=phap-phuc"
+              className={({ isActive }) =>
+                  isActive
+                    ? "text-white transition"
+                    : "text-[#f7e8b0] hover:text-white transition"
+                }
+            >
+             Pháp phục
+            </NavLink>
+          </li>
+          
+          <li>
+            <NavLink
+              to="/product?category=bo-suu-tap"
+              className={({ isActive }) =>
+                  isActive
+                    ? "text-white transition"
+                    : "text-[#f7e8b0] hover:text-white transition"
+                }
+            >
+             Bộ sưu tập
+            </NavLink>
+          </li>
 
           <li>
             <Link to="/about" className="hover:text-white transition">
