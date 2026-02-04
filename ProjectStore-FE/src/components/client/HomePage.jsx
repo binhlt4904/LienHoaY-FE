@@ -18,10 +18,6 @@ function HomePage() {
     return cached ? JSON.parse(cached) : null;
   });
 
-  const [sets, setSets] = useState([]);
-  const [tops, setTops] = useState([]);
-  const [bottoms, setBottoms] = useState([]);
-  const [accessories, setAccessories] = useState([]);
   const [newArrivals, setNewArrivals] = useState([]);
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
@@ -33,10 +29,8 @@ function HomePage() {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const res3 = await axios.get(`${API_BASE_URL}/products/accessories`);
         const res4 = await axios.get(`${API_BASE_URL}/products/new-arrivals`);
         console.log(res4)
-        setAccessories(res3.data);
         setNewArrivals(res4.data);
       } catch (err) {
         console.error("Error fetching products:", err);

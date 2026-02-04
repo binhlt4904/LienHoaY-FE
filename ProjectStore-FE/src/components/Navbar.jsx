@@ -403,7 +403,7 @@ function Navbar({ onToggleSidebar }) {
               to="/product/robe"
               className="hover:text-white transition flex items-center gap-1"
             >
-              Áo Tràng
+              Áo Dài
               <span className="text-xs">▼</span>
             </Link>
 
@@ -414,25 +414,16 @@ function Navbar({ onToggleSidebar }) {
         transition-all duration-200 z-50"
             >
               <li>
-                <Link to="/product/top/ao-trang-nam" className="block px-4 py-2 hover:bg-[#7a1414] transition">
-                  Áo Tràng Nam
+                <Link to="/product/top/ao-dai-nam" className="block px-4 py-2 hover:bg-[#7a1414] transition">
+                  Áo Dài Nam
                 </Link>
               </li>
               <li>
-                <Link to="/product/top/ao-trang-nu" className="block px-4 py-2 hover:bg-[#7a1414] transition">
-                  Áo Tràng Nữ
+                <Link to="/product/top/ao-dai-nu" className="block px-4 py-2 hover:bg-[#7a1414] transition">
+                  Áo Dài Nữ
                 </Link>
               </li>
-              <li>
-                <Link to="/product/top/ao-trang-tre-em" className="block px-4 py-2 hover:bg-[#7a1414] transition">
-                  Áo Tràng Trẻ Em
-                </Link>
-              </li>
-              <li>
-                <Link to="/product/top/ao-trang-di-chua" className="block px-4 py-2 hover:bg-[#7a1414] transition">
-                  Áo Tràng Đi Chùa
-                </Link>
-              </li>
+              
             </ul>
           </li>
 
@@ -443,43 +434,12 @@ function Navbar({ onToggleSidebar }) {
               className="hover:text-white transition flex items-center gap-1"
             >
               Pháp Phục
-              <span className="text-xs">▼</span>
+              
             </Link>
 
-            <ul
-              className="absolute left-1/2 -translate-x-1/2 top-full mt-2 
-        min-w-[220px] bg-[#5c0d0d] border border-[#cfa34a]/40 rounded-lg shadow-lg
-        opacity-0 invisible group-hover:opacity-100 group-hover:visible
-        transition-all duration-200 z-50"
-            >
-              <li>
-                <Link to="/product/bottom/ao-lam-di" className="block px-4 py-2 hover:bg-[#7a1414] transition">
-                  Áo Lam Đi Chùa
-                </Link>
-              </li>
-              <li>
-                <Link to="/product/bottom/phap-phuc-tu-si" className="block px-4 py-2 hover:bg-[#7a1414] transition">
-                  Pháp Phục Tu Sĩ
-                </Link>
-              </li>
-              <li>
-                <Link to="/product/bottom/y-ca-sa" className="block px-4 py-2 hover:bg-[#7a1414] transition">
-                  Y Ca Sa
-                </Link>
-              </li>
-              <li>
-                <Link to="/product/bottom/ao-hau-le" className="block px-4 py-2 hover:bg-[#7a1414] transition">
-                  Áo Hậu Lễ
-                </Link>
-              </li>
-            </ul>
           </li>
 
-          <li>
-            <Link to="/product/accessory" className="hover:text-white transition">
-              Vật Phẩm Phật Giáo
-            </Link>
-          </li>
+          
 
 
           <li>

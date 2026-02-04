@@ -8,6 +8,7 @@ import VerifyResetOtp from "./components/VerifyResetOtp";
 import ResetPassword from "./components/ResetPassword";
 import ChangePassword from "./components/ChangePassword";
 import UserLayout from "./components/UserLayout";
+import TetCollectionPage from "./components/client/TetCollectionPage";
 
 
 
@@ -33,6 +34,7 @@ function App() {
             <Route path="/verify-reset-otp" element={<VerifyResetOtp />} />
             <Route path="/reset-password" element={<ResetPassword />} />
             <Route path="/change-password" element={<ChangePassword />} />
+            <Route path="/tet" element={<TetCollectionPage />} />
             
 
 
