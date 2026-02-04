@@ -92,9 +92,10 @@ const DepositPage = ({ }) => {
     }, [submitted]);
 
     return (
-        <div className="flex h-screen bg-gray-100">
+        <div className="flex flex-col min-h-screen bg-gray-100">
 
             <Navbar user={user} onToggleSidebar={() => setSidebarOpen(!sidebarOpen)} />
+            <div className="flex flex-1">
             <Sidebar user={user} isOpen={sidebarOpen} />
             <main
                 ref={mainRef}
@@ -183,9 +184,9 @@ const DepositPage = ({ }) => {
                 </div>
                 <ScrollToTopButton targetRef={mainRef} />
                 <ChatBox />
-                <Footer />
             </main>
-
+            </div>
+                <Footer />
         </div>
     );
 };

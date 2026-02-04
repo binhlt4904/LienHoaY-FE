@@ -213,7 +213,7 @@ const CheckoutPage = () => {
   };
 
   return (
-    <div className="flex bg-[#fff7f3] h-screen">
+    <div className="flex flex-col min-h-screen bg-[#fff7f3]">
       <Navbar user={user} onToggleSidebar={() => setSidebarOpen(!sidebarOpen)} />
      
        <main
@@ -298,8 +298,8 @@ const CheckoutPage = () => {
           </div>
         </div>
         <ScrollToTopButton targetRef={mainRef} />
-        <Footer />
       </main>
+      <Footer />
     </div>
   );
 };

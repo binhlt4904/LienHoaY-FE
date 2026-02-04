@@ -88,8 +88,9 @@ function TopSellerPage() {
   console.log(products);
 
   return (
-    <div className="flex h-screen bg-[#fff7f3]">
+    <div className="flex flex-col min-h-screen bg-[#fff7f3]">
       <Navbar user={user} onToggleSidebar={() => setSidebarOpen(!sidebarOpen)} />
+      <div className="flex flex-1">
       <Sidebar user={user} isOpen={sidebarOpen} />
 
       <main
@@ -216,8 +217,9 @@ function TopSellerPage() {
         )}
         <ScrollToTopButton targetRef={mainRef} />
         <ChatBox />
-        <Footer />
       </main>
+      </div>
+      <Footer />
     </div>
   );
 }

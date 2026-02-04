@@ -16,8 +16,8 @@ const OrderSuccessPage = () => {
 
     document.title = "ORDER - Levents";
 
-    return (
-        <div className="flex flex-col h-screen bg-gray-50">
+  return (
+    <div className="flex flex-col min-h-screen bg-gray-50">
             <Navbar user={user} onToggleSidebar={() => setSidebarOpen(!sidebarOpen)} />
       
             <div className="flex flex-1 overflow-hidden">
@@ -56,11 +56,9 @@ const OrderSuccessPage = () => {
                         </div>
                     </div>
                     <ChatBox/>
-                    <div className="mt-12">
-                        <Footer user={user} />
-                    </div>
                 </main>
             </div>
+            <Footer user={user} />
         </div>
     );
 };

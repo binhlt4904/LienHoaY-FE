@@ -12,7 +12,7 @@ const ContactPage = () => {
     document.title = "Liên hệ - Liên Hoa Y";
 
     return (
-        <div className="min-h-screen bg-[#fff7f3]">
+        <div className="flex flex-col min-h-screen bg-[#fff7f3]">
             <Navbar user={user} />
 
             {/* Header */}
@@ -105,7 +105,7 @@ const ContactPage = () => {
                 </div>
                 
             </div>
-            <Footer />
+        <Footer />
         </div>
     );
 };

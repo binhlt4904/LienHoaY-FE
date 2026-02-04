@@ -60,7 +60,7 @@ function BuddhistPage() {
   };
 
   return (
-    <div className="flex h-screen bg-[#fff7f3]">
+    <div className="flex flex-col min-h-screen bg-[#fff7f3]">
       <Navbar user={user} onToggleSidebar={() => setSidebarOpen(!sidebarOpen)} />
       
 
@@ -230,8 +230,8 @@ function BuddhistPage() {
 
         <ScrollToTopButton targetRef={mainRef} />
         <ChatBox />
-        <Footer />
       </main>
+      <Footer />
     </div>
   );
 }
