@@ -14,7 +14,7 @@ const AboutPage = () => {
   document.title = "Giới thiệu - Liên Hoa Y";
 
   return (
-    <div className="flex h-screen bg-[#fff7f3] overflow-hidden">
+    <div className="flex flex-col min-h-screen bg-[#fff7f3] overflow-hidden">
       <Navbar user={user} />
 
       <main
@@ -177,6 +177,7 @@ const AboutPage = () => {
         <ScrollToTopButton targetRef={mainRef} />
         <Footer />
       </main>
+      <Footer />
     </div>
   );
 };

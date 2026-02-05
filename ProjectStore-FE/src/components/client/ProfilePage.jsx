@@ -153,8 +153,9 @@ function ProfilePage() {
 
 
   return (
-    <div className="flex h-screen bg-gray-100">
+    <div className="flex flex-col min-h-screen bg-gray-100">
       <Navbar user={user} onToggleSidebar={() => setSidebarOpen(!sidebarOpen)} />
+      <div className="flex flex-1">
       <Sidebar user={user} isOpen={sidebarOpen} />
 
       <main className="flex-1 mt-[72px] p-6 overflow-y-auto bg-gradient-to-br from-blue-50 to-gray-100">
@@ -350,10 +351,9 @@ function ProfilePage() {
           </div>
         )}
         <ChatBox />
-        <Footer />
       </main>
-
-
+      </div>
+      <Footer />
     </div>
   );
 }

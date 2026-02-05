@@ -11,7 +11,7 @@ import {
   FaWallet,
   FaTshirt,
 } from "react-icons/fa";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useCart } from "./client/CartContext";
 import Swal from "sweetalert2";
 import SidebarToggleButton from "./SidebarToggleButton";
@@ -382,19 +382,33 @@ function Navbar({ onToggleSidebar }) {
       </div>
 
       {/* ===== MENU BAR ===== */}
-      <nav className="hidden lg:block bg-[#5c0d0d] border-t border-[#cfa34a]/40">
-        <ul className="flex items-center justify-center gap-10 h-[46px] text-sm font-semibold tracking-widest text-[#f7e8b0]">
+      <nav className="hidden lg:block bg-[#f5d27a] border-t border-[#e8c05c]">
+        <ul className="flex items-center justify-center gap-10 h-[46px] text-sm font-semibold tracking-widest text-[#6b0f0f]">
 
           <li>
-            <Link to="/" className="hover:text-white transition">
+            <NavLink
+              to="/"
+              className={({ isActive }) =>
+                  isActive
+                    ? "text-[#5c0d0d] transition"
+                    : "text-[#6b0f0f] hover:text-[#5c0d0d] transition"
+                }
+            >
               Trang Chủ
-            </Link>
+            </NavLink>
           </li>
 
           <li>
-            <Link to="/product" className="hover:text-white transition">
+            <NavLink
+              to="/product"
+              className={({ isActive }) =>
+                  isActive
+                    ? "text-[#5c0d0d] transition"
+                    : "text-[#6b0f0f] hover:text-[#5c0d0d] transition"
+                }
+            >
               Tất Cả Sản Phẩm
-            </Link>
+            </NavLink>
           </li>
           <li className="relative group">
             <Link
@@ -418,16 +432,19 @@ function Navbar({ onToggleSidebar }) {
 
             
           </li>
-
-          {/* ===== PHÁP PHỤC DROPDOWN ===== */}
-          <li className="relative group">
-            <Link
+          
+          <li>
+            <NavLink
               to="/product/buddhist"
-              className="hover:text-white transition flex items-center gap-1"
+              className={({ isActive }) =>
+                  isActive
+                    ? "text-[#5c0d0d] transition"
+                    : "text-[#6b0f0f] hover:text-[#5c0d0d] transition"
+                }
             >
               Pháp Phục
               
-            </Link>
+            </NavLink>
 
           </li>
 
@@ -441,7 +458,7 @@ function Navbar({ onToggleSidebar }) {
           </li>
 
           <li>
-            <Link to="/contact" className="hover:text-white transition">
+            <Link to="/contact" className="text-[#6b0f0f] hover:text-[#5c0d0d] transition">
               Liên Hệ
             </Link>
           </li>

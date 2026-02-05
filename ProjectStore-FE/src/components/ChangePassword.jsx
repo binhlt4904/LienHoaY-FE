@@ -80,7 +80,7 @@ export default function ChangePassword() {
   );
 
   return (
-    <div className="flex bg-gray-100 min-h-screen">
+    <div className="flex flex-col min-h-screen bg-gray-100">
       <Navbar user={user} onToggleSidebar={() => setSidebarOpen(!sidebarOpen)} />
       
       {user.role == 'ADMIN' && (
@@ -103,8 +103,8 @@ export default function ChangePassword() {
             </button>
           </form>
         </div>
-        <Footer />
       </main>
+        <Footer />
     </div>
   );
 }
