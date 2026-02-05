@@ -4,7 +4,6 @@ import { FaBox, FaShippingFast, FaCheckCircle, FaTrashAlt, FaTimesCircle } from 
 import Sidebar from "../Sidebar";
 import Footer from "../Footer";
 import Navbar from "../Navbar";
-import ChatBox from './ChatBox';
 import ScrollToTopButton from "../ScrollToTopButton";
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
@@ -289,7 +288,6 @@ const UserOrdersPage = () => {
           </div>
         )}
         <ScrollToTopButton targetRef={mainRef} />
-        <ChatBox />
 
         <Footer />
       </main>

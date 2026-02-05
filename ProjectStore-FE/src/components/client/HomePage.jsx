@@ -5,10 +5,8 @@ import { Navigation } from 'swiper/modules';
 import { useNavigate } from 'react-router-dom';
 import 'swiper/css';
 import 'swiper/css/navigation';
-import Sidebar from "../Sidebar";
 import Footer from "../Footer";
 import Navbar from "../Navbar";
-import ChatBox from "./ChatBox";
 import ScrollToTopButton from "../ScrollToTopButton";
 
 function HomePage() {
@@ -255,9 +253,6 @@ function HomePage() {
 
         </section>
 
-
-
-        <ChatBox />
         <ScrollToTopButton targetRef={mainRef} />
         <Footer />
       </main>

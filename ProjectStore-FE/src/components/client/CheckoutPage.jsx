@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useCart } from './CartContext';
 import { useNavigate, useLocation } from 'react-router-dom';
-import Sidebar from "../Sidebar";
 import Navbar from "../Navbar";
 import Footer from "../Footer";
 import ScrollToTopButton from "../ScrollToTopButton";

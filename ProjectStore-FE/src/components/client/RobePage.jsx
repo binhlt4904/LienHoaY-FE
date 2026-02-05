@@ -1,10 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
-import Sidebar from "../Sidebar";
 import Footer from "../Footer";
 import Navbar from "../Navbar";
-import ChatBox from "./ChatBox";
 import ScrollToTopButton from "../ScrollToTopButton";
 import { FiFilter } from "react-icons/fi";
 import { FiSearch } from "react-icons/fi";
@@ -242,7 +240,6 @@ function RobePage() {
         )}
 
         <ScrollToTopButton targetRef={mainRef} />
-        <ChatBox />
         <Footer />
       </main>
     </div>

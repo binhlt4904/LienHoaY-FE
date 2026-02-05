@@ -1,10 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import Sidebar from "../Sidebar";
 import Footer from "../Footer";
 import Navbar from "../Navbar";
-import ChatBox from "./ChatBox";
 import ScrollToTopButton from "../ScrollToTopButton";
 import { FiSearch, FiFilter } from "react-icons/fi";
 import { Link } from "react-router-dom";
@@ -229,7 +227,6 @@ function BuddhistPage() {
         )}
 
         <ScrollToTopButton targetRef={mainRef} />
-        <ChatBox />
         <Footer />
       </main>
     </div>

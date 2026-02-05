@@ -4,7 +4,6 @@ import { useNavigate, Link } from "react-router-dom";
 import Sidebar from "../Sidebar";
 import Footer from "../Footer";
 import Navbar from "../Navbar";
-import ChatBox from "./ChatBox";
 import ScrollToTopButton from "../ScrollToTopButton";
 import { FiFilter, FiSearch } from "react-icons/fi";
 
@@ -242,7 +241,6 @@ function NewArrivalPage() {
         )}
 
         <ScrollToTopButton targetRef={mainRef} />
-        <ChatBox />
         <Footer />
       </main>
     </div>

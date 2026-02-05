@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import Sidebar from "../Sidebar";
 import Footer from "../Footer";
 import Navbar from "../Navbar";
-import ChatBox from "./ChatBox";
 import ScrollToTopButton from "../ScrollToTopButton";
 import { FiFilter } from "react-icons/fi";
 
@@ -215,7 +214,6 @@ function TopSellerPage() {
           </div>
         )}
         <ScrollToTopButton targetRef={mainRef} />
-        <ChatBox />
         <Footer />
       </main>
     </div>

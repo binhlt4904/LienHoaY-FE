@@ -2,40 +2,50 @@
   background: #9e2b25;
   min-height: 100vh;
   padding-bottom: 80px;
-  font-family: "Times New Roman", serif;
 }
 
 /* ===== HERO ===== */
 .tet-hero {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 60px 80px;
   background: #9e2b25;
+  overflow: hidden; /* QUAN TRỌNG */
+  justify-content: center;
+  margin-top: 70px;
+  
 }
 
 .hero-left img,
-.hero-right img {
-  height: 520px;
+.hero-right img, .hero-center img {
+  height: 700px;
   object-fit: contain;
 }
 
-.hero-center {
-  text-align: center;
-  color: #ffe6a7;
+/* ===== VIỀN 4 GÓC ===== */
+.cloud {
+  position: absolute;
+  width: 200%;
+  height: 220px;
+  background-image: url("../../../public/images/texture.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  pointer-events: none;
+  z-index: 1;
 }
 
-.hero-center h1 {
-  font-size: 42px;
-  margin-bottom: 12px;
-  color: #ffd27d;
+/* vị trí */
+.cloud.tl { top: 0; left: 0; }
+.cloud.tr { top: 0; right: 0; transform: scaleX(-1); }
+/* content luôn nổi trên viền */
+/* content luôn nổi trên viền */
+.hero-left,
+.hero-center,
+.hero-right {
+  position: relative;
+  z-index: 3;
 }
 
-.hero-center h2 {
-  font-size: 34px;
-  font-weight: 700;
-  color: #fff;
-}
+
 
 /* ===== INTRO ===== */
 .tet-intro {
@@ -178,4 +188,158 @@
   margin-top: 10px;
   font-weight: 600;
   color: #ffd27d;
+}
+/* ===== LIEN HOA Y ORNATE CARD ===== */
+.lienhoa-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 70px;
+}
+
+.lienhoa-card {
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  background: #f6ddb3;
+  padding: 48px 56px;
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 40px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+}
+
+/* content */
+.lienhoa-title {
+  font-family: "Great Vibes", cursive;
+  font-size: 42px;
+  font-weight: bold;
+  color: #2f5e3d;
+  margin-bottom: 20px;
+}
+
+.lienhoa-content {
+  font-family: "Playfair Display", serif;
+  font-size: 17px;
+  line-height: 1.9;
+  color: #2f3e2e;
+}
+
+.lienhoa-greeting {
+  font-style: italic;
+  font-size: 18px;
+}
+
+.lienhoa-sign {
+  font-family: "Great Vibes", cursive;
+  font-size: 20px;
+  margin-top: 24px;
+  color: #2f5e3d;
+}
+
+
+/* image */
+.lienhoa-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.lienhoa-image img {
+  width: 100%;
+  max-width: 360px;
+  object-fit: contain;
+}
+
+/* ===== ORNATE CORNERS ===== */
+.corner {
+  position: absolute;
+  width: 42px;
+  height: 42px;
+  border: 4px solid #b52a2a;
+}
+
+.corner.tl {
+  top: 16px;
+  left: 16px;
+  border-right: none;
+  border-bottom: none;
+}
+
+.corner.tr {
+  top: 16px;
+  right: 16px;
+  border-left: none;
+  border-bottom: none;
+}
+
+.corner.bl {
+  bottom: 16px;
+  left: 16px;
+  border-right: none;
+  border-top: none;
+}
+
+.corner.br {
+  bottom: 16px;
+  right: 16px;
+  border-left: none;
+  border-top: none;
+}
+
+/* responsive */
+@media (max-width: 768px) {
+  .lienhoa-card {
+    grid-template-columns: 1fr;
+    padding: 28px;
+  }
+
+  .lienhoa-title {
+    font-size: 28px;
+  }
+}
+/* ===== ORNATE BANNER FRAME ===== */
+.ornate-banner {
+  position: relative;
+  overflow: hidden;
+  border-radius: 32px;
+  background: #7a1414;
+}
+
+.banner-border {
+  position: absolute;
+  width: 100%;
+  left: 0;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.banner-border.top {
+  top: 0;
+}
+
+.banner-border.bottom {
+  bottom: 0;
+  transform: rotate(180deg);
+}
+
+/* nâng content lên trên viền */
+.tet-hero > *:not(.banner-border) {
+  position: relative;
+  z-index: 10;
+}
+.ornate-frame {
+  position: relative;
+  border: 28px solid transparent;
+  border-image-source: url("../../../public/images/texture.png");
+  border-image-slice: 120;
+  border-image-repeat: stretch;
+  border-radius: 28px;
+  background: #7a1414;
+  overflow: hidden;
+}
+
+.hero-card{
+  display: flex;
+  position: relative;
+  width: 100%;
 }

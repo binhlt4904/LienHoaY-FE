@@ -82,9 +82,7 @@ export default function ChangePassword() {
   return (
     <div className="flex bg-gray-100 min-h-screen">
       <Navbar user={user} onToggleSidebar={() => setSidebarOpen(!sidebarOpen)} />
-      {user.role == 'USER' && (
-        <Sidebar user={user} isOpen={sidebarOpen} />
-      )}
+      
       {user.role == 'ADMIN' && (
         <AdminSidebar user={user} isOpen={sidebarOpen} />
       )}

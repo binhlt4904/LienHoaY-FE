@@ -34,7 +34,7 @@ function App() {
             <Route path="/verify-reset-otp" element={<VerifyResetOtp />} />
             <Route path="/reset-password" element={<ResetPassword />} />
             <Route path="/change-password" element={<ChangePassword />} />
-            <Route path="/tet" element={<TetCollectionPage />} />
+            <Route path="/collection/sac-xuan" element={<TetCollectionPage />} />
             
 
 

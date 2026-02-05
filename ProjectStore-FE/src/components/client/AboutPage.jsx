@@ -1,7 +1,6 @@
 import React, { useState, useRef } from "react";
 import Navbar from "../Navbar";
 import Footer from "../Footer";
-import ChatBox from "./ChatBox";
 import ScrollToTopButton from "../ScrollToTopButton";
 import { FaCheckCircle, FaTshirt, FaHeadset, FaLeaf } from "react-icons/fa";
 
@@ -176,7 +175,6 @@ const AboutPage = () => {
         </section>
 
         <ScrollToTopButton targetRef={mainRef} />
-        <ChatBox />
         <Footer />
       </main>
     </div>

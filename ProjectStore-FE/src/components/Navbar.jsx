@@ -396,6 +396,16 @@ function Navbar({ onToggleSidebar }) {
               Tất Cả Sản Phẩm
             </Link>
           </li>
+          <li className="relative group">
+            <Link
+              to="/collection/sac-xuan"
+              className="hover:text-white transition flex items-center gap-1"
+            >
+              Bộ Sưu Tập Tết
+              
+            </Link>
+
+          </li>
 
           {/* ===== ÁO TRÀNG DROPDOWN ===== */}
           <li className="relative group">

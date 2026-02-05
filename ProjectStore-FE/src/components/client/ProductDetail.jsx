@@ -1,14 +1,13 @@
 import { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-import Sidebar from '../Sidebar';
 import { useCart } from "./CartContext";
 import Footer from "../Footer";
 import Navbar from "../Navbar";
-import ChatBox from './ChatBox';
 import ScrollToTopButton from "../ScrollToTopButton";
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 function ProductDetail() {
   const { id } = useParams();
@@ -29,6 +28,22 @@ function ProductDetail() {
     'Trắng', 'Đen', 'Xám', 'Xanh navy', 'Xanh dương', 'Xanh lá',
     'Hồng', 'Đỏ', 'Nâu', 'Cam', 'Vàng', 'Be', 'Tím'
   ];
+
+  const colorMap = {
+    "Trắng": "#ffffff",
+    "Đen": "#000000",
+    "Xám": "#9ca3af",
+    "Xanh navy": "#1f2937",
+    "Xanh dương": "#2563eb",
+    "Xanh lá": "#16a34a",
+    "Hồng": "#f9a8d4",
+    "Đỏ": "#dc2626",
+    "Nâu": "#92400e",
+    "Cam": "#f97316",
+    "Vàng": "#facc15",
+    "Be": "#f5f5dc",
+    "Tím": "#a855f7"
+  };
   const sizeOptions = ['XS', 'S', 'M', 'L', 'XL', 'XXL'];
 
   const allColors = [...new Set(variants.map(v => v.color))].sort(
@@ -211,10 +226,42 @@ function ProductDetail() {
   return (
     <div className="flex h-screen bg-[#fff7f3]">
       <Navbar user={user} onToggleSidebar={() => setSidebarOpen(!sidebarOpen)} />
+
       <main
         ref={mainRef}
         className="flex-1 mt-[72px] p-8 overflow-y-auto space-y-8"
       >
+        {/* ===== HEADER / BREADCRUMB ===== */}
+        <div className="flex flex-col gap-3">
+          
+
+          <div className="text-gray-500 text-sm flex items-center gap-2 flex-wrap">
+            <Link to="/" className="hover:text-red-700 transition">
+              Home
+            </Link>
+            <span>›</span>
+            <Link to="/product" className="hover:text-red-700 transition">
+              Tất cả sản phẩm
+            </Link>
+            <span>›</span>
+            <Link
+              to={`/product/${product?.category}`}
+              className="hover:text-red-700 transition capitalize"
+            >
+              {product?.category === "buddhist"
+                ? "Pháp Phục"
+                : product?.category === "robe"
+                  ? "Áo Robe"
+                  : product?.category === "accessory"
+                    ? "Phụ Kiện"
+                    : "Sản phẩm"}
+            </Link>
+            <span>›</span>
+            <span className="text-black font-semibold line-clamp-1">
+              {product?.name}
+            </span>
+          </div>
+        </div>
         {loading ? (
           <ProductDetailSkeleton />
         ) : (
@@ -260,9 +307,13 @@ function ProductDetail() {
                 )}
 
                 {/* Colors */}
-                <div className="mt-4">
-                  <p className="font-semibold mb-2">Màu sắc:</p>
-                  <div className="flex gap-2 flex-wrap">
+                <div className="mt-6">
+                  <p className="text-lg font-semibold text-gray-700 mb-3">
+                    Màu:{" "}
+                    <span className="font-bold text-black">{selectedColor || "-"}</span>
+                  </p>
+
+                  <div className="flex gap-3">
                     {allColors.map(color => {
                       const isSelected = selectedColor === color;
                       const isAvailable = isColorAvailable(color);
@@ -270,26 +321,27 @@ function ProductDetail() {
                       return (
                         <button
                           key={color}
-                          onClick={() => {
-                            if (isSelected) setSelectedColor('');
-                            else if (isAvailable) setSelectedColor(color);
-                          }}
-                          className={`px-4 py-2 m-1 border rounded
-                            ${isSelected ? 'bg-black text-white border-black' : 'bg-white text-black border-gray-300'}
-                            ${!isAvailable ? 'opacity-50 cursor-not-allowed line-through' : ''}`}
                           disabled={!isAvailable}
-                        >
-                          {color}
-                        </button>
+                          onClick={() => isAvailable && setSelectedColor(color)}
+                          className={`w-10 h-10 rounded-full border-2 transition
+            ${isSelected ? "border-black scale-110" : "border-gray-300"}
+            ${!isAvailable ? "opacity-40 cursor-not-allowed" : ""}
+          `}
+                          style={{ backgroundColor: colorMap[color] || "#e5e7eb" }}
+                          title={color}
+                        />
                       );
                     })}
                   </div>
                 </div>
-
                 {/* Sizes */}
-                <div className="mt-4">
-                  <p className="font-semibold mb-2">Kích thước:</p>
-                  <div className="flex gap-2 flex-wrap">
+                <div className="mt-6">
+                  <p className="text-lg font-semibold text-gray-700 mb-3">
+                    Kích Thước:{" "}
+                    <span className="font-bold text-black">{selectedSize || "-"}</span>
+                  </p>
+
+                  <div className="flex gap-3">
                     {allSizes.map(size => {
                       const isSelected = selectedSize === size;
                       const isAvailable = isSizeAvailable(size);
@@ -297,14 +349,12 @@ function ProductDetail() {
                       return (
                         <button
                           key={size}
-                          onClick={() => {
-                            if (isSelected) setSelectedSize('');
-                            else if (isAvailable) setSelectedSize(size);
-                          }}
-                          className={`px-4 py-2 m-1 border rounded
-                            ${isSelected ? 'bg-black text-white border-black' : 'bg-white text-black border-gray-300'}
-                            ${!isAvailable ? 'opacity-50 cursor-not-allowed line-through' : ''}`}
                           disabled={!isAvailable}
+                          onClick={() => isAvailable && setSelectedSize(size)}
+                          className={`w-12 h-12 rounded-full border flex items-center justify-center font-semibold transition
+            ${isSelected ? "bg-[#6b0f0f] text-white border-[#2f4f3f]" : "bg-white text-gray-700 border-gray-300 hover:border-black"}
+            ${!isAvailable ? "opacity-40 cursor-not-allowed line-through" : ""}
+          `}
                         >
                           {size}
                         </button>
@@ -336,7 +386,7 @@ function ProductDetail() {
                       category: category
                     };
                     localStorage.setItem('fitcheck_pending_product', JSON.stringify(productToTry));
-                   navigate("/fitcheck")
+                    navigate("/fitcheck")
                   }}
                   className="flex-1 bg-gradient-to-r from-rose-500 to-pink-500 text-white 
                   font-semibold py-3 rounded-full shadow 
@@ -355,7 +405,6 @@ function ProductDetail() {
         )}
 
         <ScrollToTopButton targetRef={mainRef} />
-        <ChatBox />
         <Footer />
       </main>
     </div>
