@@ -5,7 +5,7 @@ function Footer() {
     <footer className="w-full">
       <div
         className="w-full text-left text-white"
-        style={{ backgroundColor: "#122617" }}
+        style={{ backgroundColor: "#6b0f0f" }}
       >
         {/* Full width, không padding trái/phải/bottom */}
         <div className="w-full grid grid-cols-1 md:grid-cols-4 gap-8 pt-12">
@@ -18,9 +18,10 @@ function Footer() {
               </svg>
             </div>
             <ul className="text-sm text-gray-200 space-y-2">
-              <li>✻ Địa chỉ cửa hàng: 65 Kim Mã, Ba Đình, Hà Nội</li>
+              <li>✻ Địa chỉ: Đại học FPT Hà Nội, Thạch Thất, Hà Nội</li>
+      
               <li>✻ Mua online: 0702.690.884</li>
-              <li>✻ Email: cskh@nhalua.vn</li>
+              <li>✻ Email: lienhoay.vn@gmail.com</li>
             </ul>
           </div>
 
@@ -28,7 +29,7 @@ function Footer() {
             <h3 className="text-2xl font-serif text-yellow-400 mb-4">Quan Trọng</h3>
             <ul className="text-gray-200 space-y-2">
               <li>Trang chủ</li>
-              <li>Cửa hàng Nhà Lụa</li>
+              <li>Cửa hàng Pháp phục liên hoa y</li>
               <li>Về chúng tôi</li>
               <li>Liên hệ</li>
             </ul>
@@ -60,15 +61,7 @@ function Footer() {
         </div>
       </div>
 
-      <div className="w-full" style={{ backgroundColor: "#e9e0d0" }}>
-        {/* Full width, không padding trái/phải/bottom */}
-        <div className="w-full pt-6 text-center text-gray-800 text-sm">
-          <div className="font-semibold">CÔNG TY TNHH THƯƠNG MẠI VÀ SẢN XUẤT KINA</div>
-          <div className="mt-1">Địa chỉ: 654/4B Trung Nữ Vương, Phường Hòa Cường, TP Đà Nẵng, Việt Nam</div>
-          <div className="mt-1">Mã số doanh nghiệp: 0402299830</div>
-          <div className="mt-2">© 2025 Nhà Lụa</div>
-        </div>
-      </div>
+      
     </footer>
   );
 }

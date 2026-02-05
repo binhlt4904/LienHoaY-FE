@@ -73,3 +73,9 @@ body {
   animation: fade-in-up 0.6s ease-out both;
 }
 
+/* Override Tailwind px-10 to use larger horizontal padding */
+.px-10 {
+  padding-left: 8.5rem;
+  padding-right: 8.5rem;
+}
+

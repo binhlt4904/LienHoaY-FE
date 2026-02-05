@@ -166,8 +166,8 @@ function HomePage() {
           msOverflowStyle: "none", // IE
         }}
       >
-        {/* Banner */}
-        <div className="relative">
+      {/* Banner */}
+      <div className="relative pt-6">
           <img
             src="/images/anhnen.png"
             alt="Banner"

@@ -382,16 +382,16 @@ function Navbar({ onToggleSidebar }) {
       </div>
 
       {/* ===== MENU BAR ===== */}
-      <nav className="hidden lg:block bg-[#5c0d0d] border-t border-[#cfa34a]/40">
-        <ul className="flex items-center justify-center gap-10 h-[46px] text-sm font-semibold tracking-widest text-[#f7e8b0]">
+      <nav className="hidden lg:block bg-[#f5d27a] border-t border-[#e8c05c]">
+        <ul className="flex items-center justify-center gap-10 h-[46px] text-sm font-semibold tracking-widest text-[#6b0f0f]">
 
           <li>
             <NavLink
               to="/"
               className={({ isActive }) =>
                   isActive
-                    ? "text-white transition"
-                    : "text-[#f7e8b0] hover:text-white transition"
+                    ? "text-[#5c0d0d] transition"
+                    : "text-[#6b0f0f] hover:text-[#5c0d0d] transition"
                 }
             >
               Trang Chủ
@@ -403,8 +403,8 @@ function Navbar({ onToggleSidebar }) {
               to="/product"
               className={({ isActive }) =>
                   isActive
-                    ? "text-white transition"
-                    : "text-[#f7e8b0] hover:text-white transition"
+                    ? "text-[#5c0d0d] transition"
+                    : "text-[#6b0f0f] hover:text-[#5c0d0d] transition"
                 }
             >
               Tất Cả Sản Phẩm
@@ -416,8 +416,8 @@ function Navbar({ onToggleSidebar }) {
               to="/product?category=ao-dai"
               className={({ isActive }) =>
                   isActive
-                    ? "text-white transition"
-                    : "text-[#f7e8b0] hover:text-white transition"
+                    ? "text-[#5c0d0d] transition"
+                    : "text-[#6b0f0f] hover:text-[#5c0d0d] transition"
                 }
             >
              Áo dài
@@ -429,8 +429,8 @@ function Navbar({ onToggleSidebar }) {
               to="/product?category=phap-phuc"
               className={({ isActive }) =>
                   isActive
-                    ? "text-white transition"
-                    : "text-[#f7e8b0] hover:text-white transition"
+                    ? "text-[#5c0d0d] transition"
+                    : "text-[#6b0f0f] hover:text-[#5c0d0d] transition"
                 }
             >
              Pháp phục
@@ -442,8 +442,8 @@ function Navbar({ onToggleSidebar }) {
               to="/product?category=bo-suu-tap"
               className={({ isActive }) =>
                   isActive
-                    ? "text-white transition"
-                    : "text-[#f7e8b0] hover:text-white transition"
+                    ? "text-[#5c0d0d] transition"
+                    : "text-[#6b0f0f] hover:text-[#5c0d0d] transition"
                 }
             >
              Bộ sưu tập
@@ -451,13 +451,13 @@ function Navbar({ onToggleSidebar }) {
           </li>
 
           <li>
-            <Link to="/about" className="hover:text-white transition">
+            <Link to="/about" className="text-[#6b0f0f] hover:text-[#5c0d0d] transition">
               Về Chúng Tôi
             </Link>
           </li>
 
           <li>
-            <Link to="/contact" className="hover:text-white transition">
+            <Link to="/contact" className="text-[#6b0f0f] hover:text-[#5c0d0d] transition">
               Liên Hệ
             </Link>
           </li>
