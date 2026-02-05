@@ -240,7 +240,6 @@ function RobePage() {
         )}
 
         <ScrollToTopButton targetRef={mainRef} />
-        <Footer />
       </main>
       <Footer />
     </div>

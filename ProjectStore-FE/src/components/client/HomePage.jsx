@@ -158,8 +158,8 @@ function HomePage() {
           msOverflowStyle: "none", // IE
         }}
       >
-      {/* Banner */}
-      <div className="relative pt-6">
+        {/* Banner */}
+        <div className="relative">
           <img
             src="/images/anhnen.png"
             alt="Banner"
@@ -200,39 +200,61 @@ function HomePage() {
           ))}
         </section>
 
-       <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
-          {categories.map((item, index) => (
-            <div
-              key={index}
-              onClick={() => navigate(item.link)}
-              className="relative h-[300px] rounded-[36px] bg-[#fdf1e7] shadow-lg hover:shadow-2xl 
-      transition-all duration-300 cursor-pointer overflow-hidden group"
+
+        {/* ================= NEW PRODUCTS SECTION ================= */}
+        <section className="grid grid-cols-1 lg:grid-cols-5 gap-12 items-start">
+          {/* Left text */}
+          <div className="lg:col-span-1 space-y-5">
+            <h2
+              className="text-3xl font-extrabold tracking-wide text-[#1f1f1f]"
+              style={{ fontFamily: "'Playfair Display', serif" }}
             >
-              <img
-                src={item.image}
-                alt={item.title}
-                className="absolute inset-0 w-full h-full object-cover opacity-95 group-hover:scale-110 transition-transform duration-300"
-              />
+              Sản Phẩm Mới!
+            </h2>
+            <p className="text-gray-600 leading-relaxed">
+              Khám phá bộ sưu tập pháp phục mới 2026 tại{" "}
+              <span className="font-semibold text-[#7a1414]">
+                Liên Hoa Y
+              </span>
+              .
+            </p>
+            <p className="text-gray-600 leading-relaxed">
+              Các mặt hàng của Shop luôn được cập nhật mới liên tục về màu sắc
+              và kiểu dáng.
+            </p>
 
-              <div className="absolute inset-0 bg-gradient-to-t from-[#7a1414]/85 via-[#7a1414]/40 to-transparent" />
+            <button
+              onClick={() => navigate("/product/new-arrival")}
+              className="mt-2 inline-flex items-center gap-2 text-[#7a1414] font-semibold hover:underline"
+            >
+              Xem tất cả →
+            </button>
+          </div>
 
-              <div className="relative z-10 p-7 h-full flex flex-col justify-between text-[#fff5d6]">
-                <div>
-                  <h3 className="text-xl font-extrabold leading-snug">
-                    {item.title}
-                  </h3>
-                  
-                </div>
+          {/* Right product grid */}
+          <div className="lg:col-span-4">
+            <Swiper
+              modules={[Navigation]}
+              navigation
+              spaceBetween={24}
+              slidesPerView={1}
+              breakpoints={{
+                640: { slidesPerView: 2 },
+                1024: { slidesPerView: 4 },
+              }}
+            >
+              {(newArrivals || []).map((product, index) => (
+                <SwiperSlide key={index}>
+                  <ProductDetail product={product} />
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          </div>
 
-                <button className="self-start bg-[#b22a2a] hover:bg-[#951f1f] text-white text-sm font-semibold px-6 py-2.5 rounded-full shadow-lg transition">
-                  MUA NGAY
-                </button>
-              </div>
-            </div>
-          ))}
         </section>
 
         <ScrollToTopButton targetRef={mainRef} />
+        
       </main>
       <Footer />
     </div>

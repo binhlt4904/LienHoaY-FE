@@ -405,7 +405,6 @@ function ProductDetail() {
         )}
 
         <ScrollToTopButton targetRef={mainRef} />
-        <Footer />
       </main>
       <Footer />
     </div>

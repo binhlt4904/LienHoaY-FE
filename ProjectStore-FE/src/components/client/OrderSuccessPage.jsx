@@ -20,7 +20,6 @@ const OrderSuccessPage = () => {
             <Navbar user={user} onToggleSidebar={() => setSidebarOpen(!sidebarOpen)} />
       
             <div className="flex flex-1 overflow-hidden">
-                <Sidebar user={user} isOpen={sidebarOpen} />
                 <main className="flex-1 p-6 overflow-y-auto">
                     <div className="max-w-xl mx-auto bg-white shadow-lg rounded-2xl p-8 text-center mt-20">
                         <CheckCircle className="mx-auto text-green-500 w-20 h-20 animate-pulse" />
@@ -55,7 +54,6 @@ const OrderSuccessPage = () => {
                         </div>
                     </div>
                     <div className="mt-12">
-                        <Footer user={user} />
                     </div>
                 </main>
             </div>

@@ -2,7 +2,7 @@ import React from "react";
 
 function Footer() {
   return (
-    <footer className="w-full">
+    <footer className="w-full mt-auto">
       <div
         className="w-full text-left text-white"
         style={{ backgroundColor: "#6b0f0f" }}

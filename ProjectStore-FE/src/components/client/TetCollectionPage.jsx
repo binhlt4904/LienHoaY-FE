@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import Navbar from "../Navbar";
+import Footer from "../Footer";
 
 import "./TetCollectionPage.css";
 
@@ -95,7 +96,7 @@ export default function TetCollectionPage() {
   }, []);
 
   return (
-    <div className="flex bg-[#fff7f3] overflow-hidden tet-page">
+    <div className="flex flex-col min-h-screen bg-[#fff7f3] tet-page">
       <Navbar user={user} onToggleSidebar={() => setSidebarOpen(!sidebarOpen)} />
 
       <main
@@ -203,6 +204,7 @@ export default function TetCollectionPage() {
           </>
         )}
       </main>
+      <Footer />
     </div>
   );
 }

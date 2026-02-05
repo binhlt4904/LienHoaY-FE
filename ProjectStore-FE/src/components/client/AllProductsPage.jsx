@@ -245,7 +245,6 @@ function AllProductsPage() {
         )}
 
         <ScrollToTopButton targetRef={mainRef} />
-        <Footer />
       </main>
       <Footer />
     </div>

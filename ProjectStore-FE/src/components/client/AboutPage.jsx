@@ -175,7 +175,6 @@ const AboutPage = () => {
         </section>
 
         <ScrollToTopButton targetRef={mainRef} />
-        <Footer />
       </main>
       <Footer />
     </div>

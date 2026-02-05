@@ -227,7 +227,6 @@ function BuddhistPage() {
         )}
 
         <ScrollToTopButton targetRef={mainRef} />
-        <Footer />
       </main>
       <Footer />
     </div>

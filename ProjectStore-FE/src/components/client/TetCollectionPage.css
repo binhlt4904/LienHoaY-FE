@@ -1,7 +1,6 @@
 .tet-page {
   background: #9e2b25;
   min-height: 100vh;
-  padding-bottom: 80px;
 }
 
 /* ===== HERO ===== */
@@ -88,6 +87,7 @@
 .tet-section {
   margin-top: 80px;
   text-align: center;
+  margin-bottom: 50px;
 }
 
 .section-title {
