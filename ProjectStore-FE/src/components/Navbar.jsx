@@ -414,27 +414,9 @@ function Navbar({ onToggleSidebar }) {
               className="hover:text-white transition flex items-center gap-1"
             >
               Áo Dài
-              <span className="text-xs">▼</span>
             </Link>
 
-            <ul
-              className="absolute left-1/2 -translate-x-1/2 top-full mt-2 
-        min-w-[200px] bg-[#5c0d0d] border border-[#cfa34a]/40 rounded-lg shadow-lg
-        opacity-0 invisible group-hover:opacity-100 group-hover:visible
-        transition-all duration-200 z-50"
-            >
-              <li>
-                <Link to="/product/top/ao-dai-nam" className="block px-4 py-2 hover:bg-[#7a1414] transition">
-                  Áo Dài Nam
-                </Link>
-              </li>
-              <li>
-                <Link to="/product/top/ao-dai-nu" className="block px-4 py-2 hover:bg-[#7a1414] transition">
-                  Áo Dài Nữ
-                </Link>
-              </li>
-              
-            </ul>
+            
           </li>
 
           {/* ===== PHÁP PHỤC DROPDOWN ===== */}
