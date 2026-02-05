@@ -343,3 +343,93 @@
   position: relative;
   width: 100%;
 }
+/* ===================== */
+/* ===== SKELETON ===== */
+/* ===================== */
+
+.skeleton {
+  pointer-events: none;
+}
+
+.skeleton-box,
+.skeleton-line {
+  background: linear-gradient(
+    90deg,
+    #f1e6df 25%,
+    #f7efe9 37%,
+    #f1e6df 63%
+  );
+  background-size: 400% 100%;
+  animation: shimmer 1.4s ease infinite;
+  border-radius: 6px;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 100% 0;
+  }
+  100% {
+    background-position: -100% 0;
+  }
+}
+
+/* ----- HERO SKELETON ----- */
+.skeleton .hero-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 60px 80px;
+}
+
+.skeleton-box.hero-img {
+  width: 260px;
+  height: 420px;
+  border-radius: 20px;
+}
+
+.skeleton-box.hero-title {
+  width: 320px;
+  height: 140px;
+  border-radius: 16px;
+}
+
+/* ----- LIEN HOA CARD ----- */
+.skeleton-line {
+  height: 18px;
+  margin-bottom: 12px;
+}
+
+.skeleton-line.w-40 {
+  width: 40%;
+}
+
+.skeleton-line.w-60 {
+  width: 60%;
+}
+
+.skeleton-line.w-80 {
+  width: 80%;
+}
+
+.skeleton-box.square {
+  width: 220px;
+  height: 220px;
+  border-radius: 16px;
+}
+
+/* ----- PRODUCT GRID ----- */
+.skeleton-card {
+  padding: 14px;
+}
+
+.skeleton-card .thumb {
+  width: 100%;
+  height: 260px;
+  border-radius: 12px;
+  margin-bottom: 12px;
+}
+
+.view-more.disabled {
+  opacity: 0.4;
+  pointer-events: none;
+}

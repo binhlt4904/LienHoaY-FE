@@ -4,13 +4,62 @@ import Navbar from "../Navbar";
 
 import "./TetCollectionPage.css";
 
-
 const ProductCard = ({ product }) => (
   <div className="tet-product-card">
     <img src={product.thumbnailImage} alt={product.name} />
     <h4>{product.name}</h4>
     <span className="price">{product.price}</span>
   </div>
+);
+
+/* ===== SKELETON COMPONENTS ===== */
+
+const SkeletonHero = () => (
+  <section className="tet-hero skeleton">
+    <div className="hero-card">
+      <div className="skeleton-box hero-img left" />
+      <div className="skeleton-box hero-title" />
+      <div className="skeleton-box hero-img right" />
+    </div>
+  </section>
+);
+
+const SkeletonLienHoa = () => (
+  <section className="lienhoa-wrapper skeleton">
+    <div className="lienhoa-card">
+      <div className="lienhoa-content">
+        <div className="skeleton-line w-60" />
+        <div className="skeleton-line w-40" />
+        <div className="skeleton-line" />
+        <div className="skeleton-line" />
+        <div className="skeleton-line w-80" />
+      </div>
+      <div className="lienhoa-image">
+        <div className="skeleton-box square" />
+      </div>
+
+      <span className="corner tl" />
+      <span className="corner tr" />
+      <span className="corner bl" />
+      <span className="corner br" />
+    </div>
+  </section>
+);
+
+const SkeletonProductGrid = ({ title }) => (
+  <section className="relative tet-section skeleton">
+    <div className="section-title">{title}</div>
+    <div className="product-grid">
+      {Array.from({ length: 8 }).map((_, i) => (
+        <div className="tet-product-card skeleton-card" key={i}>
+          <div className="skeleton-box thumb" />
+          <div className="skeleton-line w-80" />
+          <div className="skeleton-line w-40" />
+        </div>
+      ))}
+    </div>
+    <button className="view-more disabled">Xem thêm sản phẩm</button>
+  </section>
 );
 
 export default function TetCollectionPage() {
@@ -30,7 +79,6 @@ export default function TetCollectionPage() {
     const fetchCollection = async () => {
       try {
         const res = await axios.get(`${API_BASE_URL}/collection/sac-xuan`);
-
         const robe = res.data.filter(p => p.category === "robe");
         const buddhist = res.data.filter(p => p.category === "buddhist");
 
@@ -46,117 +94,114 @@ export default function TetCollectionPage() {
     fetchCollection();
   }, []);
 
-  if (loading) {
-    return <div className="tet-loading">Đang tải bộ sưu tập...</div>;
-  }
-  console.log(buddhistProducts)
-
   return (
-
-    <div className="flex  bg-[#fff7f3] overflow-hidden tet-page">
+    <div className="flex bg-[#fff7f3] overflow-hidden tet-page">
       <Navbar user={user} onToggleSidebar={() => setSidebarOpen(!sidebarOpen)} />
-
 
       <main
         ref={mainRef}
-        className="flex-1 mt-[50px]  overflow-y-auto "
+        className="flex-1 mt-[50px] overflow-y-auto"
         style={{
-          scrollbarWidth: "none", // Firefox
-          msOverflowStyle: "none", // IE
+          scrollbarWidth: "none",
+          msOverflowStyle: "none",
         }}
       >
-        <section className="tet-hero">
-          <div className="hero-card">
-            {/* VIỀN 4 GÓC */}
-          <span className="cloud tl"></span>
-          <span className="cloud tr"></span>
+        {loading ? (
+          <>
+            <SkeletonHero />
+            <SkeletonLienHoa />
+            <SkeletonProductGrid title="Hương Sắc Hội Xuân" />
+            <SkeletonProductGrid title="Sắc Xuân Xum Vầy – Pháp Phục" />
+          </>
+        ) : (
+          <>
+            {/* ===== HERO ===== */}
+            <section className="tet-hero">
+              <div className="hero-card">
+                <span className="cloud tl"></span>
+                <span className="cloud tr"></span>
 
-          <div className="hero-left">
-            <img src="/images/banner-left.png" alt="" />
-          </div>
+                <div className="hero-left">
+                  <img src="/images/banner-left.png" alt="" />
+                </div>
 
-          <div className="hero-center">
-            <img
-              src="/images/title.png"
-              alt="Săn deal đón Tết"
-              className="title-img"
-            />
-          </div>
+                <div className="hero-center">
+                  <img
+                    src="/images/title.png"
+                    alt="Săn deal đón Tết"
+                    className="title-img"
+                  />
+                </div>
 
-          <div className="hero-right">
-            <img src="/images/banner-right.png" alt="" />
-          </div>
-          </div>
-        </section>
+                <div className="hero-right">
+                  <img src="/images/banner-right.png" alt="" />
+                </div>
+              </div>
+            </section>
 
+            {/* ===== LIEN HOA Y CARD ===== */}
+            <section className="lienhoa-wrapper">
+              <div className="lienhoa-card ">
+                <div className="lienhoa-content">
+                  <h3 className="lienhoa-title">Lời ngỏ từ Pháp Phục Liên Hoa Y</h3>
+                  <p className="lienhoa-greeting">Gửi đạo hữu,</p>
 
+                  <p>
+                    Nhân dịp xuân về, Pháp Phục Liên Hoa Y kính chúc đạo hữu thân tâm an lạc,
+                    phước duyên viên mãn.
+                  </p>
 
-        {/* ===== LIEN HOA Y CARD ===== */}
-        <section className="lienhoa-wrapper">
-          <div className="lienhoa-card ">
-            {/* LEFT TEXT */}
-            <div className="lienhoa-content">
-              <h3 className="lienhoa-title">Lời ngỏ từ Pháp Phục Liên Hoa Y</h3>
-              <p className="lienhoa-greeting">Gửi đạo hữu,</p>
+                  <p>
+                    Liên Hoa Y trân trọng giới thiệu những pháp phục mới mang tinh thần thanh
+                    tịnh, trang nghiêm và thuần khiết, đồng hành cùng đạo hữu trên hành trình
+                    tu tập và chiêm nghiệm nội tâm.
+                  </p>
 
-              <p>
-                Nhân dịp xuân về, Pháp Phục Liên Hoa Y kính chúc đạo hữu thân tâm an lạc,
-                phước duyên viên mãn.
-              </p>
+                  <p>
+                    Với từng đường kim mũi chỉ, Liên Hoa Y gửi gắm sự cung kính và tâm thành,
+                    mong mỗi pháp phục sẽ trở thành trợ duyên cho sự an trú và tỉnh thức của
+                    đạo hữu.
+                  </p>
 
-              <p>
-                Liên Hoa Y trân trọng giới thiệu những pháp phục mới mang tinh thần thanh
-                tịnh, trang nghiêm và thuần khiết, đồng hành cùng đạo hữu trên hành trình
-                tu tập và chiêm nghiệm nội tâm.
-              </p>
+                  <p className="lienhoa-sign">
+                    Nam mô Bổn Sư Thích Ca Mâu Ni Phật.
+                  </p>
+                </div>
 
-              <p>
-                Với từng đường kim mũi chỉ, Liên Hoa Y gửi gắm sự cung kính và tâm thành,
-                mong mỗi pháp phục sẽ trở thành trợ duyên cho sự an trú và tỉnh thức của
-                đạo hữu.
-              </p>
+                <div className="lienhoa-image">
+                  <img src="/images/lienhoay-title.png" alt="Liên Hoa Y" />
+                </div>
 
-              <p className="lienhoa-sign">
-                Nam mô Bổn Sư Thích Ca Mâu Ni Phật.
-              </p>
-            </div>
+                <span className="corner tl" />
+                <span className="corner tr" />
+                <span className="corner bl" />
+                <span className="corner br" />
+              </div>
+            </section>
 
-            {/* RIGHT IMAGE */}
-            <div className="lienhoa-image">
-              <img src="/images/lienhoay-title.png" alt="Liên Hoa Y" />
-            </div>
+            {/* ===== ROBE COLLECTION ===== */}
+            <section className="relative tet-section">
+              <div className="section-title">Hương Sắc Hội Xuân</div>
+              <div className="product-grid">
+                {robeProducts.map((p) => (
+                  <ProductCard key={p.id} product={p} />
+                ))}
+              </div>
+              <button className="view-more">Xem thêm sản phẩm</button>
+            </section>
 
-            {/* ORNAMENT CORNERS */}
-            <span className="corner tl" />
-            <span className="corner tr" />
-            <span className="corner bl" />
-            <span className="corner br" />
-          </div>
-        </section>
-
-
-        {/* ===== ROBE COLLECTION ===== */}
-        <section className="relative tet-section">
-          <div className="section-title">Hương Sắc Hội Xuân</div>
-          <div className="product-grid">
-            {robeProducts.map((p) => (
-              <ProductCard key={p.id} product={p} />
-            ))}
-          </div>
-          <button className="view-more">Xem thêm sản phẩm</button>
-        </section>
-
-        {/* ===== BUDDHIST COLLECTION ===== */}
-        <section className="relative tet-section">
-          <div className="section-title">Sắc Xuân Xum Vầy – Pháp Phục</div>
-          <div className="product-grid">
-            {buddhistProducts.map((p) => (
-              <ProductCard key={p.id} product={p} />
-            ))}
-          </div>
-          <button className="view-more">Xem thêm sản phẩm</button>
-        </section>
-
+            {/* ===== BUDDHIST COLLECTION ===== */}
+            <section className="relative tet-section">
+              <div className="section-title">Sắc Xuân Xum Vầy – Pháp Phục</div>
+              <div className="product-grid">
+                {buddhistProducts.map((p) => (
+                  <ProductCard key={p.id} product={p} />
+                ))}
+              </div>
+              <button className="view-more">Xem thêm sản phẩm</button>
+            </section>
+          </>
+        )}
       </main>
     </div>
   );
