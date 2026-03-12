@@ -96,9 +96,9 @@ export default function Register() {
 
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-100 to-blue-300">
+    <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-[#3b0606] via-[#6b0f0f] to-[#a83232] px-4">
       <div className="bg-white p-8 rounded-xl shadow-xl w-full max-w-md transform transition-all duration-700 animate-fade-in-up">
-        <h2 className="text-2xl font-bold mb-6 text-center text-blue-700">Đăng ký</h2>
+        <h2 className="text-2xl font-bold mb-6 text-center text-[#6b0f0f]">Đăng ký</h2>
 
         <form onSubmit={handleRegister} className="space-y-5">
 
@@ -111,7 +111,7 @@ export default function Register() {
               <input
                 type="email"
                 placeholder="Nhập email"
-                className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+                className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#8f1d1d] transition"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
@@ -129,7 +129,7 @@ export default function Register() {
               <input
                 type="text"
                 placeholder="Nhập tài khoản"
-                className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+                className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#8f1d1d] transition"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
 
@@ -148,7 +148,7 @@ export default function Register() {
               <input
                  type={showPassword ? "text" : "password"}
                 placeholder="Nhập mật khẩu"
-                className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+                className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#8f1d1d] transition"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
 
@@ -174,7 +174,7 @@ export default function Register() {
               <input
                  type={showConfirmPassword ? "text" : "password"}
                 placeholder="Nhập lại mật khẩu"
-                className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+                className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#8f1d1d] transition"
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
               />
@@ -199,7 +199,7 @@ export default function Register() {
               <input
                 type="text"
                 placeholder="Nhập tên người dùng"
-                className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+                className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#8f1d1d] transition"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
 
@@ -215,7 +215,7 @@ export default function Register() {
           {/* Submit */}
           <button
             type="submit"
-            className="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition-all duration-300 transform hover:scale-[1.02]"
+            className="w-full bg-[#8f1d1d] text-white py-3 rounded-md hover:bg-[#6b0f0f] active:bg-[#520909] transition duration-200"
           >
             Đăng ký
           </button>
@@ -223,7 +223,7 @@ export default function Register() {
 
         <p className="text-center text-sm mt-4">
           Đã có tài khoản?{" "}
-          <Link to="/login" className="text-blue-500 hover:underline">
+          <Link to="/login" className="text-[#6b0f0f] hover:underline">
             Đăng nhập
           </Link>
         </p>

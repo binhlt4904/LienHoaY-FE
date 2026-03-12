@@ -16,7 +16,7 @@ function Login() {
   const [errors, setErrors] = useState({});
   const [showPassword, setShowPassword] = useState(false);
   console.log("Login component rendered");
-  
+
 
   document.title = "LOGIN";
 
@@ -93,9 +93,11 @@ function Login() {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-200 via-blue-300 to-blue-400 px-4">
+    <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-[#3b0606] via-[#6b0f0f] to-[#a83232] px-4">
       <div className="bg-white p-8 rounded-xl shadow-xl w-full max-w-md animate-fade-in-up">
-        <h2 className="text-3xl font-bold mb-8 text-center text-blue-700">Đăng nhập</h2>
+        <h2 className="text-3xl font-bold mb-8 text-center text-[#6b0f0f]">
+  Đăng nhập
+</h2>
         <form onSubmit={handleLogin} className="space-y-6">
           {/* Username */}
           <div className="relative">
@@ -105,7 +107,7 @@ function Login() {
               placeholder="Tên đăng nhập/ Email"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-              className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 transition"
+              className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#8f1d1d] transition"
             />
           </div>
           {errors.username && <p className="text-red-600 font-medium">{errors.username}</p>}
@@ -116,7 +118,7 @@ function Login() {
             <input
               type={showPassword ? "text" : "password"}
               placeholder="Nhập lại mật khẩu"
-              className="w-full pl-10 pr-10 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 transition"
+              className="w-full pl-10 pr-10 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#8f1d1d] transition"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
@@ -134,7 +136,7 @@ function Login() {
 
           <button
             type="submit"
-            className="w-full bg-blue-600 text-white py-3 rounded-md hover:bg-blue-700 transition"
+            className="w-full bg-[#8f1d1d] text-white py-3 rounded-md hover:bg-[#6b0f0f] active:bg-[#520909] transition duration-200"
           >
             Đăng nhập
           </button>
@@ -142,13 +144,13 @@ function Login() {
 
         <p className="text-center text-sm mt-6 text-gray-600">
           Chưa có tài khoản?{" "}
-          <Link to="/register" className="text-blue-600 font-medium hover:underline">
+          <Link to="/register" className="text-[#6b0f0f] font-medium hover:underline">
             Đăng ký
           </Link>
         </p>
         <p className="text-center text-sm mt-1 text-gray-600">
           Quên mật khẩu?{" "}
-          <Link to="/forgot-password" className="text-blue-600 font-medium hover:underline">
+          <Link to="/forgot-password" className="text-[#6b0f0f] font-medium hover:underline">
             Làm mới mật khẩu
           </Link>
 
