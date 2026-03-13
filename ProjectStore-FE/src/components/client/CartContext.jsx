@@ -68,7 +68,7 @@ export const CartProvider = ({ children }) => {
 
   const increaseQuantity = async (productId) => {
     if (!user?.id) return;
-    await axios.post(`/cart/add`, {
+    await axios.post(`${API_BASE_URL}/cart/add`, {
       userId: user.id,
       productVariantId: productId,
       quantity: 1,

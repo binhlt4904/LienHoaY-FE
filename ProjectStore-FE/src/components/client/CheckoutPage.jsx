@@ -38,7 +38,7 @@ const CheckoutPage = () => {
     ? location.state.selectedProducts
     : [];
 
-    
+
 
   useEffect(() => {
     if (selectedProducts.length > 0) {
@@ -93,10 +93,10 @@ const CheckoutPage = () => {
   };
 
   const handlePlaceOrder = async (e) => {
-     e.preventDefault();
-     if(!validateForm()){
+    e.preventDefault();
+    if (!validateForm()) {
       return;
-     }
+    }
 
     const orderData = {
       userId: user?.id,
@@ -192,15 +192,15 @@ const CheckoutPage = () => {
         newErrors.phone = "Số điện thoại không hợp lệ.";
       }
     }
-    if(!selectedProvince){
+    if (!selectedProvince) {
       newErrors.selectedProvince = "Vui lòng chọn tỉnh.";
     }
 
-    if(!selectedDistrict){
+    if (!selectedDistrict) {
       newErrors.selectedDistrict = "Vui lòng chọn huyện.";
     }
 
-    if(!selectedWard){
+    if (!selectedWard) {
       newErrors.selectedWard = "Vui lòng chọn xã.";
     }
 
@@ -214,26 +214,28 @@ const CheckoutPage = () => {
   return (
     <div className="flex flex-col min-h-screen bg-[#f6f1e7]">
       <Navbar user={user} onToggleSidebar={() => setSidebarOpen(!sidebarOpen)} />
-     
-       <main
+
+      <main
         ref={mainRef}
         className="flex-1 mt-[72px] p-8 overflow-y-auto space-y-8 "
       >
         <div className="flex-1  px-6 pb-10">
-          <h2 className="text-3xl font-bold mb-8 text-center text-gray-800">Xác Nhận Đơn Hàng</h2>
+          <h2 className="text-3xl font-bold mb-8 text-center text-[#7a1414] tracking-widest uppercase">Xác Nhận Đơn Hàng</h2>
 
           <div className="flex flex-col md:flex-row gap-8">
             {/* Sản phẩm */}
-            <div className="md:w-2/3 bg-white p-6 rounded-lg shadow-md">
-              <h3 className="text-xl font-semibold mb-4 border-b pb-2">Sản phẩm đã chọn</h3>
+            <div className="md:w-2/3 bg-white p-6 rounded-2xl shadow-sm border border-red-100">
+              <h3 className="text-xl font-semibold text-[#7a1414] border-b pb-2 mb-4">
+                Sản phẩm đã chọn
+              </h3>
               <ul className="space-y-4 max-h-[600px] overflow-y-auto pr-2">
                 {itemsToCheckout.map((item, index) => (
                   <li key={index} className="flex items-center gap-4 border-b pb-4">
                     <img src={item.imageUrl} alt={item.productName} className="w-20 h-20 object-cover rounded-lg border" />
                     <div className="flex-1">
-                      <div className="text-lg font-medium">{item.productName}</div>
-                      <div className="text-sm text-gray-500">Màu: {item.color} - Size: {item.size}</div>
-                      <div className="text-sm text-gray-600">Số lượng: {item.quantity}</div>
+                      <div className="text-lg font-medium text-[#3d2c22]">{item.productName}</div>
+                      <div className="space-y-1 text-sm text-[#5a4636]">Màu: {item.color} - Size: {item.size}</div>
+                      <div className="space-y-1 text-sm text-[#5a4636]">Số lượng: {item.quantity}</div>
                     </div>
                     <div className="text-red-600 font-semibold text-right min-w-[100px]">
                       {(item.price * item.quantity).toLocaleString()} ₫
@@ -244,53 +246,66 @@ const CheckoutPage = () => {
             </div>
 
             {/* Thông tin giao hàng */}
-            <div className="md:w-1/3 bg-white p-6 rounded-lg shadow-md space-y-4">
-              <h3 className="text-xl font-semibold">Thông tin giao hàng</h3>
+            <div className="md:w-1/3 bg-white p-6 rounded-2xl shadow-sm border border-red-100 space-y-4">
+              <h3 className="text-xl font-semibold text-[#7a1414] border-b pb-2">
+                Thông tin giao hàng
+              </h3>
 
-              <input type="text" placeholder="Họ và tên" value={fullName} onChange={e => setFullName(e.target.value)} className="w-full border rounded-lg p-3 text-sm" />
+              <input type="text" placeholder="Họ và tên" value={fullName} onChange={e => setFullName(e.target.value)} className="w-full border border-red-100 rounded-lg p-3 text-sm focus:ring-2 focus:ring-red-200 focus:outline-none" />
               {errors.fullName && <p className="text-red-600 font-medium mt-1">{errors.fullName}</p>}
-              <input type="tel" placeholder="Số điện thoại" value={phone} onChange={e => setPhone(e.target.value)} className="w-full border rounded-lg p-3 text-sm" />
-                {errors.phone && <p className="text-red-600 font-medium mt-1">{errors.phone}</p>}
-              <select value={selectedProvince} onChange={e => setSelectedProvince(e.target.value)} className="w-full border rounded-lg p-3 text-sm">
+              <input type="tel" placeholder="Số điện thoại" value={phone} onChange={e => setPhone(e.target.value)} className="w-full border border-red-100 rounded-lg p-3 text-sm focus:ring-2 focus:ring-red-200 focus:outline-none" />
+              {errors.phone && <p className="text-red-600 font-medium mt-1">{errors.phone}</p>}
+              <select value={selectedProvince} onChange={e => setSelectedProvince(e.target.value)} className="w-full border border-red-100 rounded-lg p-3 text-sm focus:ring-2 focus:ring-red-200 focus:outline-none">
                 <option value="">Chọn Tỉnh/Thành phố</option>
                 {provinces.map(p => <option key={p.code} value={p.code}>{p.name}</option>)}
               </select>
               {errors.selectedProvince && <p className="text-red-600 font-medium mt-1">{errors.selectedProvince}</p>}
 
-              <select value={selectedDistrict} onChange={e => setSelectedDistrict(e.target.value)} disabled={!districts.length} className="w-full border rounded-lg p-3 text-sm">
+              <select value={selectedDistrict} onChange={e => setSelectedDistrict(e.target.value)} disabled={!districts.length} className="w-full border border-red-100 rounded-lg p-3 text-sm focus:ring-2 focus:ring-red-200 focus:outline-none">
                 <option value="">Chọn Quận/Huyện</option>
                 {districts.map(d => <option key={d.code} value={d.code}>{d.name}</option>)}
               </select>
               {errors.selectedDistrict && <p className="text-red-600 font-medium mt-1">{errors.selectedDistrict}</p>}
 
-              <select value={selectedWard} onChange={e => setSelectedWard(e.target.value)} disabled={!wards.length} className="w-full border rounded-lg p-3 text-sm">
+              <select value={selectedWard} onChange={e => setSelectedWard(e.target.value)} disabled={!wards.length} className="w-full border border-red-100 rounded-lg p-3 text-sm focus:ring-2 focus:ring-red-200 focus:outline-none">
                 <option value="">Chọn Phường/Xã</option>
                 {wards.map(w => <option key={w.code} value={w.code}>{w.name}</option>)}
               </select>
               {errors.selectedWard && <p className="text-red-600 font-medium mt-1">{errors.selectedWard}</p>}
 
-              <textarea rows={2} placeholder="Mô tả thêm (số nhà, ngõ...)" value={addressDetail} onChange={e => setAddressDetail(e.target.value)} className="w-full border rounded-lg p-3 text-sm" />
+              <textarea rows={2} placeholder="Mô tả thêm (số nhà, ngõ...)" value={addressDetail} onChange={e => setAddressDetail(e.target.value)} className="w-full border border-red-100 rounded-lg p-3 text-sm focus:ring-2 focus:ring-red-200 focus:outline-none" />
 
-              <div className="space-y-1 text-sm text-gray-600">
+              <div className="space-y-2 text-sm text-[#5a4636] bg-[#faf7f2] p-4 rounded-lg">
                 <div className="flex justify-between"><span>Tổng số sản phẩm:</span><span className="font-medium">{totalQuantity}</span></div>
                 <div className="flex justify-between"><span>Tạm tính:</span><span>{totalAmount.toLocaleString()} ₫</span></div>
-                <div className="flex justify-between font-bold text-lg border-t pt-2 text-gray-800">
+                <div className="flex justify-between font-bold text-lg border-t pt-2 text-[#7a1414]">
                   <span>Tổng cộng:</span>
-                  <span className="text-red-600">{totalAmount.toLocaleString()} ₫</span>
+                  <span className="text-[#b22a2a]">{totalAmount.toLocaleString()} ₫</span>
                 </div>
               </div>
 
               <div>
-                <h3 className="text-xl font-semibold mb-2">Phương thức thanh toán</h3>
-                <div className="space-y-2 text-sm text-gray-700">
-                  <label className="flex items-center gap-2">
-                    <input type="radio" name="payment" value="cod" checked={paymentMethod === 'cod'} onChange={() => setPaymentMethod('cod')} />
-                    Thanh toán khi nhận hàng
+                <h3 className="text-xl font-semibold text-[#7a1414] border-b pb-2 mb-3">
+                  Phương thức thanh toán
+                </h3>
+                <div className="space-y-2 text-sm text-[#5a4636]">
+                  <label className="flex items-center gap-3 border border-red-100 rounded-lg p-3 hover:bg-red-50 cursor-pointer transition">
+                    <input
+                      type="radio"
+                      name="payment"
+                      value="cod"
+                      checked={paymentMethod === 'cod'}
+                      onChange={() => setPaymentMethod('cod')}
+                      className="accent-[#7a1414]"
+                    />                    Thanh toán khi nhận hàng (COD)
                   </label>
                 </div>
               </div>
 
-              <button onClick={handlePlaceOrder} className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg text-lg font-semibold transition-all duration-200">
+              <button
+                onClick={handlePlaceOrder}
+                className="w-full bg-[#7a1414] hover:bg-[#5c0f0f] text-white py-3 rounded-lg text-lg font-semibold transition-all duration-200 hover:shadow-lg"
+              >
                 Xác nhận đặt hàng
               </button>
             </div>

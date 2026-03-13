@@ -1,130 +1,105 @@
-import React, { useState } from 'react'; // Keep useState if you need local state, though for logout it's often not needed directly here
-import { FaUserCircle, FaKey, FaSignOutAlt, FaClipboardList } from 'react-icons/fa';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom'; // Import 
-import Swal from 'sweetalert2';
+import React from "react";
+import { FaUserCircle, FaKey, FaSignOutAlt, FaClipboardList } from "react-icons/fa";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const UserDropdown = ({ user, isOpen, onClose }) => {
-  // Moved React Hooks inside the functional component
-  // const [message, setMessage] = useState(''); // Not strictly needed for logout here, HomePage could handle notifications
   const navigate = useNavigate();
   const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
-  function handleUserPofile() {
-    navigate("/user/profile");
-  }
+  if (!isOpen) return null;
 
-  function handleChangePassword(){
-    navigate("/change-password");
-  }
+  const handleNavigate = (path) => {
+    onClose();
+    navigate(path);
+  };
 
   const handleLogout = async () => {
     try {
-      const res = await axios.post(`${API_BASE_URL}/logout`, {}, { withCredentials: true });
+      const res = await axios.post(
+        `${API_BASE_URL}/logout`,
+        {},
+        { withCredentials: true }
+      );
 
       if (res.status === 200) {
         localStorage.removeItem("user");
 
         await Swal.fire({
-          icon: 'success',
-          title: 'Đăng xuất thành công!',
-          timer: 1500,
-          showConfirmButton: false
+          icon: "success",
+          title: "Đăng xuất thành công",
+          timer: 1200,
+          showConfirmButton: false,
         });
 
-        onClose(); // Đóng dropdown
-
+        onClose();
         navigate("/");
-
-
-        window.location.reload(); // Làm mới trang để reset lại UI
-      } else {
-        await Swal.fire({
-          icon: 'info',
-          title: 'Thông báo',
-          text: res.data || 'Có vấn đề khi đăng xuất.',
-        });
       }
-
     } catch (err) {
-      console.error("Error logging out:", err);
+      console.error(err);
 
-      await Swal.fire({
-        icon: 'error',
-        title: 'Đăng xuất thất bại',
-        text: err.response?.data?.message || 'Vui lòng thử lại sau.',
+      Swal.fire({
+        icon: "error",
+        title: "Đăng xuất thất bại",
+        text: err.response?.data?.message || "Vui lòng thử lại.",
       });
     }
   };
 
-  if (!isOpen) {
-    return null;
-  }
-
   return (
-    isOpen && (
-      <div
-        className={`absolute right-0 mt-2 w-max bg-white rounded-md shadow-lg py-1 z-50
-                  animate-slide-fade-in transition-all duration-300`}
-      >
-        {user?.username ? (
-          <>
+    <div className="absolute right-0 mt-3 w-48 bg-white rounded-xl border border-red-100 shadow-lg z-50 overflow-hidden">
 
-            {user.role === "USER" && (
-              <>
-                <button
-                  className="flex items-center px-4 py-2 text-gray-800 hover:bg-gray-100 w-full text-left"
-                  onClick={handleUserPofile}
-                >
-                  <FaUserCircle className="mr-2 text-lg" />
-                  Thông tin cá nhân
-                </button>
-                <button
-                  className="flex items-center px-4 py-2 text-gray-800 hover:bg-gray-100 w-full text-left"
-                  onClick={() => {
-                    onClose();
-                    navigate("/my-orders");
-                  }}
-                >
-                  <FaClipboardList className="mr-2 text-lg" />
-                  Đơn hàng của tôi
-                </button>
-              </>
-            )}
+      {user?.username ? (
+        <>
+          {user.role === "USER" && (
+            <>
+              <button
+                onClick={() => handleNavigate("/user/profile")}
+                className="flex items-center gap-3 w-full px-4 py-3 text-sm text-[#3d2c22] hover:bg-[#fdf2f2] transition"
+              >
+                <FaUserCircle className="text-[#7a1414]" />
+                Thông tin cá nhân
+              </button>
 
-            <button
-              className="flex items-center px-4 py-2 text-gray-800 hover:bg-gray-100 w-full text-left"
-              onClick={
+              <button
+                onClick={() => handleNavigate("/my-orders")}
+                className="flex items-center gap-3 w-full px-4 py-3 text-sm text-[#3d2c22] hover:bg-[#fdf2f2] transition"
+              >
+                <FaClipboardList className="text-[#7a1414]" />
+                Đơn hàng của tôi
+              </button>
+            </>
+          )}
 
-                handleChangePassword
-              }
-            >
-
-              <FaKey className="mr-2 text-lg" />
-              Đổi mật khẩu
-            </button>
-            <button
-              className="flex items-center px-4 py-2 text-gray-800 hover:bg-gray-100 w-full text-left"
-              onClick={handleLogout}
-            >
-              <FaSignOutAlt className="mr-2 text-lg" />
-              Đăng xuất
-            </button>
-          </>
-        ) : (
           <button
-            className="flex items-center px-4 py-2 text-gray-800 hover:bg-gray-100 w-full text-left"
-            onClick={() => {
-              onClose();
-              navigate("/login");
-            }}
+            onClick={() => handleNavigate("/change-password")}
+            className="flex items-center gap-3 w-full px-4 py-3 text-sm text-[#3d2c22] hover:bg-[#fdf2f2] transition"
           >
-            <FaSignOutAlt className="mr-2 text-lg" />
-            Đăng nhập
+            <FaKey className="text-[#7a1414]" />
+            Đổi mật khẩu
           </button>
-        )}
-      </div>
-    )
+
+          <div className="border-t border-gray-100"></div>
+
+          <button
+            onClick={handleLogout}
+            className="flex items-center gap-3 w-full px-4 py-3 text-sm text-red-600 hover:bg-[#fdf2f2] transition"
+          >
+            <FaSignOutAlt />
+            Đăng xuất
+          </button>
+        </>
+      ) : (
+        <button
+          onClick={() => handleNavigate("/login")}
+          className="flex items-center gap-3 w-full px-4 py-3 text-sm text-[#3d2c22] hover:bg-[#fdf2f2] transition"
+        >
+          <FaSignOutAlt className="text-[#7a1414]" />
+          Đăng nhập
+        </button>
+      )}
+    </div>
   );
 };
 

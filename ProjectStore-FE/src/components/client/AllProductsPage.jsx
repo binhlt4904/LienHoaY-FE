@@ -157,7 +157,7 @@ focus:ring-2 focus:ring-red-300 focus:border-red-300 focus:outline-none transiti
           {products.map((product) => (
             <div
               key={product.id}
-              onClick={() => handleProductClick(product.id)}
+              onClick={() => handleProductClick(product)}
               className="group relative bg-white border border-red-100 rounded-2xl shadow-sm 
               hover:shadow-xl transition-all duration-300 hover:-translate-y-2  
               cursor-pointer overflow-hidden"

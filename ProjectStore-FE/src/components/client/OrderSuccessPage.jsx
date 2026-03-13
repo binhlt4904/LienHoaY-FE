@@ -13,27 +13,42 @@ const OrderSuccessPage = () => {
 
     const [sidebarOpen, setSidebarOpen] = useState(false);
 
-    document.title = "ORDER - Levents";
+    document.title = "Đặt hàng thành công - Liên Hoa Y";
 
-  return (
-    <div className="flex flex-col min-h-screen bg-[#f6f1e7]">
+    return (
+        <div className="flex flex-col min-h-screen bg-[#f6f1e7]">
             <Navbar user={user} onToggleSidebar={() => setSidebarOpen(!sidebarOpen)} />
-      
+
             <div className="flex flex-1 overflow-hidden">
                 <main className="flex-1 p-6 overflow-y-auto">
-                    <div className="max-w-xl mx-auto bg-white shadow-lg rounded-2xl p-8 text-center mt-20">
-                        <CheckCircle className="mx-auto text-green-500 w-20 h-20 animate-pulse" />
-                        <h2 className="text-3xl font-bold text-gray-800 mt-4">Đặt hàng thành công!</h2>
-                        <p className="text-gray-600 mt-2 text-lg">
-                            Cảm ơn bạn đã mua hàng. Đơn hàng của bạn đang được xử lý.
+                    <div className="max-w-xl mx-auto bg-white shadow-md rounded-2xl border border-red-100 p-8 text-center mt-20">
+                        <CheckCircle className="mx-auto text-[#7a1414] w-20 h-20" />
+                        <h2 className="text-3xl font-bold text-[#7a1414] mt-4">
+                            Đặt hàng thành công
+                        </h2>
+                        <p className="text-[#5a4636] mt-2 text-lg">
+                            Cảm ơn bạn đã đặt hàng tại Liên Hoa Y.
+                            Đơn hàng của bạn đang được chúng tôi xác nhận và chuẩn bị giao.
                         </p>
+                        <div className="mt-6 text-left bg-[#faf7f2] rounded-xl p-5 border border-red-100">
+                            <h3 className="font-semibold text-[#7a1414] mb-3">
+                                Thông tin giao hàng
+                            </h3>
+                            <p className="text-[#5a4636]">
+                                <strong>Người nhận:</strong> {user?.fullname || "Nguyễn Văn A"}
+                            </p>
 
-                        <div className="mt-6 text-left bg-blue-50 rounded-lg p-4 border border-blue-200">
-                            <h3 className="font-semibold text-blue-800 mb-2">Thông tin vận chuyển</h3>
-                            <p><strong>Người nhận:</strong> {user?.fullname || "Nguyễn Văn A"}</p>
-                            <p><strong>Địa chỉ:</strong> 123 Đường ABC, Quận 1, TP. Hồ Chí Minh</p>
-                            <p><strong>SĐT:</strong> 0909 123 456</p>
-                            <p><strong>Dự kiến giao:</strong> 2-3 ngày làm việc</p>
+                            <p className="text-[#5a4636]">
+                                <strong>Địa chỉ:</strong> 123 Đường ABC, Quận 1, TP. Hồ Chí Minh
+                            </p>
+
+                            <p className="text-[#5a4636]">
+                                <strong>SĐT:</strong> 0909 123 456
+                            </p>
+
+                            <p className="text-[#5a4636]">
+                                <strong>Dự kiến giao:</strong> 2 – 3 ngày làm việc
+                            </p>
                         </div>
 
 
@@ -41,13 +56,13 @@ const OrderSuccessPage = () => {
                         <div className="mt-8 space-x-4">
                             <Link
                                 to="/"
-                                className="bg-blue-500 hover:bg-blue-600 text-white px-5 py-2 rounded-lg transition"
+                                className="bg-[#7a1414] hover:bg-[#5c0f0f] text-white px-6 py-2.5 rounded-lg transition"
                             >
                                 Về trang chủ
                             </Link>
                             <Link
                                 to="/my-orders"
-                                className="bg-gray-200 hover:bg-gray-300 text-gray-800 px-5 py-2 rounded-lg transition"
+                                className="border border-[#7a1414] text-[#7a1414] px-6 py-2.5 rounded-lg hover:bg-red-50 transition"
                             >
                                 Xem đơn hàng
                             </Link>
