@@ -14,7 +14,7 @@ const AboutPage = () => {
   document.title = "Giới thiệu - Liên Hoa Y";
 
   return (
-    <div className="flex flex-col min-h-screen bg-[#fff7f3] overflow-hidden">
+    <div className="flex flex-col min-h-screen bg-[#f6f1e7] overflow-hidden">
       <Navbar user={user} />
 
       <main
@@ -37,15 +37,15 @@ const AboutPage = () => {
         {/* ================= GIỚI THIỆU ================= */}
         <section className="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           <div>
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">
+            <h2 className="text-3xl font-bold text-[#7a1414] mb-4">
               Câu chuyện của chúng tôi
             </h2>
-            <p className="text-gray-700 leading-relaxed mb-4">
+            <p className="text-[#5a4636] leading-relaxed mb-4">
               Pháp Phục Liên Hoa Y ra đời từ mong muốn mang đến những bộ trang phục
               giản dị, tinh tế, giúp người mặc cảm nhận được sự an lạc trong từng
               chuyển động thường nhật.
             </p>
-            <p className="text-gray-700 leading-relaxed">
+            <p className="text-[#5a4636] leading-relaxed">
               Chúng tôi kết hợp chất liệu tự nhiên, thiết kế tối giản và kỹ thuật
               may đo tỉ mỉ để tạo nên những sản phẩm vừa đẹp, vừa bền, vừa phù hợp
               với đời sống tu tập và thiền định.
@@ -71,7 +71,7 @@ const AboutPage = () => {
         </section>
 
         {/* ================= SỨ MỆNH ================= */}
-        <section className="bg-gradient-to-br from-[#fff1e6] to-[#fff9f4] py-20">
+        <section className="bg-gradient-to-br from-[#fff5f5] to-[#fdf3f3] py-20">
           <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <div className="relative rounded-3xl overflow-hidden shadow-lg">
               <img
@@ -82,20 +82,20 @@ const AboutPage = () => {
             </div>
 
             <div>
-              <h2 className="text-3xl font-bold text-gray-900 mb-5">
+              <h2 className="text-3xl font-bold text-[#7a1414] mb-5">
                 Sứ mệnh của chúng tôi
               </h2>
-              <p className="text-gray-700 leading-relaxed mb-4">
+              <p className="text-[#5a4636] leading-relaxed mb-4">
                 Chúng tôi mong muốn lan tỏa tinh thần an lạc thông qua từng thiết
                 kế, giúp người mặc cảm nhận được sự thư thái, tĩnh lặng và hài hòa
                 trong đời sống hiện đại.
               </p>
-              <p className="text-gray-700 leading-relaxed">
+              <p className="text-[#5a4636] leading-relaxed">
                 Mỗi bộ pháp phục không chỉ là trang phục, mà còn là một người bạn
                 đồng hành trên hành trình tu tập và phát triển nội tâm.
               </p>
 
-              <div className="mt-6 flex items-center gap-3 text-[#8b5e3c] font-semibold">
+              <div className="mt-6 flex items-center gap-3 text-[#7a1414] font-semibold">
                 <FaLeaf />
                 <span>Giản dị – Bền vững – Tỉnh thức</span>
               </div>
@@ -105,45 +105,45 @@ const AboutPage = () => {
 
         {/* ================= GIÁ TRỊ CỐT LÕI ================= */}
         <section className="max-w-6xl mx-auto px-6 text-center">
-          <h2 className="text-3xl font-bold text-gray-900 mb-10">
+          <h2 className="text-3xl font-bold text-[#7a1414] mb-10">
             Vì sao khách hàng chọn chúng tôi
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="bg-white rounded-3xl p-8 shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
-              <div className="w-14 h-14 flex items-center justify-center rounded-full bg-[#fde8d8] text-[#b45c2e] text-2xl mb-4 mx-auto">
+              <div className="w-14 h-14 flex items-center justify-center rounded-full bg-red-50 text-[#7a1414] text-2xl mb-4 mx-auto">
                 <FaCheckCircle />
               </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-3">
+              <h3 className="text-xl font-semibold text-[#7a1414] mb-3">
                 Chất lượng tuyển chọn
               </h3>
-              <p className="text-gray-700 text-sm leading-relaxed">
+              <p className="text-[#5a4636] text-sm leading-relaxed">
                 Chất liệu tự nhiên, đường may chắc chắn, form dáng thoải mái, bền
                 đẹp theo thời gian.
               </p>
             </div>
 
             <div className="bg-white rounded-3xl p-8 shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
-              <div className="w-14 h-14 flex items-center justify-center rounded-full bg-[#e8f3ff] text-[#3b82f6] text-2xl mb-4 mx-auto">
+              <div className="w-14 h-14 flex items-center justify-center rounded-full bg-red-100 text-[#b22a2a] text-2xl mb-4 mx-auto">
                 <FaTshirt />
               </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-3">
+              <h3 className="text-xl font-semibold text-[#7a1414] mb-3">
                 Thiết kế tinh tế
               </h3>
-              <p className="text-gray-700 text-sm leading-relaxed">
+              <p className="text-[#5a4636] text-sm leading-relaxed">
                 Kiểu dáng tối giản, trang nhã, phù hợp cả trong thiền viện lẫn đời
                 sống thường nhật.
               </p>
             </div>
 
             <div className="bg-white rounded-3xl p-8 shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
-              <div className="w-14 h-14 flex items-center justify-center rounded-full bg-[#e9f9ef] text-[#22c55e] text-2xl mb-4 mx-auto">
+              <div className="w-14 h-14 flex items-center justify-center rounded-full bg-red-50 text-[#8b5e3c] text-2xl mb-4 mx-auto">
                 <FaHeadset />
               </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-3">
+              <h3 className="text-xl font-semibold text-[#7a1414] mb-3">
                 Đồng hành tận tâm
               </h3>
-              <p className="text-gray-700 text-sm leading-relaxed">
+              <p className="text-[#5a4636] text-sm leading-relaxed">
                 Tư vấn kỹ lưỡng, hỗ trợ nhanh chóng trước – trong – sau khi mua
                 hàng.
               </p>
@@ -167,7 +167,7 @@ const AboutPage = () => {
                 Khám phá bộ sưu tập pháp phục tinh tế, nhẹ nhàng và đầy chánh niệm
                 ngay hôm nay.
               </p>
-              <button className="bg-white text-[#7a1414] font-semibold px-8 py-3 rounded-full shadow hover:scale-105 transition">
+              <button className="bg-white text-[#7a1414] font-semibold px-8 py-3 rounded-full shadow hover:scale-105 hover:shadow-xl transition">
                 Khám phá ngay
               </button>
             </div>

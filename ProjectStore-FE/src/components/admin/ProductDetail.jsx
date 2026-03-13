@@ -11,6 +11,8 @@ import AddVariantModel from './AddVariantModel';
 import AddSizeModel from './AddSizeModel';
 import EditVariantModel from './EditVariantModel';
 import EditColorImagesModel from './EditColorImagesModel';
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 
 const ProductDetail = () => {
@@ -333,14 +335,14 @@ const ProductDetail = () => {
 
 
   return (
-    <div className="flex h-screen bg-gray-100">
+    <div className="flex min-h-screen bg-[#f6f1e7]">
       <Navbar user={user} onToggleSidebar={() => setSidebarOpen(!sidebarOpen)} />
       <AdminSidebar user={user} isOpen={sidebarOpen} />
 
-      <main className="flex-1 mt-[72px] p-8 overflow-y-auto">
+      <main className="flex-1 pt-[90px] p-8 overflow-y-auto">
         <div className="flex gap-8">
-          <div className="w-1/2 bg-white p-6 rounded shadow flex flex-col items-center ">
-            <h1 className="text-3xl font-bold mb-4">{product?.name}</h1>
+          <div className="w-1/2 bg-[#fffaf0] border border-[#cfa34a]/40 p-6 rounded-xl shadow flex flex-col items-center">
+            <h1 className="text-3xl font-bold mb-4 text-[#7B1E16]">{product?.name}</h1>
             {activeColor && groupedByColor[activeColor]?.[0]?.images?.length > 0 && (
               <img
                 src={groupedByColor[activeColor][0].images[0]}
@@ -350,13 +352,19 @@ const ProductDetail = () => {
               />
             )}
 
-            <p className="text-lg"><strong>Giá trưng bày:</strong> {product?.price?.toLocaleString()}đ</p>
+            <p className="text-lg text-[#7B1E16]"><strong>Giá trưng bày: </strong>
+              <span className="text-[#cfa34a] font-semibold">
+                {product?.price?.toLocaleString()}đ
+              </span></p>
           </div>
 
-          <div className="w-1/2 bg-white p-6 rounded shadow">
+          <div className="w-1/2 bg-[#fffaf0] border border-[#cfa34a]/40 p-6 rounded-xl shadow">
             <div className="flex items-center justify-between mb-4">
-              <h2 className="text-2xl font-semibold">Các mẫu hiện có</h2>
-              <button onClick={() => setIsAddModalOpen(true)} className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded shadow text-sm">
+              <h2 className="text-2xl font-semibold text-[#7B1E16]">Các mẫu hiện có</h2>
+              <button
+                onClick={() => setIsAddModalOpen(true)}
+                className="bg-[#7B1E16] hover:bg-[#9B2C20] text-[#f7e8b0] px-4 py-2 rounded shadow text-sm"
+              >
                 + Nhập thêm mẫu
               </button>
             </div>
@@ -366,7 +374,11 @@ const ProductDetail = () => {
                 <button
                   key={color}
                   onClick={() => setActiveColor(color)}
-                  className={`px-4 py-2 rounded border ${activeColor === color ? 'bg-gray-800 text-white' : 'bg-gray-100 hover:bg-gray-200'}`}
+                  className={`px-4 py-2 rounded border transition
+${activeColor === color
+                      ? 'bg-[#7B1E16] text-[#f7e8b0] border-[#7B1E16]'
+                      : 'bg-[#f8edd6] text-[#7B1E16] border-[#cfa34a]/40 hover:bg-[#f3e2c2]'
+                    }`}
                 >
                   {color}
                 </button>
@@ -376,7 +388,7 @@ const ProductDetail = () => {
             {activeColor && groupedByColor[activeColor] && (
               <div className="space-y-4">
                 {groupedByColor[activeColor].map((v, idx) => (
-                  <div key={idx} className="flex items-center justify-between bg-gray-50 p-4 rounded border">
+                  <div key={idx} className="flex items-center justify-between bg-[#f8edd6] p-4 rounded border border-[#cfa34a]/30">
                     <div>
                       <p><strong>Size:</strong> {v.size}</p>
                       <p><strong>Giá:</strong> {v.price.toLocaleString()}đ</p>
@@ -385,13 +397,13 @@ const ProductDetail = () => {
                     <div className="space-x-2">
                       <button
                         onClick={() => openEditModal(v)}
-                        className="px-3 py-1 text-sm bg-yellow-500 hover:bg-yellow-600 text-white rounded"
+                        className="px-3 py-1 text-sm bg-[#cfa34a] hover:bg-[#d9b15f] text-white rounded"
                       >
                         <FaEdit />
                       </button>
                       <button
                         onClick={() => handleHideVariant(v.id)}
-                        className="px-3 py-1 text-sm bg-red-600 hover:bg-red-700 text-white rounded"
+                        className="px-3 py-1 text-sm bg-[#7B1E16] hover:bg-[#9B2C20] text-white rounded"
                       >
                         <FaEyeSlash />
                       </button>
@@ -406,7 +418,7 @@ const ProductDetail = () => {
                     setSelectedColorForSize(activeColor);
                     setIsAddSizeModalOpen(true);
                   }}
-                  className="mt-4  bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+                  className="mt-4 bg-[#7B1E16] text-[#f7e8b0] px-4 py-2 rounded hover:bg-[#9B2C20]"
                 >
                   + Thêm size cho màu này
                 </button>
@@ -439,16 +451,47 @@ const ProductDetail = () => {
         />
 
         {/* Modal xem ảnh */}
-        <Modal isOpen={isModalOpen} onRequestClose={closeModal} style={{ overlay: { backgroundColor: 'rgba(0,0,0,0.5)' }, content: { maxWidth: '600px', margin: '50px auto ' } }}>
-          <button onClick={closeModal} className="absolute top-2 right-2 text-xl hover:text-red-500"><FaTimes /></button>
-          <Slider {...sliderSettings}>
-            {selectedImages.map((img, i) => (
-              <div key={i} className="flex justify-center items-center h-[70vh] w-full ">
-                <img src={img} className="max-h-full max-w-full object-contain rounded ml-10" />
-              </div>
-            ))
-            }
-          </Slider>
+        <Modal
+  isOpen={isModalOpen}
+  onRequestClose={closeModal}
+  style={{
+    overlay: {
+      backgroundColor: "rgba(0,0,0,0.7)",
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center"
+    },
+    content: {
+      position: "relative",
+      inset: "unset",
+      width: "80%",
+      maxWidth: "900px",
+      height: "80vh",
+      padding: "20px",
+      borderRadius: "10px",
+      overflow: "hidden"
+    }
+  }}
+>
+          <button
+  onClick={closeModal}
+  className="absolute top-3 right-4 text-2xl hover:text-red-500 z-10"
+>
+  <FaTimes />
+</button>
+
+<Slider {...sliderSettings} className="h-full">
+  {selectedImages.map((img, i) => (
+    <div key={i}>
+      <div className="flex justify-center items-center h-[70vh]">
+        <img
+          src={img}
+          className="max-h-[70vh] object-contain"
+        />
+      </div>
+    </div>
+  ))}
+</Slider>
         </Modal>
         <AddSizeModel
           isOpen={isAddSizeModalOpen}

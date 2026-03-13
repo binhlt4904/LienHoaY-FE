@@ -37,26 +37,39 @@ function AdminDashboard() {
   ];
 
   return (
-    <div className="flex min-h-screen bg-gray-100">
+    <div className="flex min-h-screen bg-[#f6f1e7]">
       <Navbar user={user} onToggleSidebar={() => setSidebarOpen(!sidebarOpen)} />
       <AdminSidebar user={user} isOpen={sidebarOpen} />
 
       <main className="flex-1 mt-[150px] p-8 overflow-y-auto">
         <div className="max-w-6xl mx-auto">
-          <h1 className="text-4xl font-bold text-gray-800 mb-10 text-center">Bảng Điều Khiển Quản Trị</h1>
+          <h1 className="text-4xl font-bold text-[#7B1E16] mb-10 text-center">
+  Bảng Điều Khiển Quản Trị
+</h1>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-[50px]">
             {cards.map((card, index) => (
               <div
-                key={index}
-                onClick={card.onClick}
-                className="cursor-pointer rounded-xl bg-white border border-gray-200 shadow-sm hover:shadow-md hover:-translate-y-1 transform transition duration-200 
-             p-6 min-h-[200px] flex flex-col items-center justify-center text-center"
-              >
-                <div className="mb-4">{card.icon}</div>
-                <h2 className="text-xl font-semibold text-gray-800 mb-1">{card.title}</h2>
-                <p className="text-gray-600 text-sm">{card.description}</p>
-              </div>
+  key={index}
+  onClick={card.onClick}
+  className="cursor-pointer rounded-2xl 
+  bg-[#fffaf0] border border-[#cfa34a]/40 
+  shadow-sm hover:shadow-lg hover:border-[#cfa34a]
+  hover:-translate-y-1 transition duration-200
+  p-6 min-h-[200px] flex flex-col items-center justify-center text-center"
+>
+  <div className="mb-4 text-[#7B1E16] text-4xl">
+    {card.icon}
+  </div>
+
+  <h2 className="text-xl font-semibold text-[#7B1E16] mb-1">
+    {card.title}
+  </h2>
+
+  <p className="text-[#7a5c2e] text-sm">
+    {card.description}
+  </p>
+</div>
 
             ))}
           </div>

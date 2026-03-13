@@ -72,36 +72,44 @@ function RobePage() {
   }, []);
 
   return (
-   <div className="flex flex-col min-h-screen bg-[#fff7f3]">
+   <div className="flex flex-col min-h-screen bg-[#f6f1e7]">
       <Navbar user={user} onToggleSidebar={() => setSidebarOpen(!sidebarOpen)} />
 
-      <main
-        ref={mainRef}
-        className="flex-1 mt-[72px] px-6 py-8 overflow-y-auto space-y-10"
-      >
+
+      <main className="flex-1 mt-[72px] px-6 py-8 overflow-y-auto space-y-10 max-w-[1400px] mx-auto w-full">
         {/* ===== HEADER ===== */}
-        <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
+        <div className="flex flex-col xl:flex-row xl:items-end xl:justify-between gap-6">
           <div className="space-y-3">
-          <h2 className="text-4xl font-bold tracking-widest text-red-700 uppercase relative">Áo Tràng
-          <span className="absolute left-0 -bottom-2 w-10 h-[3px] bg-red-600 rounded-full"></span></h2>
-          <div className="text-gray-500 text-sm flex items-center gap-2">
-            <Link to="/" className="hover:text-red-700 transition">
-              Home
-            </Link>
-            <span>›</span>
-            <Link to="/product" className="hover:text-red-700 transition">
-              Tất cả sản phẩm
-            </Link>
-            <span>›</span>
-            <span className="text-black font-semibold">Áo Tràng</span>
+            <h2 className="text-3xl md:text-4xl font-bold tracking-wider text-red-700 uppercase relative">Pháp Phục
+              <span className="absolute left-0 -bottom-2 w-10 h-[3px] bg-red-600 rounded-full"></span></h2>
+            <div className="flex flex-col gap-3">
+
+
+              <div className="text-[#7a5c2e] text-sm flex items-center gap-2 flex-wrap">
+                <Link to="/" className="hover:text-[#7B1E16] transition">
+                  Home
+                </Link>
+
+                <span>›</span>
+
+                <Link to="/product" className="hover:text-[#7B1E16] transition">
+                  Tất cả sản phẩm
+                </Link>
+
+                <span>›</span>
+                <span className="text-[#7B1E16] font-semibold line-clamp-1">
+                  Áo Tràng
+                </span>
+
+              </div>
+            </div>
+            <div className="text-base text-gray-500">
+              ({products.length} sản phẩm / trang {currentPage + 1}/{totalPages})
+            </div>
           </div>
-          <div className="text-base text-gray-500">
-            ({products.length} sản phẩm / trang {currentPage + 1}/{totalPages})
-          </div>
-        </div>
 
           {/* ===== FILTER BAR ===== */}
-          <div className="flex flex-col sm:flex-row gap-4 w-full lg:w-auto">
+          <div className="flex flex-col sm:flex-row gap-4 w-full xl:w-auto">
             {/* Search */}
             <div className="relative w-full sm:w-60">
               <FiSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
@@ -113,8 +121,8 @@ function RobePage() {
                   setSearchTerm(e.target.value);
                   setCurrentPage(0);
                 }}
-                className="pl-10 pr-4 py-2.5 w-full rounded-full border border-gray-200 
-                focus:ring-2 focus:ring-red-300 focus:outline-none transition-all"
+                className="pl-10 pr-4 py-2.5 w-full rounded-full border border-gray-200 bg-white
+focus:ring-2 focus:ring-red-300 focus:border-red-300 focus:outline-none transition"
               />
             </div>
 
@@ -127,8 +135,8 @@ function RobePage() {
                   setPriceFilter(e.target.value);
                   setCurrentPage(0);
                 }}
-                className="pl-10 pr-4 py-2.5 w-full rounded-full border border-gray-200 
-                focus:ring-2 focus:ring-red-300 focus:outline-none transition-all bg-white"
+               className="pl-10 pr-4 py-2.5 w-full rounded-full border border-gray-200 bg-white
+focus:ring-2 focus:ring-red-300 focus:border-red-300 focus:outline-none transition"
               >
                 <option value="">Lọc theo giá</option>
                 <option value="0-300000">Dưới 300.000₫</option>
@@ -146,8 +154,8 @@ function RobePage() {
                   setSortBy(e.target.value);
                   setCurrentPage(0);
                 }}
-                className="pl-10 pr-4 py-2.5 w-full rounded-full border border-gray-200 
-                focus:ring-2 focus:ring-red-300 focus:outline-none transition-all bg-white"
+               className="pl-10 pr-4 py-2.5 w-full rounded-full border border-gray-200 bg-white
+focus:ring-2 focus:ring-red-300 focus:border-red-300 focus:outline-none transition"
               >
                 <option value="">Sắp xếp</option>
                 <option value="price-asc">Giá tăng dần</option>
@@ -166,7 +174,7 @@ function RobePage() {
               key={product.id}
               onClick={() => handleProductClick(product.id)}
               className="group relative bg-white border border-red-100 rounded-2xl shadow-sm 
-              hover:shadow-xl transition-all duration-300 hover:-translate-y-1 
+              hover:shadow-xl transition-all duration-300 hover:-translate-y-2  
               cursor-pointer overflow-hidden"
             >
               {/* Image */}
@@ -174,7 +182,7 @@ function RobePage() {
                 <img
                   src={product.thumbnailImage}
                   alt={product.name}
-                  className="w-full h-full object-contain transition-transform duration-500 
+                  className="w-full h-full object-cover transition-transform duration-500 
                   group-hover:scale-105"
                 />
               </div>
@@ -186,7 +194,7 @@ function RobePage() {
                 </h3>
 
                 <div className="flex items-center justify-between">
-                  <span className="text-red-600 font-bold">
+                  <span className="text-red-600 font-bold text-lg">
                     {Number(product.price).toLocaleString("vi-VN")} ₫
                   </span>
 
@@ -216,11 +224,10 @@ function RobePage() {
                 key={i}
                 onClick={() => setCurrentPage(i)}
                 className={`w-9 h-9 rounded-full text-sm font-medium transition-all
-                ${
-                  i === currentPage
+                ${i === currentPage
                     ? "bg-red-600 text-white shadow"
                     : "border hover:bg-red-50"
-                }`}
+                  }`}
               >
                 {i + 1}
               </button>

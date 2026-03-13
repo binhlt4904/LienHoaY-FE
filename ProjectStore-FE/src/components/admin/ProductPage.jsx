@@ -64,67 +64,51 @@ function ProductPage() {
     {
       name: "Pháp Phục",
       description: "Quản lý các sản phẩm pháp phục",
-      icon: <FaTshirt className="text-3xl text-gray-700" />,
-      bg: "bg-white border border-gray-200",
-      hover: "hover:bg-gray-100",
+      icon: <FaTshirt className="text-3xl text-[#7B1E16]" />,
+      bg: "bg-white border border-[#cfa34a]/40",
+      hover: "hover:bg-[#f8edd6]",
       onClick: () => navigate("/admin/product/buddhist"),
       total: buddhists.length,
     },
     {
-      name: "Bottom",
-      description: "Quản lý các sản phẩm quần",
-      icon: <GiArmoredPants className="text-3xl text-gray-700" />,
-      bg: "bg-white border border-gray-200",
-      hover: "hover:bg-gray-100",
-      onClick: () => navigate("/admin/product/bottom"),
-      total: bottoms.length,
-    },
-    {
       name: "Áo Tràng",
       description: "Quản lý các sản phẩm áo tràng",
-      icon: <GiArmoredPants className="text-3xl text-gray-700" />,
-      bg: "bg-white border border-gray-200",
-      hover: "hover:bg-gray-100",
+      icon: <GiArmoredPants className="text-3xl text-[#7B1E16]" />,
+      bg: "bg-white border border-[#cfa34a]/40",
+      hover: "hover:bg-[#f8edd6]",
       onClick: () => navigate("/admin/product/robe"),
       total: robes.length,
-    },
-    {
-      name: "Accessory",
-      description: "Quản lý các sản phẩm phụ kiện",
-      icon: <FaShoppingBag className="text-3xl text-gray-700" />,
-      bg: "bg-white border border-gray-200",
-      hover: "hover:bg-gray-100",
-      onClick: () => navigate("/admin/product/accessory"),
-      total: accessories.length,
     },
   ];
 
   return (
-    <div className="flex min-h-screen bg-gray-100">
+    <div className="flex min-h-screen bg-[#f6f1e7]">
       <Navbar user={user} onToggleSidebar={() => setSidebarOpen(!sidebarOpen)} />
       <AdminSidebar user={user} isOpen={sidebarOpen} />
 
-      <main className="flex-1 mt-[150px] p-6 overflow-y-auto">
-        <h1 className="text-3xl font-bold text-gray-800 text-center mb-10">
+      <main className="flex-1 pt-[90px]  p-8 overflow-y-auto">
+        <h1 className="text-3xl font-bold text-[#7B1E16] text-center mt-12 mb-10">
           Danh Mục Sản Phẩm
         </h1>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto mt-[50px]">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 max-w-3xl mx-auto mt-[60px]">
           {categories.map((cat, index) => (
             <div
               key={index}
-              className={`rounded-2xl shadow-md ${cat.bg} transition-all duration-200 cursor-pointer hover:shadow-xl transform hover:-translate-y-1 p-6 min-h-[180px] flex flex-col items-center justify-center text-center`}
+              className={`rounded-2xl shadow-sm ${cat.bg} transition-all duration-200
+  cursor-pointer hover:shadow-lg hover:border-[#cfa34a]
+  transform hover:-translate-y-1 p-6 min-h-[180px]
+  flex flex-col items-center justify-center text-center`}
               onClick={cat.onClick}
             >
-              {/* Icon trong vòng tròn */}
-              <div className="w-16 h-16 flex items-center justify-center rounded-full bg-gray-100 mb-4">
+              {/* Icon trong vòng tròn */}<div className="w-16 h-16 flex items-center justify-center rounded-full bg-[#f8edd6] mb-4">
                 {cat.icon}
               </div>
 
               {/* Nội dung */}
-              <h2 className="text-xl font-semibold text-gray-800">{cat.name}</h2>
-              <p className="text-gray-600 text-sm mt-1">{cat.description}</p>
-              <p className="text-blue-600 text-sm font-medium mt-2">
+              <h2 className="text-xl font-semibold text-[#7B1E16]">{cat.name}</h2>
+              <p className="text-[#7a5c2e] text-sm mt-1">{cat.description}</p>
+              <p className="text-[#cfa34a] text-sm font-semibold mt-2">
                 Tổng sản phẩm: {cat.total}
               </p>
             </div>

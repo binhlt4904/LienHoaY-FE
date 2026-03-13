@@ -227,7 +227,7 @@ function Navbar({ onToggleSidebar }) {
                 title="Thử đồ ảo"
                 onClick={() => navigate("/fitcheck")}
               />
-              
+
             </>
           )}
 
@@ -382,72 +382,55 @@ function Navbar({ onToggleSidebar }) {
       </div>
 
       {/* ===== MENU BAR ===== */}
-      <nav className="hidden lg:block bg-[#5c0d0d] border-t border-[#cfa34a]/40">
-        <ul className="flex items-center justify-center gap-10 h-[46px] text-sm font-semibold tracking-widest text-[#f7e8b0]">
+      {user?.role !== "ADMIN" && (
+        <nav className="hidden lg:block bg-[#5c0d0d] border-t border-[#cfa34a]/40">
+          <ul className="flex items-center justify-center gap-10 h-[46px] text-sm font-semibold tracking-widest text-[#f7e8b0]">
 
-          <li>
-            <Link to="/" className="hover:text-white transition">
-              Trang Chủ
-            </Link>
-          </li>
+            <li>
+              <Link to="/" className="hover:text-white transition">
+                Trang Chủ
+              </Link>
+            </li>
 
-          <li>
-            <Link to="/product" className="hover:text-white transition">
-              Tất Cả Sản Phẩm
-            </Link>
-          </li>
-          <li className="relative group">
-            <Link
-              to="/collection/sac-xuan"
-              className="hover:text-white transition flex items-center gap-1"
-            >
-              Bộ Sưu Tập Tết
-              
-            </Link>
+            <li>
+              <Link to="/product" className="hover:text-white transition">
+                Tất Cả Sản Phẩm
+              </Link>
+            </li>
 
-          </li>
+            <li>
+              <Link to="/collection/sac-xuan" className="hover:text-white transition">
+                Bộ Sưu Tập Tết
+              </Link>
+            </li>
 
-          {/* ===== ÁO TRÀNG DROPDOWN ===== */}
-          <li className="relative group">
-            <Link
-              to="/product/robe"
-              className="hover:text-white transition flex items-center gap-1"
-            >
-              Áo Dài
-            </Link>
+            <li>
+              <Link to="/product/robe" className="hover:text-white transition">
+                Áo Dài
+              </Link>
+            </li>
 
-            
-          </li>
+            <li>
+              <Link to="/product/buddhist" className="hover:text-white transition">
+                Pháp Phục
+              </Link>
+            </li>
 
-          {/* ===== PHÁP PHỤC DROPDOWN ===== */}
-          <li className="relative group">
-            <Link
-              to="/product/buddhist"
-              className="hover:text-white transition flex items-center gap-1"
-            >
-              Pháp Phục
-              
-            </Link>
+            <li>
+              <Link to="/about" className="hover:text-white transition">
+                Về Chúng Tôi
+              </Link>
+            </li>
 
-          </li>
+            <li>
+              <Link to="/contact" className="hover:text-white transition">
+                Liên Hệ
+              </Link>
+            </li>
 
-          
-
-
-          <li>
-            <Link to="/about" className="hover:text-white transition">
-              Về Chúng Tôi
-            </Link>
-          </li>
-
-          <li>
-            <Link to="/contact" className="hover:text-white transition">
-              Liên Hệ
-            </Link>
-          </li>
-
-        </ul>
-      </nav>
+          </ul>
+        </nav>
+      )}
 
     </header>
   );

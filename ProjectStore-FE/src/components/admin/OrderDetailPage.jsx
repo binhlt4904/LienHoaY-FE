@@ -58,82 +58,128 @@ const OrderDetailPage = () => {
     if (!order) return <div className="text-center mt-20 text-xl">Đang tải đơn hàng...</div>;
 
     return (
-        <div className="flex bg-gray-100 h-screen">
+        <div className="flex min-h-screen bg-[#f6f1e7]">
             <Navbar user={user} onToggleSidebar={() => setSidebarOpen(!sidebarOpen)} />
             <AdminSidebar user={user} isOpen={sidebarOpen} />
 
             <div className="flex-1 p-6 mt-16 overflow-y-auto">
-                <div className="max-w-4xl mx-auto bg-white rounded-xl shadow-lg p-6">
-                    <h2 className="text-2xl font-bold mb-6 text-center">Chi tiết đơn hàng #{order.id}</h2>
+                <div className="max-w-4xl mx-auto bg-[#fffaf0] border border-[#cfa34a]/40 rounded-2xl shadow-sm p-8">
+                    <h2 className="text-3xl font-bold mb-8 text-center text-[#7B1E16]">
+                        Chi tiết đơn hàng #{order.id}
+                    </h2>
 
-                    <div className="grid grid-cols-2 gap-4 mb-6 text-gray-700">
-                        <div className="flex items-center gap-2">
-                            <BiSolidUser className="text-blue-500" />
-                            <span><strong>Người nhận:</strong> {parsedAddress.fullName}</span>
+                    <div className="grid grid-cols-2 gap-6 mb-8 text-[#7a5c2e]">
+
+                        <div className="flex items-center gap-3">
+                            <BiSolidUser className="text-[#7B1E16] text-xl" />
+                            <span><strong>Người nhận:</strong> {parsedAddress?.fullName}</span>
                         </div>
-                        <div className="flex items-center gap-2">
-                            <BiSolidPhone className="text-green-500" />
-                            <span><strong>SĐT:</strong> {parsedAddress.phone}</span>
+
+                        <div className="flex items-center gap-3">
+                            <BiSolidPhone className="text-[#7B1E16] text-xl" />
+                            <span><strong>SĐT:</strong> {parsedAddress?.phone}</span>
                         </div>
-                        <div className="flex items-center gap-2 col-span-2">
-                            <PiMapPinLineBold className="text-red-500" />
+
+                        <div className="flex items-start gap-3 col-span-2">
+                            <PiMapPinLineBold className="text-[#7B1E16] text-xl mt-1" />
                             <span>
-                                <strong>Địa chỉ:</strong>{' '}
-                                {parsedAddress
-                                    ? `${parsedAddress.addressDetail}, ${parsedAddress.ward}, ${parsedAddress.district}, ${parsedAddress.province}`
-                                    : order.userAddress}
+                                <strong>Địa chỉ:</strong>{" "}
+                                {
+                                    parsedAddress
+                                        ? [
+                                            parsedAddress.addressDetail,
+                                            parsedAddress.ward,
+                                            parsedAddress.district,
+                                            parsedAddress.province
+                                        ].filter(Boolean).join(", ")
+                                        : order.userAddress
+                                }
                             </span>
                         </div>
-                        <div className="flex items-center gap-2">
-                            <MdOutlinePayment className="text-purple-500" />
+
+                        <div className="flex items-center gap-3">
+                            <MdOutlinePayment className="text-[#7B1E16] text-xl" />
                             <span><strong>Thanh toán:</strong> {order.paymentMethod}</span>
                         </div>
-                        <div className="flex items-center gap-2">
-                            <FaRegClock className="text-orange-500" />
-                            <span><strong>Ngày đặt:</strong> {new Date(order.orderDate).toLocaleString()}</span>
+
+                        <div className="flex items-center gap-3">
+                            <FaRegClock className="text-[#7B1E16] text-xl" />
+                            <span>
+                                <strong>Ngày đặt:</strong>{" "}
+                                {new Date(order.orderDate).toLocaleString()}
+                            </span>
                         </div>
+
                     </div>
 
                     <h3 className="text-lg font-semibold mb-3 border-b pb-1">Sản phẩm trong đơn:</h3>
                     <div className="space-y-4">
                         {order.items.map((item, index) => (
 
-                            <div key={index} className="flex items-center justify-between bg-gray-50 border rounded-lg p-4">
+                            <div
+                                key={index}
+                                className="flex items-center justify-between
+            bg-[#fdf6e3]
+            border border-[#e5d3a1]
+            rounded-xl
+            p-4
+            hover:bg-[#f3e6c9]
+            transition"
+                            >
+
                                 <div className="flex items-center gap-4">
+
                                     <img
                                         src={item.image}
                                         alt={item.productName}
-                                        className="w-10 h-10 object-cover cursor-pointer hover:scale-105 transition-transform duration-200"
+                                        className="w-14 h-14 object-cover rounded cursor-pointer hover:scale-105 transition"
                                         onClick={() => setSelectedImage(item.image)}
                                     />
+
                                     <div>
-                                        <p className="font-semibold">{item.productName}</p>
-                                        <p className="text-sm text-gray-500">Màu: {item.color} | Size: {item.size}</p>
+                                        <p className="font-semibold text-[#7B1E16]">
+                                            {item.productName}
+                                        </p>
+
+                                        <p className="text-sm text-[#7a5c2e]">
+                                            Màu: {item.color} | Size: {item.size}
+                                        </p>
                                     </div>
+
                                 </div>
+
                                 <div className="text-right">
-                                    <p className="text-sm">Số lượng: <strong>{item.quantity}</strong></p>
-                                    <p className="text-sm">Giá: <strong>{item.productPrice?.toLocaleString() || '---'}₫</strong></p>
+
+                                    <p className="text-sm text-[#7a5c2e]">
+                                        Số lượng: <strong>{item.quantity}</strong>
+                                    </p>
+
+                                    <p className="text-sm font-semibold text-[#7B1E16]">
+                                        {item.productPrice?.toLocaleString()}₫
+                                    </p>
+
                                 </div>
+
                             </div>
+
                         ))}
                     </div>
                 </div>
             </div>
             {/* Modal hiển thị ảnh */}
             {selectedImage && (
-                <div
-                    className="fixed inset-0 bg-black bg-opacity-70 flex justify-center items-center z-50"
-                    onClick={() => setSelectedImage(null)}
-                >
-                    <img
-                        src={selectedImage}
-                        alt="Ảnh sản phẩm"
-                        className="max-w-[90%] max-h-[80%] object-contain rounded shadow-lg"
-                        onClick={(e) => e.stopPropagation()}
-                    />
-                </div>
-            )}
+    <div
+        className="fixed inset-0 bg-black/70 backdrop-blur-sm flex justify-center items-center z-50"
+        onClick={() => setSelectedImage(null)}
+    >
+        <img
+            src={selectedImage}
+            alt="Ảnh sản phẩm"
+            className="max-w-[90%] max-h-[85%] object-contain rounded-xl shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+        />
+    </div>
+)}
             <AdminChatBox />
         </div>
     );

@@ -30,7 +30,7 @@ function AllProductsPage() {
 
   useEffect(() => {
     const fetchProducts = async () => {
-        console.log(categoryTerm)
+      console.log(categoryTerm)
       try {
         const res = await axios.get(`${API_BASE_URL}/products/sort`, {
           params: {
@@ -57,40 +57,44 @@ function AllProductsPage() {
 
   const handleProductClick = (product) => {
     if (product.category === 'buddhist') navigate(`/product/buddhist/${product.id}`);
-      if (product.category === 'robe') navigate(`/product/robe/${product.id}`);
+    if (product.category === 'robe') navigate(`/product/robe/${product.id}`);
   };
 
   return (
-    <div className="flex flex-col min-h-screen bg-[#fff7f3]">
+    <div className="flex flex-col min-h-screen bg-[#f6f1e7]">
       <Navbar user={user} onToggleSidebar={() => setSidebarOpen(!sidebarOpen)} />
 
-      <main
-        ref={mainRef}
-        className="flex-1 mt-[72px] px-6 py-8 overflow-y-auto space-y-10"
-      >
+
+      <main className="flex-1 mt-[72px] px-6 py-8 overflow-y-auto space-y-10 max-w-[1400px] mx-auto w-full">
         {/* ===== HEADER ===== */}
-        <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
+        <div className="flex flex-col xl:flex-row xl:items-end xl:justify-between gap-6">
           <div className="space-y-3">
-            <h2 className="text-4xl font-bold tracking-widest text-red-700 uppercase relative">
-              Tất cả sản phẩm
-              <span className="absolute left-0 -bottom-2 w-10 h-[3px] bg-red-600 rounded-full"></span>
-            </h2>
+            <h2 className="text-3xl md:text-4xl font-bold tracking-wider text-red-700 uppercase relative">Tất cả sản phẩm
+              <span className="absolute left-0 -bottom-2 w-10 h-[3px] bg-red-600 rounded-full"></span></h2>
+            <div className="flex flex-col gap-3">
 
-            <div className="text-gray-500 text-sm flex items-center gap-2">
-              <Link to="/" className="hover:text-red-700 transition">
-                Home
-              </Link>
-              <span>›</span>
-              <span className="text-black font-semibold">Tất cả sản phẩm</span>
+
+              <div className="text-[#7a5c2e] text-sm flex items-center gap-2 flex-wrap">
+                <Link to="/" className="hover:text-[#7B1E16] transition">
+                  Home
+                </Link>
+
+                <span>›</span>
+
+                <span className="text-[#7B1E16] font-semibold line-clamp-1">
+                  Tất cả sản phẩm
+                </span>
+
+
+              </div>
             </div>
-
             <div className="text-base text-gray-500">
               ({products.length} sản phẩm / trang {currentPage + 1}/{totalPages})
             </div>
           </div>
 
           {/* ===== FILTER BAR ===== */}
-          <div className="flex flex-col sm:flex-row gap-4 w-full lg:w-auto">
+          <div className="flex flex-col sm:flex-row gap-4 w-full xl:w-auto">
             {/* Search */}
             <div className="relative w-full sm:w-60">
               <FiSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
@@ -102,8 +106,8 @@ function AllProductsPage() {
                   setSearchTerm(e.target.value);
                   setCurrentPage(0);
                 }}
-                className="pl-10 pr-4 py-2.5 w-full rounded-full border border-gray-200 
-                focus:ring-2 focus:ring-red-300 focus:outline-none transition-all"
+                className="pl-10 pr-4 py-2.5 w-full rounded-full border border-gray-200 bg-white
+focus:ring-2 focus:ring-red-300 focus:border-red-300 focus:outline-none transition"
               />
             </div>
 
@@ -116,31 +120,13 @@ function AllProductsPage() {
                   setPriceFilter(e.target.value);
                   setCurrentPage(0);
                 }}
-                className="pl-10 pr-4 py-2.5 w-full rounded-full border border-gray-200 
-                focus:ring-2 focus:ring-red-300 focus:outline-none transition-all bg-white"
+               className="pl-10 pr-4 py-2.5 w-full rounded-full border border-gray-200 bg-white
+focus:ring-2 focus:ring-red-300 focus:border-red-300 focus:outline-none transition"
               >
                 <option value="">Lọc theo giá</option>
                 <option value="0-300000">Dưới 300.000₫</option>
                 <option value="300000-500000">300.000₫ – 500.000₫</option>
                 <option value="500000-1000000">Trên 500.000₫</option>
-              </select>
-            </div>
-
-            <div className="relative w-full sm:w-56">
-              <FiFilter className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
-              <select
-                value={categoryTerm}
-                onChange={(e) => {
-                  setCategoryTerm(e.target.value);
-                  setCurrentPage(0);
-                }}
-                className="pl-10 pr-4 py-2.5 w-full rounded-full border border-gray-200 
-                focus:ring-2 focus:ring-red-300 focus:outline-none transition-all bg-white"
-              >
-                <option value="">Lọc theo danh mục</option>
-                <option value="buddhist">Pháp Phục</option>
-                <option value="robe">Áo Robe</option>
-                <option value="accessory">Phụ Kiện</option>
               </select>
             </div>
 
@@ -153,8 +139,8 @@ function AllProductsPage() {
                   setSortBy(e.target.value);
                   setCurrentPage(0);
                 }}
-                className="pl-10 pr-4 py-2.5 w-full rounded-full border border-gray-200 
-                focus:ring-2 focus:ring-red-300 focus:outline-none transition-all bg-white"
+               className="pl-10 pr-4 py-2.5 w-full rounded-full border border-gray-200 bg-white
+focus:ring-2 focus:ring-red-300 focus:border-red-300 focus:outline-none transition"
               >
                 <option value="">Sắp xếp</option>
                 <option value="price-asc">Giá tăng dần</option>
@@ -171,27 +157,29 @@ function AllProductsPage() {
           {products.map((product) => (
             <div
               key={product.id}
-              onClick={() => handleProductClick(product)}
+              onClick={() => handleProductClick(product.id)}
               className="group relative bg-white border border-red-100 rounded-2xl shadow-sm 
-              hover:shadow-xl transition-all duration-300 hover:-translate-y-1 
+              hover:shadow-xl transition-all duration-300 hover:-translate-y-2  
               cursor-pointer overflow-hidden"
             >
+              {/* Image */}
               <div className="relative w-full aspect-[3/4] overflow-hidden">
                 <img
                   src={product.thumbnailImage}
                   alt={product.name}
-                  className="w-full h-full object-contain transition-transform duration-500 
+                  className="w-full h-full object-cover transition-transform duration-500 
                   group-hover:scale-105"
                 />
               </div>
 
+              {/* Info */}
               <div className="p-4 space-y-2">
                 <h3 className="text-[15px] font-semibold line-clamp-2 min-h-[40px] text-gray-800">
                   {product.name}
                 </h3>
 
                 <div className="flex items-center justify-between">
-                  <span className="text-red-600 font-bold">
+                  <span className="text-red-600 font-bold text-lg">
                     {Number(product.price).toLocaleString("vi-VN")} ₫
                   </span>
 
@@ -221,11 +209,10 @@ function AllProductsPage() {
                 key={i}
                 onClick={() => setCurrentPage(i)}
                 className={`w-9 h-9 rounded-full text-sm font-medium transition-all
-                ${
-                  i === currentPage
+                ${i === currentPage
                     ? "bg-red-600 text-white shadow"
                     : "border hover:bg-red-50"
-                }`}
+                  }`}
               >
                 {i + 1}
               </button>

@@ -12,26 +12,26 @@ const ContactPage = () => {
     document.title = "Liên hệ - Liên Hoa Y";
 
     return (
-        <div className="flex flex-col min-h-screen bg-[#fff7f3]">
+        <div className="flex flex-col min-h-screen bg-[#f6f1e7]">
             <Navbar user={user} />
 
             {/* Header */}
             <div className="pt-24 pb-10 text-center">
                 <h1
-                    className="text-4xl font-bold text-gray-800"
+                    className="text-4xl font-bold tracking-widest text-[#7a1414] uppercase"
                     style={{ fontFamily: "'Playfair Display', serif" }}
                 >
                     Liên Hệ
                 </h1>
-                <div className="w-16 h-1 bg-gray-300 mx-auto mt-4 rounded-full" />
+                <div className="w-16 h-1 bg-[#7a1414] mx-auto mt-4 rounded-full" />
             </div>
 
             {/* Content */}
             <div className="max-w-6xl mx-auto px-6 pb-20 grid grid-cols-1 lg:grid-cols-2 gap-12">
                 {/* Left */}
-                <div className="space-y-6 text-gray-700 leading-relaxed">
+                <div className="space-y-6 text-[#5a4636] leading-relaxed">
                     <h2
-                        className="text-2xl font-bold text-gray-800"
+                        className="text-2xl font-bold text-[#7a1414]"
                         style={{ fontFamily: "'Playfair Display', serif" }}
                     >
                         Thông Tin Liên Hệ – Pháp Phục Liên Hoa Y:
@@ -93,7 +93,7 @@ const ContactPage = () => {
                 </div>
 
                 {/* Right - Map */}
-                <div className="w-full h-[420px] rounded-xl overflow-hidden shadow-lg border">
+                <div className="w-full h-[420px] rounded-2xl overflow-hidden shadow-md border border-red-100">
                     <iframe
                         title="Đại học FPT Hà Nội"
                         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3724.485409294682!2d105.523106!3d21.013026!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31345b2c44e8d7ff%3A0x45e2d48b8eabf3a2!2zVHLGsOG7nW5nIMSQ4bqhaSBo4buNYyBGUFQgSMOgIE7hu5lp!5e0!3m2!1svi!2s!4v1700000000000"
@@ -103,9 +103,9 @@ const ContactPage = () => {
                     />
 
                 </div>
-                
+
             </div>
-        <Footer />
+            <Footer />
         </div>
     );
 };

@@ -146,7 +146,7 @@ function HomePage() {
 
 
   return (
-    <div className="flex flex-col min-h-screen bg-[#fff7f3] overflow-hidden">
+    <div className="flex flex-col min-h-screen bg-[#f6f1e7] overflow-hidden">
       <Navbar user={user} onToggleSidebar={() => setSidebarOpen(!sidebarOpen)} />
 
 

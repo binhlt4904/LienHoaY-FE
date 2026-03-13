@@ -224,7 +224,7 @@ function ProductDetail() {
   );
 
   return (
-    <div className="flex flex-col min-h-screen bg-[#fff7f3]">
+    <div className="flex flex-col min-h-screen bg-[#f6f1e7]">
       <Navbar user={user} onToggleSidebar={() => setSidebarOpen(!sidebarOpen)} />
 
       <main
@@ -233,31 +233,22 @@ function ProductDetail() {
       >
         {/* ===== HEADER / BREADCRUMB ===== */}
         <div className="flex flex-col gap-3">
-          
 
-          <div className="text-gray-500 text-sm flex items-center gap-2 flex-wrap">
-            <Link to="/" className="hover:text-red-700 transition">
+
+          <div className="text-[#7a5c2e] text-sm flex items-center gap-2 flex-wrap">
+            <Link to="/" className="hover:text-[#7B1E16] transition">
               Home
             </Link>
+
             <span>›</span>
-            <Link to="/product" className="hover:text-red-700 transition">
+
+            <Link to="/product" className="hover:text-[#7B1E16] transition">
               Tất cả sản phẩm
             </Link>
+
             <span>›</span>
-            <Link
-              to={`/product/${product?.category}`}
-              className="hover:text-red-700 transition capitalize"
-            >
-              {product?.category === "buddhist"
-                ? "Pháp Phục"
-                : product?.category === "robe"
-                  ? "Áo Robe"
-                  : product?.category === "accessory"
-                    ? "Phụ Kiện"
-                    : "Sản phẩm"}
-            </Link>
-            <span>›</span>
-            <span className="text-black font-semibold line-clamp-1">
+
+            <span className="text-[#7B1E16] font-semibold line-clamp-1">
               {product?.name}
             </span>
           </div>
@@ -265,7 +256,12 @@ function ProductDetail() {
         {loading ? (
           <ProductDetailSkeleton />
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 bg-white rounded-lg p-6 shadow-md">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 
+bg-[#fffaf0] 
+border border-[#cfa34a]/40 
+rounded-2xl 
+p-8 
+shadow-sm">
             <div className="grid grid-cols-6 gap-6">
               {/* Thumbnails */}
               <div className="flex flex-col col-span-1 gap-3">
@@ -293,15 +289,15 @@ function ProductDetail() {
 
             <div className="flex flex-col justify-between">
               <div>
-                <h1 className="text-3xl font-bold mb-4">{product.name}</h1>
+                <h1 className="text-3xl font-bold mb-4 text-[#7B1E16]">{product.name}</h1>
                 <p className="text-gray-600 mb-4">{product.description}</p>
 
                 {selectedVariant ? (
-                  <p className="text-2xl text-red-600 font-semibold mt-2">
+                  <p className="text-2xl text-[#7B1E16] font-semibold mt-2">
                     {Number(selectedVariant.price).toLocaleString('vi-VN')} ₫
                   </p>
                 ) : (
-                  <p className="text-2xl text-red-600 font-semibold mt-2">
+                  <p className="text-2xl text-[#7B1E16] font-semibold mt-2">
                     {Number(product.price).toLocaleString('vi-VN')} ₫
                   </p>
                 )}
@@ -324,9 +320,12 @@ function ProductDetail() {
                           disabled={!isAvailable}
                           onClick={() => isAvailable && setSelectedColor(color)}
                           className={`w-10 h-10 rounded-full border-2 transition
-            ${isSelected ? "border-black scale-110" : "border-gray-300"}
-            ${!isAvailable ? "opacity-40 cursor-not-allowed" : ""}
-          `}
+${isSelected 
+  ? "border-[#7B1E16] scale-110 shadow" 
+  : "border-[#e5d3a1] hover:border-[#cfa34a]"
+}
+${!isAvailable ? "opacity-40 cursor-not-allowed" : ""}
+`}
                           style={{ backgroundColor: colorMap[color] || "#e5e7eb" }}
                           title={color}
                         />
@@ -352,7 +351,7 @@ function ProductDetail() {
                           disabled={!isAvailable}
                           onClick={() => isAvailable && setSelectedSize(size)}
                           className={`w-12 h-12 rounded-full border flex items-center justify-center font-semibold transition
-            ${isSelected ? "bg-[#6b0f0f] text-white border-[#2f4f3f]" : "bg-white text-gray-700 border-gray-300 hover:border-black"}
+            ${isSelected ? "bg-[#7B1E16] text-white border-[#7B1E16]" : "bg-[#fffaf0] text-[#7a5c2e] border-[#e5d3a1] hover:border-black"}
             ${!isAvailable ? "opacity-40 cursor-not-allowed line-through" : ""}
           `}
                         >

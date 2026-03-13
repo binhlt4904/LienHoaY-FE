@@ -166,22 +166,25 @@ const AdminOrderPage = () => {
     console.log(orders);
 
     return (
-        <div className="flex h-screen bg-gray-100">
+        <div className="flex min-h-screen bg-[#f6f1e7]">
             <Navbar user={user} onToggleSidebar={() => setSidebarOpen(!sidebarOpen)} />
             <AdminSidebar user={user} isOpen={sidebarOpen} />
 
-            <main className="flex-1 mt-[80px] p-6 overflow-auto">
-                <h2 className="text-2xl font-bold mb-6 text-gray-800">Quản lý đơn hàng</h2>
+            <main className="flex-1 mt-[100px] p-8 overflow-auto">
+                <h2 className="text-3xl font-bold mb-8 text-[#7B1E16]">
+                    Quản lý đơn hàng
+                </h2>
 
                 {/* Tabs */}
-                <div className="flex flex-wrap gap-2 mb-6 border-b border-gray-200 pb-2">
+                <div className="flex flex-wrap gap-2 mb-6 border-b border-[#cfa34a]/40 pb-3">
                     {TABS.map(tab => (
                         <button
                             key={tab.value}
                             onClick={() => setFilterStatus(tab.value)}
-                            className={`px-4 py-2 text-sm rounded-full transition-all duration-200 ${filterStatus === tab.value
-                                ? "bg-blue-600 text-white"
-                                : "bg-white border border-gray-300 text-gray-600 hover:bg-gray-200"
+                            className={`px-4 py-2 text-sm rounded-full transition-all duration-200
+                    ${filterStatus === tab.value
+                                    ? "bg-[#7B1E16] text-white shadow"
+                                    : "bg-[#fffaf0] border border-[#cfa34a]/40 text-[#7a5c2e] hover:bg-[#f3e6c9]"
                                 }`}
                         >
                             {tab.label}
@@ -191,57 +194,79 @@ const AdminOrderPage = () => {
 
                 {/* Order Table */}
                 <div className="overflow-x-auto">
-                    <table className="min-w-full bg-white border rounded-lg shadow-sm">
+                    <table className="min-w-full bg-[#fffaf0] border border-[#cfa34a]/40 rounded-xl shadow-sm">
                         <thead>
-                            <tr className="bg-gray-100 text-left text-sm text-gray-700">
-                                <th className="py-3 px-4 border-b">Mã đơn</th>
-                                <th className="py-3 px-4 border-b">Người nhận</th>
-                                <th className="py-3 px-4 border-b">SĐT</th>
-                                <th className="py-3 px-4 border-b">Địa chỉ</th>
-                                <th className="py-3 px-4 border-b">Thời gian</th>
-                                <th className="py-3 px-4 border-b">Tổng tiền</th>
-                                <th className="py-3 px-4 border-b">Trạng thái</th>
-                                <th className="py-3 px-4 border-b text-center">Hành động</th>
+                            <tr className="bg-[#f3e6c9] text-left text-sm text-[#7B1E16]">
+                                <th className="py-3 px-4 border-b border-[#e5d3a1]">Mã đơn</th>
+                                <th className="py-3 px-4 border-b border-[#e5d3a1]">Người nhận</th>
+                                <th className="py-3 px-4 border-b border-[#e5d3a1]">SĐT</th>
+                                <th className="py-3 px-4 border-b border-[#e5d3a1]">Địa chỉ</th>
+                                <th className="py-3 px-4 border-b border-[#e5d3a1]">Thời gian</th>
+                                <th className="py-3 px-4 border-b border-[#e5d3a1]">Tổng tiền</th>
+                                <th className="py-3 px-4 border-b border-[#e5d3a1]">Trạng thái</th>
+                                <th className="py-3 px-4 border-b border-[#e5d3a1] text-center">Hành động</th>
                             </tr>
                         </thead>
+
                         <tbody>
                             {orders.map(order => {
                                 const address = JSON.parse(order.userAddress);
+
                                 return (
-                                    <tr key={order.id} className="odd:bg-gray-50 hover:bg-gray-100 transition">
-                                        <td className="py-3 px-4 border-b">{order.id}</td>
-                                        <td className="py-3 px-4 border-b">{address.fullName}</td>
-                                        <td className="py-3 px-4 border-b">{address.phone}</td>
-                                        <td className="py-3 px-4 border-b">
-                                            {`${address.addressDetail}, ${address.ward}, ${address.district}, ${address.province}`}
+                                    <tr
+                                        key={order.id}
+                                        className="odd:bg-[#fffaf0] even:bg-[#fdf6e3] hover:bg-[#f3e6c9] transition"
+                                    >
+                                        <td className="py-3 px-4 border-b border-[#f0e0b0]">{order.id}</td>
+
+                                        <td className="py-3 px-4 border-b border-[#f0e0b0]">
+                                            {address.fullName}
                                         </td>
-                                        <td className="py-3 px-4 border-b whitespace-nowrap">
+
+                                        <td className="py-3 px-4 border-b border-[#f0e0b0]">
+                                            {address.phone}
+                                        </td>
+
+                                        <td className="py-3 px-4 border-b border-[#f0e0b0]">
+                                            {
+                                                [
+                                                    address.addressDetail,
+                                                    address.ward,
+                                                    address.district,
+                                                    address.province
+                                                ]
+                                                    .filter(Boolean)
+                                                    .join(", ")
+                                            }
+                                        </td>
+
+                                        <td className="py-3 px-4 border-b border-[#f0e0b0] whitespace-nowrap">
                                             {new Date(order.orderDate).toLocaleString()}
                                         </td>
-                                        <td className="py-3 px-4 border-b text-red-600 font-semibold whitespace-nowrap">
+
+                                        <td className="py-3 px-4 border-b border-[#f0e0b0] text-[#7B1E16] font-semibold whitespace-nowrap">
                                             {order.totalAmount?.toLocaleString()} ₫
                                         </td>
 
-
-
-                                        <td className="py-3 px-4 border-b whitespace-nowrap">
+                                        <td className="py-3 px-4 border-b border-[#f0e0b0]">
                                             {(() => {
                                                 const status = statusMap[order.status] || statusMap.default;
                                                 return (
-                                                    <span className={`px-2 py-1 rounded text-xs font-medium whitespace-nowrap flex items-center gap-1 w-fit ${status.color}`}>
+                                                    <span
+                                                        className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-sm font-medium whitespace-nowrap ${status.color}`}
+                                                    >
                                                         {status.icon}
                                                         {status.label}
                                                     </span>
                                                 );
                                             })()}
-
                                         </td>
 
-                                        <td className="py-2 px-3 border-b">
-                                            <div className="flex items-center justify-center gap-2">
+                                        <td className="py-2 px-3 border-b border-[#f0e0b0]">
+                                            <div className="flex items-center justify-center gap-3">
                                                 <button
                                                     onClick={() => handleView(order.id)}
-                                                    className="text-blue-500 hover:text-blue-700 text-base"
+                                                    className="text-[#7B1E16] hover:text-[#a52a2a] text-base"
                                                     title="Xem chi tiết"
                                                 >
                                                     <FaEye />
@@ -252,40 +277,36 @@ const AdminOrderPage = () => {
                                                         <button
                                                             onClick={() => handleApprove(order.id)}
                                                             className="text-green-600 hover:text-green-800 text-base"
-                                                            title="Chấp thuận đơn hàng"
                                                         >
                                                             ✔️
                                                         </button>
+
                                                         <button
                                                             onClick={() => handleCancel(order.id)}
                                                             className="text-red-600 hover:text-red-800 text-base"
-                                                            title="Hủy đơn hàng"
                                                         >
                                                             ❌
                                                         </button>
                                                     </>
                                                 )}
-                                                {order.status === "CONFIRMED" && (
-                                                    <>
-                                                        <button
-                                                            onClick={() => handleAssigned(order.id)}
-                                                            className="text-green-600 hover:text-green-800 text-base"
-                                                            title="Chấp thuận đơn hàng"
-                                                        >
-                                                            <FaShippingFast className='text-blue-500' />
-                                                        </button>
 
-                                                    </>
+                                                {order.status === "CONFIRMED" && (
+                                                    <button
+                                                        onClick={() => handleAssigned(order.id)}
+                                                        className="text-blue-600 hover:text-blue-800 text-base"
+                                                    >
+                                                        <FaShippingFast />
+                                                    </button>
                                                 )}
                                             </div>
                                         </td>
-
                                     </tr>
                                 );
                             })}
                         </tbody>
                     </table>
                 </div>
+
                 <AdminChatBox />
             </main>
         </div>
