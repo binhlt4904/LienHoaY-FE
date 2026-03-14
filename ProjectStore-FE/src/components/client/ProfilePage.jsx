@@ -153,205 +153,206 @@ function ProfilePage() {
 
 
   return (
-    <div className="flex flex-col min-h-screen bg-gray-100">
+    <div className="flex flex-col min-h-screen bg-[#f6f1e7]">
       <Navbar user={user} onToggleSidebar={() => setSidebarOpen(!sidebarOpen)} />
       <div className="flex flex-1">
-      <Sidebar user={user} isOpen={sidebarOpen} />
 
-      <main className="flex-1 mt-[72px] p-6 overflow-y-auto bg-gradient-to-br from-blue-50 to-gray-100">
-        <div className="max-w-5xl mx-auto bg-white rounded-lg shadow-lg overflow-hidden">
-          {/* Banner */}
-          <div className="bg-blue-500 h-32 sm:h-32 flex items-center justify-center text-white text-2xl font-bold">
-            Hồ sơ cá nhân
+
+        <main className="flex-1 mt-[72px] p-6 overflow-y-auto bg-[#f6f1e7]">
+          <div className="max-w-5xl mx-auto bg-white rounded-2xl shadow-md border border-red-100 overflow-hidden">
+            {/* Banner */}
+            <div className="bg-[#7a1414] h-32 flex items-center justify-center text-white text-2xl font-semibold">
+              Hồ sơ cá nhân
+            </div>
+
+            <div className="p-6 sm:p-10">
+              {/* Avatar + Info */}
+              <div className="flex flex-col sm:flex-row items-center gap-6 mb-10">
+                <div className="relative">
+                  <div className="p-[3px] rounded-full bg-gradient-to-r from-purple-400 via-pink-500 to-red-500">
+                    <img
+                      src={user.avatar || "/images/default-avatar.png"}
+                      alt="Avatar"
+                      className="w-32 h-32 rounded-full object-cover"
+                    />
+                  </div>
+
+
+
+                  <input
+                    type="file"
+                    accept="image/*"
+                    id="avatarUpload"
+                    className="hidden"
+                    onChange={handleAvatarUpload}
+                  />
+
+                  <button
+                    className="absolute bottom-0 right-0 text-white p-1 rounded-full text-xs bg-[#7a1414] hover:bg-[#5e0f0f]"
+                    onClick={() => document.getElementById("avatarUpload").click()}
+                  >
+                    <FaUserEdit />
+                  </button>
+                </div>
+
+                <div className="flex-1 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div className="flex items-center gap-2 text-lg font-medium text-gray-800">
+                    <FaUserEdit className="text-gray-500" /> {user.name}
+                  </div>
+                  <div className="flex items-center gap-2 text-gray-600">
+                    <FaPhone /> {user.phone || "Chưa cập nhật"}
+                  </div>
+                  <div className="flex items-center gap-2 text-gray-700">
+                    <FaCalendarAlt />
+                    <span>{user.dob ? new Date(user.dob).toLocaleDateString('vi-VN') : "Chưa cập nhật"}</span>
+                  </div>
+
+                  <div className="flex items-center gap-2 text-gray-600">
+                    <FaEnvelope /> {user.email || "Chưa cập nhật"}
+                  </div>
+                  <div className="flex items-center gap-2 text-gray-600">
+                    {stats.gender === true ? (
+                      <FaMars />
+                    ) : stats.gender === false ? (
+                      <FaVenus />
+                    ) : (
+                      <FaGenderless className="text-gray-500" />
+                    )}
+                    <span>
+                      {user.gender === true
+                        ? "Nam"
+                        : user.gender === false
+                          ? "Nữ"
+                          : "Chưa cập nhật"}
+                    </span>
+                  </div>
+
+                </div>
+              </div>
+
+              {/* Thống kê đơn hàng */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8">
+                <div className="bg-red-100 p-5 rounded shadow flex items-center gap-4">
+                  <FaBoxOpen className="text-[#7a1414] text-3xl" />
+                  <div>
+                    <div className="text-2xl font-bold">{orders}</div>
+                    <div className="text-gray-600 text-sm">Đơn hàng đã đặt</div>
+                  </div>
+                </div>
+                <div className="bg-orange-100 p-5 rounded shadow flex items-center gap-4">
+                  <FaMoneyBillWave className="text-orange-600 text-3xl" />
+                  <div>
+                    <div className="text-2xl font-bold">{total.toLocaleString()}₫</div>
+                    <div className="text-gray-600 text-sm">Tổng đã chi tiêu</div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Nút cập nhật */}
+              <div className="text-center mb-8">
+                <button
+                  className="bg-[#7a1414] text-white px-6 py-2 rounded-lg hover:bg-[#5e0f0f] transition"
+                  onClick={() => setIsEditModalOpen(true)}
+                >
+                  Cập nhật thông tin
+                </button>
+              </div>
+
+              {/* Thông tin bổ sung */}
+              <div className="border-t pt-6 text-gray-600 text-sm space-y-2">
+                <p><strong>Ngày tham gia:</strong> {user.createdAt ? new Date(user.createdAt).toLocaleDateString() : "Không rõ"}</p>
+                <p><strong>Vai trò:</strong> {user.role || "Khách hàng"}</p>
+                <p><strong>Trạng thái:</strong> {user.status ? "Hoạt động" : "Đang bị khóa"}</p>
+              </div>
+            </div>
+
+
           </div>
-
-          <div className="p-6 sm:p-10">
-            {/* Avatar + Info */}
-            <div className="flex flex-col sm:flex-row items-center gap-6 mb-10">
-              <div className="relative">
-                <div className="p-[3px] rounded-full bg-gradient-to-r from-purple-400 via-pink-500 to-red-500">
-                  <img
-                    src={user.avatar || "/images/default-avatar.png"}
-                    alt="Avatar"
-                    className="w-32 h-32 rounded-full object-cover"
+          {isEditModalOpen && (
+            <div className="fixed inset-0 bg-black bg-opacity-40 flex justify-center items-center z-50">
+              <div className="bg-white p-6 rounded-lg w-full max-w-md shadow-lg space-y-4">
+                <h2 className="text-xl font-semibold text-[#7a1414]">
+                  Cập nhật thông tin
+                </h2>
+                <div>
+                  <label className="text-gray-500">Tên</label>
+                  <input
+                    type="text"
+                    placeholder="Tên"
+                    value={user.name}
+                    onChange={(e) => setUser({ ...user, name: e.target.value })}
+                    className="w-full border border-gray-300 p-2 rounded-lg focus:ring-2 focus:ring-red-200 focus:border-[#7a1414]"
+                  />
+                  {errors.name && <p className="text-red-600 font-medium mt-1">{errors.name}</p>}
+                </div>
+                <div>
+                  <label className="text-gray-500">Ngày sinh</label>
+                  <input
+                    type="date"
+                    value={
+                      user.dob
+                        ? new Date(user.dob).toISOString().split("T")[0] // chuyển sang yyyy-MM-dd
+                        : ""
+                    }
+                    onChange={(e) => setUser({ ...user, dob: e.target.value })}
+                    className="w-full border border-gray-300 p-2 rounded-lg focus:ring-2 focus:ring-red-200 focus:border-[#7a1414]"
+                  />
+                  {errors.dob && <p className="text-red-600 font-medium mt-1">{errors.dob}</p>}
+                </div>
+                <div>
+                  <label className="text-gray-500">Số điện thoại</label>
+                  <input
+                    type="text"
+                    placeholder="Số điện thoại"
+                    value={user.phone}
+                    onChange={(e) => setUser({ ...user, phone: e.target.value })}
+                    className="w-full border border-gray-300 p-2 rounded-lg focus:ring-2 focus:ring-red-200 focus:border-[#7a1414]"
                   />
                 </div>
-
-
-
-                <input
-                  type="file"
-                  accept="image/*"
-                  id="avatarUpload"
-                  className="hidden"
-                  onChange={handleAvatarUpload}
-                />
-
-                <button
-                  className="absolute bottom-0 right-0 bg-blue-600 text-white p-1 rounded-full text-xs hover:bg-blue-700"
-                  onClick={() => document.getElementById("avatarUpload").click()}
-                >
-                  <FaUserEdit />
-                </button>
-              </div>
-
-              <div className="flex-1 grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div className="flex items-center gap-2 text-lg font-medium text-gray-800">
-                  <FaUserEdit className="text-gray-500" /> {user.name}
-                </div>
-                <div className="flex items-center gap-2 text-gray-600">
-                  <FaPhone /> {user.phone || "Chưa cập nhật"}
-                </div>
-                <div className="flex items-center gap-2 text-gray-700">
-                  <FaCalendarAlt />
-                  <span>{user.dob ? new Date(user.dob).toLocaleDateString('vi-VN') : "Chưa cập nhật"}</span>
-                </div>
-
-                <div className="flex items-center gap-2 text-gray-600">
-                  <FaEnvelope /> {user.email || "Chưa cập nhật"}
-                </div>
-                <div className="flex items-center gap-2 text-gray-600">
-                  {stats.gender === true ? (
-                    <FaMars />
-                  ) : stats.gender === false ? (
-                    <FaVenus />
-                  ) : (
-                    <FaGenderless className="text-gray-500" />
-                  )}
-                  <span>
-                    {user.gender === true
-                      ? "Nam"
-                      : user.gender === false
-                        ? "Nữ"
-                        : "Chưa cập nhật"}
-                  </span>
-                </div>
-
-              </div>
-            </div>
-
-            {/* Thống kê đơn hàng */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8">
-              <div className="bg-blue-100 p-5 rounded shadow flex items-center gap-4">
-                <FaBoxOpen className="text-blue-600 text-3xl" />
                 <div>
-                  <div className="text-2xl font-bold">{orders}</div>
-                  <div className="text-gray-600 text-sm">Đơn hàng đã đặt</div>
+                  <label className="text-gray-500">Email</label>
+                  <input
+                    type="text"
+                    placeholder="Email"
+                    value={user.email}
+                    onChange={(e) => setUser({ ...user, email: e.target.value })}
+                    className="w-full border border-gray-300 p-2 rounded-lg focus:ring-2 focus:ring-red-200 focus:border-[#7a1414]"
+                  />
                 </div>
-              </div>
-              <div className="bg-green-100 p-5 rounded shadow flex items-center gap-4">
-                <FaMoneyBillWave className="text-green-600 text-3xl" />
                 <div>
-                  <div className="text-2xl font-bold">{total.toLocaleString()}₫</div>
-                  <div className="text-gray-600 text-sm">Tổng đã chi tiêu</div>
+                  <label className="text-gray-500">Giới tính</label>
+                  <select
+                    value={user.gender === true ? "male" : user.gender === false ? "female" : ""}
+                    onChange={(e) =>
+                      setUser({ ...user, gender: e.target.value === "male" ? true : false })
+                    }
+                    className="w-full border border-gray-300 p-2 rounded-lg focus:ring-2 focus:ring-red-200 focus:border-[#7a1414]"
+                  >
+                    <option value="">-- Chọn giới tính --</option>
+                    <option value="male">Nam</option>
+                    <option value="female">Nữ</option>
+                  </select>
+                </div>
+
+
+                <div className="flex justify-end gap-2 mt-4">
+                  <button
+                    className="px-4 py-2 border border-gray-300 text-gray-600 rounded-lg 
+  hover:bg-gray-100 hover:border-gray-400 transition"
+                    onClick={() => setIsEditModalOpen(false)}
+                  >
+                    Hủy
+                  </button>
+                  <button
+                    className="px-4 py-2 bg-[#7a1414] text-white rounded-lg hover:bg-[#5e0f0f]"
+                  >
+                    Lưu
+                  </button>
                 </div>
               </div>
             </div>
-
-            {/* Nút cập nhật */}
-            <div className="text-center mb-8">
-              <button
-                className="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700"
-                onClick={() => setIsEditModalOpen(true)}
-              >
-                Cập nhật thông tin
-              </button>
-            </div>
-
-            {/* Thông tin bổ sung */}
-            <div className="border-t pt-6 text-gray-600 text-sm space-y-2">
-              <p><strong>Ngày tham gia:</strong> {user.createdAt ? new Date(user.createdAt).toLocaleDateString() : "Không rõ"}</p>
-              <p><strong>Vai trò:</strong> {user.role || "Khách hàng"}</p>
-              <p><strong>Trạng thái:</strong> {user.status ? "Hoạt động" : "Đang bị khóa"}</p>
-            </div>
-          </div>
-
-
-        </div>
-        {isEditModalOpen && (
-          <div className="fixed inset-0 bg-black bg-opacity-40 flex justify-center items-center z-50">
-            <div className="bg-white p-6 rounded-lg w-full max-w-md shadow-lg space-y-4">
-              <h2 className="text-xl font-bold mb-4">Cập nhật thông tin</h2>
-              <div>
-                <label className="text-gray-500">Tên</label>
-                <input
-                  type="text"
-                  placeholder="Tên"
-                  value={user.name}
-                  onChange={(e) => setUser({ ...user, name: e.target.value })}
-                  className="w-full border p-2 rounded"
-                />
-                {errors.name && <p className="text-red-600 font-medium mt-1">{errors.name}</p>}
-              </div>
-              <div>
-                <label className="text-gray-500">Ngày sinh</label>
-                <input
-                  type="date"
-                  value={
-                    user.dob
-                      ? new Date(user.dob).toISOString().split("T")[0] // chuyển sang yyyy-MM-dd
-                      : ""
-                  }
-                  onChange={(e) => setUser({ ...user, dob: e.target.value })}
-                  className="w-full border p-2 rounded"
-                />
-                {errors.dob && <p className="text-red-600 font-medium mt-1">{errors.dob}</p>}
-              </div>
-              <div>
-                <label className="text-gray-500">Số điện thoại</label>
-                <input
-                  type="text"
-                  placeholder="Số điện thoại"
-                  value={user.phone}
-                  onChange={(e) => setUser({ ...user, phone: e.target.value })}
-                  className="w-full border p-2 rounded"
-                />
-              </div>
-              <div>
-                <label className="text-gray-500">Email</label>
-                <input
-                  type="text"
-                  placeholder="Email"
-                  value={user.email}
-                  onChange={(e) => setUser({ ...user, email: e.target.value })}
-                  className="w-full border p-2 rounded"
-                />
-              </div>
-              <div>
-                <label className="text-gray-500">Giới tính</label>
-                <select
-                  value={user.gender === true ? "male" : user.gender === false ? "female" : ""}
-                  onChange={(e) =>
-                    setUser({ ...user, gender: e.target.value === "male" ? true : false })
-                  }
-                  className="w-full border p-2 rounded"
-                >
-                  <option value="">-- Chọn giới tính --</option>
-                  <option value="male">Nam</option>
-                  <option value="female">Nữ</option>
-                </select>
-              </div>
-
-
-              <div className="flex justify-end gap-2 mt-4">
-                <button
-                  className="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400"
-                  onClick={() => setIsEditModalOpen(false)}
-                >
-                  Hủy
-                </button>
-                <button
-                  className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
-                  onClick={handleUpdateProfile}
-                >
-                  Lưu
-                </button>
-              </div>
-            </div>
-          </div>
-        )}
-        <ChatBox />
-      </main>
+          )}
+        </main>
       </div>
       <Footer />
     </div>

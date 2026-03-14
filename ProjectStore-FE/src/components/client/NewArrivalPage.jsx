@@ -241,7 +241,6 @@ function NewArrivalPage() {
         )}
 
         <ScrollToTopButton targetRef={mainRef} />
-        <Footer />
       </main>
       <Footer />
     </div>

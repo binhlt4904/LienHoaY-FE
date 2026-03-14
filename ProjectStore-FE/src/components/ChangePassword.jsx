@@ -6,7 +6,7 @@ import AdminSidebar from '../components/admin/AdminSidebar'
 import Navbar from './Navbar';
 import Footer from './Footer';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
-
+import { FaLock } from "react-icons/fa";
 export default function ChangePassword() {
   const [currentPassword, setCurrentPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
@@ -59,19 +59,21 @@ export default function ChangePassword() {
 
   const renderInput = (label, value, setValue, show, setShow, placeholder) => (
     <div>
+      
       <label className="block text-sm font-medium text-gray-700 mb-1">{label}</label>
       <div className="relative">
+        <FaLock className="absolute top-1/2 left-3 -translate-y-1/2 text-gray-400 " />
         <input
           type={show ? 'text' : 'password'}
           placeholder={placeholder}
-          className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+          className="w-full pl-10 pr-10 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#8f1d1d] transition"
           value={value}
           onChange={(e) => setValue(e.target.value)}
         />
         <button
           type="button"
           onClick={() => setShow(!show)}
-          className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 focus:outline-none"
+          className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-[#7a1414]"
         >
           {show ? <FaEyeSlash /> : <FaEye />}
         </button>
@@ -80,16 +82,18 @@ export default function ChangePassword() {
   );
 
   return (
-    <div className="flex flex-col min-h-screen bg-gray-100">
+    <div className="flex flex-col min-h-screen bg-[#f6f1e7] mt-16">
       <Navbar user={user} onToggleSidebar={() => setSidebarOpen(!sidebarOpen)} />
-      
+
       {user.role == 'ADMIN' && (
         <AdminSidebar user={user} isOpen={sidebarOpen} />
       )}
 
       <main className="flex-1 mt-[72px] p-8 space-y-8 overflow-y-auto">
-        <div className="max-w-lg mx-auto bg-white p-6 rounded-xl shadow-md">
-          <h2 className="text-2xl font-bold mb-6 text-center text-blue-700">Đổi mật khẩu</h2>
+        <div className="max-w-lg mx-auto bg-white p-8 rounded-2xl shadow-md border border-red-100">
+          <h2 className="text-2xl font-semibold mb-6 text-center text-[#7a1414]">
+            Đổi mật khẩu
+          </h2>
           <form onSubmit={handleChangePassword} className="space-y-5">
             {renderInput('Mật khẩu hiện tại', currentPassword, setCurrentPassword, showCurrent, setShowCurrent, 'Nhập mật khẩu hiện tại')}
             {renderInput('Mật khẩu mới', newPassword, setNewPassword, showNew, setShowNew, 'Nhập mật khẩu mới')}
@@ -97,14 +101,14 @@ export default function ChangePassword() {
 
             <button
               type="submit"
-              className="w-full bg-blue-600 text-white py-3 rounded-md hover:bg-blue-700 transition font-semibold"
+              className="w-full bg-[#7a1414] text-white py-3 rounded-lg hover:bg-[#5e0f0f] transition font-semibold"
             >
               Cập nhật mật khẩu
             </button>
           </form>
         </div>
       </main>
-        <Footer />
+      <Footer />
     </div>
   );
 }
